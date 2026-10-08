@@ -3,6 +3,7 @@ import { createWorldTextures, preloadWorld } from '../art/world.js';
 import { preloadScenery } from '../art/scenery.js';
 import { createForestAnims, preloadForest } from '../art/forest.js';
 import { createBeachAnims, preloadBeach } from '../art/beach.js';
+import { createFarmAnims, preloadFarm } from '../art/farm.js';
 
 // Turns all drawings into textures once, then shows the start screen.
 export class BootScene extends Phaser.Scene {
@@ -16,6 +17,7 @@ export class BootScene extends Phaser.Scene {
     preloadScenery(this);
     preloadForest(this);
     preloadBeach(this);
+    preloadFarm(this);
   }
 
   create() {
@@ -23,6 +25,7 @@ export class BootScene extends Phaser.Scene {
     createFrankieAnims(this);
     createForestAnims(this);
     createBeachAnims(this);
+    createFarmAnims(this);
     this.scene.start('StartScene');
   }
 }
