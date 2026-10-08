@@ -68,4 +68,36 @@ export const WORLDS = {
       },
     ],
   },
+
+  beach: {
+    color: 0x29a3d6,
+    tiles: { hillsFar: 'hills-far-beach', hillsNear: 'hills-near-beach', ground: 'ground-beach' },
+    gap: 'gap-beach',
+    block: 'block-pier',
+    zones: [
+      {
+        key: 'dunes',
+        until: 1 / 3,
+        far: ['dune', 'dune-2', 'dune', 'dune-2', 'sailboat'],
+        mid: ['beach-chair', 'beach-chair-red', 'beach-chair', 'parasol', 'beach-chair-red', 'lifeguard'],
+        near: ['marram', 'marram', 'shell-pile', 'marram'],
+        strip: 'dune-fence',
+      },
+      {
+        key: 'shore',
+        until: 2 / 3,
+        far: ['sailboat', 'sailboat-2', 'ferry', 'sailboat', 'cutter', 'sailboat-2'],
+        mid: ['parasol', 'beach-chair', 'parasol-2', 'lifeguard', 'beach-chair-red', 'parasol-2', 'beach-chair'],
+        near: ['shell-pile', 'marram', 'gull-post', 'shell-pile', 'marram'],
+      },
+      {
+        key: 'harbor',
+        until: 1,
+        far: ['cutter', 'sailboat', 'ferry', 'cutter', 'sailboat-2'],
+        mid: ['lighthouse', 'brick-house', 'fish-stall', 'frisian-house', 'brick-house', 'fish-stall'],
+        near: ['lifebuoy-post', 'gull-post', 'marram', 'lifebuoy-post'],
+        strip: 'quay-rail',
+      },
+    ],
+  },
 };

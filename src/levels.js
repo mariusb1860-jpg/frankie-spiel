@@ -13,6 +13,9 @@ const crate = thing('crate');
 const stump = thing('stump');
 const log = thing('log');
 const hedgehog = thing('hedgehog'); // walks back and forth
+const sandcastle = thing('sandcastle');
+const crab = thing('crab'); // walks sideways, back and forth
+const beachball = thing('beachball'); // rolls towards Frankie
 // A gap in the ground with water; x is its middle. Falling in = start again.
 const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
@@ -58,6 +61,38 @@ export const LEVELS = [
     fast: {
       length: 3400,
       layout: [row(600), blocks(950, 4, { sausages: 2 }), stream(1550, 130), hedgehog(2050), log(2550), high(2900)],
+    },
+  },
+  {
+    // Level 3, beach: faster again, three water channels (the widest one only over
+    // the pier), crabs walking sideways and beach balls rolling towards Frankie.
+    world: 'beach',
+    speed: 244,
+    layout: [
+      row(700),
+      sandcastle(1400),
+      high(2000),
+      stream(2550, 140),
+      crab(3200),
+      arc(3850),
+      blocks(4300, 5, { sausages: 3 }),
+      blocks(4480, 4, { tier: 2, sausages: 2 }),
+      beachball(5400),
+      sandcastle(6050),
+      blocks(6550, 12, { sausages: 3 }), // the pier: the channel below is too wide to jump over
+      stream(6860, 400),
+      row(7750),
+      crab(8400),
+      high(9000),
+      beachball(9800),
+      stream(10450, 160),
+      sandcastle(11100),
+      high(11650),
+      crab(12200),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), sandcastle(1000), blocks(1340, 10, { sausages: 2 }), stream(1580, 340), crab(2150), beachball(3100)],
     },
   },
 ];

@@ -20,6 +20,7 @@ const STRIP = { factor: 0.85, baseY: GROUND_Y + 4, width: 156 };
 const FLIPPABLE = [
   'tree-oak', 'tree-apple', 'tree-birch', 'tree-beech', 'rock', 'mossy-rock', 'bush', 'berry-bush',
   'grass-tuft', 'mushrooms', 'daisies', 'fern', 'log-pile', 'deer',
+  'dune', 'dune-2', 'sailboat', 'sailboat-2', 'ferry', 'cutter', 'marram', 'shell-pile',
 ];
 
 /**
@@ -66,6 +67,7 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
       img.setScrollFactor(layer.factor).setDepth(DEPTH[layer.name]);
       if (FLIPPABLE.includes(key)) img.setFlipX(rng.frac() < 0.5);
       if (key === 'windmill') addWindmillBlades(scene, img, layer.factor);
+      if (key === 'lighthouse') addLighthouseBeam(scene, img, layer.factor);
     }
   }
 
@@ -100,6 +102,15 @@ function addWindmillBlades(scene, mill, factor) {
   const hubY = mill.y - (260 - 64) * mill.scaleY;
   const blades = scene.add.image(mill.x, hubY, 'windmill-blades').setScale(mill.scaleX * 0.85).setScrollFactor(factor).setDepth(DEPTH.far);
   scene.tweens.add({ targets: blades, angle: 360, duration: 9000, repeat: -1 });
+}
+
+// The lighthouse lamp sends out a beam that sweeps from one side to the other.
+function addLighthouseBeam(scene, tower, factor) {
+  // The lamp sits at (65, 64) inside the 130 x 300 lighthouse picture.
+  const lampY = tower.y - (300 - 64) * tower.scaleY;
+  const beam = scene.add.image(tower.x, lampY, 'light-beam').setOrigin(0, 0.5).setScale(tower.scaleX * 0.9);
+  beam.setScrollFactor(factor).setDepth(DEPTH.mid).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.6);
+  scene.tweens.add({ targets: beam, scaleX: -beam.scaleX, duration: 2600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 }
 
 // Light falling through the tree tops, hanging from the top of the screen.
