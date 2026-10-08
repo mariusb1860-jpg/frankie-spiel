@@ -48,8 +48,7 @@ export function preloadFrankie(scene) {
 export function createFrankieAnims(scene) {
   const frames = (names) => names.map((f) => ({ key: `frankie-${f}` }));
   scene.anims.create({ key: 'frankie-run', frames: frames(['run0', 'run1', 'run2', 'run3']), frameRate: 10, repeat: -1 });
-  scene.anims.create({ key: 'frankie-eat', frames: frames(['eat0', 'eat1', 'eat0', 'eat1', 'eat0', 'eat1']), frameRate: 9 });
-  scene.anims.create({ key: 'frankie-eat-quick', frames: frames(['eat0', 'eat1']), frameRate: 9 });
+  scene.anims.create({ key: 'frankie-chomp', frames: frames(['eat0', 'eat1']), frameRate: 8, repeat: -1 });
 }
 
 function drawFrankie(p) {

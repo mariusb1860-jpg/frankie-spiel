@@ -10,26 +10,24 @@ const FRANKIE_X = 445;
 const FRANKIE_SCALE = 0.95;
 const FRANKIE_Y = GROUND_Y - (FRANKIE_FEET_Y - FRANKIE_H / 2) * FRANKIE_SCALE; // center, so Frankie can roll around it
 const BELLY_GROWTH = 0.008; // Frankie gets a little rounder with every sausage
-const PACE = {
-  slow: { fly: 650, anim: 'frankie-eat', pause: 250 },
-  medium: { fly: 380, anim: 'frankie-eat', pause: 60 },
-  fast: { fly: 240, anim: 'frankie-eat-quick', pause: 40 },
-};
+const EAT_MS = 6000; // all sausages together take about this long (plus the last flight)
+const DANCES = ['danceHop', 'danceRoll', 'danceWiggle'];
 
-// Reward scene: every collected sausage flies into the bowl and Frankie eats it.
+// Reward scene: Frankie arrives at his house, does a happy dance,
+// then all collected sausages fly into the bowl and he eats them.
 export class EatScene extends Phaser.Scene {
   constructor() {
     super('EatScene');
   }
 
   init(data) {
-    // There is no losing: even with zero sausages Frankie gets one treat.
+    // Even with zero sausages Frankie gets one treat.
     this.count = Math.max(1, data.collected ?? 1);
   }
 
   create() {
     this.leaving = false;
-    createBackdrop(this).update(0);
+    this.backdrop = createBackdrop(this, { zone: 'village' });
 
     this.add.image(800, GROUND_Y + 4, 'house').setOrigin(0.5, 1);
     this.add
@@ -47,60 +45,127 @@ export class EatScene extends Phaser.Scene {
 
     addMuteButton(this);
     this.cameras.main.fadeIn(400);
-    this.time.delayedCall(700, () => this.feed(0));
+    this.time.delayedCall(500, () => this[this.pickDance()](() => this.feedAll()));
   }
 
-  feed(i) {
-    if (i >= this.queue.length) {
-      this.celebrate();
-      return;
-    }
-    // The first sausages slowly, then faster, so a big haul does not take forever.
-    const pace = i < 3 ? PACE.slow : i < 6 ? PACE.medium : PACE.fast;
-    const s = this.queue[i];
-    this.tweens.add({ targets: s, x: BOWL_X, duration: pace.fly, ease: 'Sine.easeInOut' });
-    this.tweens.add({
-      targets: s,
-      y: GROUND_Y - 30,
-      angle: 360,
-      duration: pace.fly,
-      ease: 'Quad.easeIn',
+  update() {
+    this.backdrop.update(0, this.time.now);
+  }
+
+  // A different dance than last time, so it does not get boring.
+  pickDance() {
+    const last = this.registry.get('lastDance');
+    const options = DANCES.filter((d) => d !== last);
+    const dance = Phaser.Utils.Array.GetRandom(options);
+    this.registry.set('lastDance', dance);
+    return dance;
+  }
+
+  // Dance 1: three hops, looking left and right.
+  danceHop(done) {
+    const f = this.frankie;
+    sfx.bark();
+    this.tweens.chain({
+      targets: f,
+      tweens: [0, 1, 2].map((i) => ({
+        y: FRANKIE_Y - 70,
+        duration: 230,
+        yoyo: true,
+        ease: 'Quad.easeOut',
+        onStart: () => {
+          f.setFlipX(i % 2 === 0);
+          sfx.jump();
+        },
+      })),
       onComplete: () => {
-        sfx.plop();
-        this.eat(s, pace, () => this.feed(i + 1));
+        f.setFlipX(false);
+        done();
       },
     });
   }
 
-  eat(s, pace, done) {
+  // Dance 2: a big jump with a somersault, then a little bounce.
+  danceRoll(done) {
     const f = this.frankie;
-    this.tweens.add({ targets: f, x: FRANKIE_X + 22, duration: 120, yoyo: true });
-    f.play(pace.anim);
-    sfx.munch();
-    this.tweens.add({ targets: s, scale: 0, duration: 250, delay: 100, onComplete: () => s.destroy() });
-    this.crumbs(BOWL_X - 20, GROUND_Y - 40);
-    this.heart(f.x + 40, f.y - 50);
-
-    f.scaleX += BELLY_GROWTH;
-    f.once('animationcomplete', () => {
-      f.setTexture('frankie-happy');
-      this.time.delayedCall(pace.pause, done);
+    sfx.jump();
+    this.tweens.add({ targets: f, angle: -360, duration: 800, ease: 'Sine.easeInOut' });
+    this.tweens.chain({
+      targets: f,
+      tweens: [
+        { y: FRANKIE_Y - 110, duration: 400, yoyo: true, ease: 'Quad.easeOut' },
+        { scaleY: FRANKIE_SCALE * 0.82, duration: 110, yoyo: true },
+        { y: FRANKIE_Y - 30, duration: 170, yoyo: true, ease: 'Quad.easeOut' },
+      ],
+      onComplete: () => {
+        f.setAngle(0);
+        sfx.bark();
+        this.hearts(5);
+        this.time.delayedCall(300, done);
+      },
     });
   }
 
-  celebrate() {
+  // Dance 3: wiggle from side to side while music notes float up.
+  danceWiggle(done) {
     const f = this.frankie;
     sfx.melody();
-    this.time.delayedCall(900, () => sfx.bark());
+    for (let i = 0; i < 5; i++) this.time.delayedCall(i * 300, () => this.note());
+    this.tweens.add({
+      targets: f,
+      angle: { from: -14, to: 14 },
+      duration: 150,
+      yoyo: true,
+      repeat: 5,
+      ease: 'Sine.easeInOut',
+      onComplete: () => {
+        f.setAngle(0);
+        done();
+      },
+    });
+    this.tweens.add({ targets: f, scaleY: FRANKIE_SCALE * 0.9, duration: 150, yoyo: true, repeat: 5 });
+  }
 
-    // Happy jump with a roll, then hearts everywhere.
-    this.tweens.add({ targets: f, y: FRANKIE_Y - 90, duration: 380, yoyo: true, ease: 'Quad.easeOut' });
-    this.tweens.add({ targets: f, angle: -360, duration: 760, ease: 'Sine.easeInOut' });
-    for (let i = 0; i < 10; i++) {
-      this.time.delayedCall(i * 90, () => this.heart(f.x + Phaser.Math.Between(-120, 120), f.y - Phaser.Math.Between(0, 60)));
-    }
+  // All sausages fly into the bowl one after the other while Frankie keeps munching.
+  feedAll() {
+    const f = this.frankie;
+    const gap = Phaser.Math.Clamp(EAT_MS / this.count, 280, 900);
+    const fly = Math.min(600, gap * 1.5);
+    this.tweens.add({ targets: f, x: FRANKIE_X + 18, duration: 200 });
+    f.play('frankie-chomp');
+    this.queue.forEach((s, i) => {
+      this.time.delayedCall(i * gap, () => this.flyToBowl(s, fly, i));
+    });
+  }
 
-    this.time.delayedCall(1300, () => {
+  flyToBowl(s, fly, i) {
+    this.tweens.add({ targets: s, x: BOWL_X, duration: fly, ease: 'Sine.easeInOut' });
+    this.tweens.add({
+      targets: s,
+      y: GROUND_Y - 30,
+      angle: 360,
+      duration: fly,
+      ease: 'Quad.easeIn',
+      onComplete: () => {
+        sfx.munch();
+        this.crumbs(BOWL_X - 20, GROUND_Y - 40);
+        if (i % 2 === 0) this.heart(this.frankie.x + 40, this.frankie.y - 50);
+        this.frankie.scaleX += BELLY_GROWTH;
+        this.tweens.add({ targets: s, scale: 0, duration: 180, onComplete: () => s.destroy() });
+        if (i === this.queue.length - 1) this.time.delayedCall(350, () => this.finale());
+      },
+    });
+  }
+
+  finale() {
+    const f = this.frankie;
+    f.anims.stop();
+    f.setTexture('frankie-happy');
+    sfx.bark();
+    this.tweens.add({ targets: f, x: FRANKIE_X, duration: 200 });
+    this.tweens.add({ targets: f, y: FRANKIE_Y - 40, duration: 200, yoyo: true, ease: 'Quad.easeOut' });
+    this.hearts(8);
+
+    this.time.delayedCall(700, () => {
       addBigButton(this, 480, 230, 'btn-replay', () => this.replay());
       this.input.keyboard.once('keydown-SPACE', () => this.replay());
       this.input.keyboard.once('keydown-ENTER', () => this.replay());
@@ -112,6 +177,19 @@ export class EatScene extends Phaser.Scene {
     this.leaving = true;
     sfx.unlock();
     this.scene.start('GameScene');
+  }
+
+  hearts(n) {
+    const f = this.frankie;
+    for (let i = 0; i < n; i++) {
+      this.time.delayedCall(i * 90, () => this.heart(f.x + Phaser.Math.Between(-120, 120), f.y - Phaser.Math.Between(0, 60)));
+    }
+  }
+
+  note() {
+    const f = this.frankie;
+    const n = this.add.image(f.x + Phaser.Math.Between(-50, 60), f.y - 60, 'note').setDepth(8).setScale(0.8);
+    this.tweens.add({ targets: n, y: n.y - 110, x: n.x + Phaser.Math.Between(-30, 30), alpha: 0, duration: 1200, onComplete: () => n.destroy() });
   }
 
   heart(x, y) {
