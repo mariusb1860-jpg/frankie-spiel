@@ -20,6 +20,9 @@ const haybale = thing('haybale');
 const milkcan = thing('milkcan');
 const chicken = thing('chicken'); // walks back and forth, a bit faster
 const frog = thing('frog'); // hops up and down
+const snowman = thing('snowman');
+const snowball = thing('snowball'); // rolls towards Frankie
+const rabbit = thing('rabbit'); // hops a little way to the left and back
 // A gap in the ground with water; x is its middle. Falling in = start again.
 const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
@@ -133,6 +136,39 @@ export const LEVELS = [
     fast: {
       length: 3600,
       layout: [row(600), haybale(1000), blocks(1350, 8, { sausages: 2 }), stream(1550, 150), chicken(2150), frog(2750), high(3050)],
+    },
+  },
+  {
+    // Level 5, winter: the fastest level. Five ice holes (two of them only over
+    // the ice blocks), snowmen, rolling snowballs and hopping hares.
+    world: 'winter',
+    speed: 268,
+    layout: [
+      row(700),
+      snowman(1300),
+      high(1850),
+      stream(2400, 150),
+      rabbit(3050),
+      arc(3650),
+      blocks(4100, 13, { sausages: 4 }), // ice bridge: the hole below is too wide to jump over
+      stream(4410, 420),
+      snowball(5450),
+      snowman(5950),
+      stream(6500, 160),
+      blocks(7000, 4, { sausages: 1 }),
+      blocks(7180, 5, { tier: 2, sausages: 2 }),
+      rabbit(8050),
+      arc(8600),
+      blocks(9100, 13, { sausages: 3 }), // second ice bridge
+      stream(9410, 420),
+      snowball(10450),
+      stream(11000, 170),
+      snowman(11600),
+      rabbit(12150),
+    ],
+    fast: {
+      length: 3800,
+      layout: [row(600), snowman(1000), blocks(1300, 12, { sausages: 2 }), stream(1590, 400), snowball(2700), rabbit(3150)],
     },
   },
 ];

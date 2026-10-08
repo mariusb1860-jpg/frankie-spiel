@@ -133,4 +133,38 @@ export const WORLDS = {
       },
     ],
   },
+
+  winter: {
+    color: 0x7fb8e6,
+    sky: 'sky-winter', // paler winter sky
+    snow: true, // falling snow behind the haze
+    tiles: { hillsFar: 'hills-far-winter', hillsNear: 'hills-near-winter', ground: 'ground-winter' },
+    gap: 'gap-winter',
+    block: 'block-ice',
+    density: 0.85,
+    zones: [
+      {
+        key: 'snowy-forest',
+        until: 1 / 3,
+        far: ['fir-snow', 'fir-snow', 'deer', 'fir-snow', 'bare-tree'],
+        mid: ['fir-snow', 'bare-tree', 'fir-snow', 'cabin', 'fir-snow', 'bare-tree'],
+        near: ['snow-bush', 'snow-rock', 'holly', 'snow-bush'],
+      },
+      {
+        key: 'frozen-lake',
+        until: 2 / 3,
+        far: ['fir-snow', 'bare-tree', 'fir-snow', 'deer'],
+        mid: ['ice-pond', 'bare-tree', 'fir-snow', 'ice-pond', 'cabin', 'fir-snow'],
+        near: ['snow-reeds', 'snow-rock', 'snow-reeds', 'snow-bush'],
+      },
+      {
+        key: 'snow-village',
+        until: 1,
+        far: ['church-snow', 'house-snow-2', 'fir-snow', 'house-snow'],
+        mid: ['house-snow', 'xmas-tree', 'house-snow-2', 'fir-snow', 'house-snow'],
+        near: ['lamp-snow', 'snow-bush', 'holly', 'lamp-snow'],
+        strip: 'snow-fence',
+      },
+    ],
+  },
 };

@@ -30,6 +30,9 @@ export const OBSTACLE_TYPES = {
   milkcan: { y: GROUND_Y - 25, box: [22, 36, 9, 15] },
   chicken: { y: GROUND_Y - 24, box: [24, 26, 15, 20], patrol: 70, patrolSpeed: 45, anim: 'chicken-walk' },
   frog: { y: GROUND_Y - 20, box: [30, 20, 9, 18], hop: { height: 45, ms: 520, pause: 900, air: 'frog-jump' } },
+  snowman: { y: GROUND_Y - 37, box: [30, 44, 13, 31] },
+  snowball: { y: GROUND_Y - 21, circle: [16, 7, 7], roll: 100 },
+  rabbit: { y: GROUND_Y - 22, box: [26, 24, 14, 22], hop: { height: 38, ms: 420, pause: 380, air: 'rabbit-jump', steps: 3, step: 40 } },
 };
 const PATROL_SPEED = 40; // px per second, unless the type sets its own
 const ROLL_START = GAME_WIDTH + 50; // rolling starts once this close to the left screen edge
