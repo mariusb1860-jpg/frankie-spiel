@@ -14,7 +14,7 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische B
 - Große Figuren und große Tippflächen (Tablet und Handy).
 - Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Detailreiches als SVG-Code, einfache Formen als Phaser-Graphics. Die Landschaft soll so detailreich sein wie Frankie.
 - Grafik ansehen ohne zu spielen: `http://localhost:8137/preview.html` (`?zoom=3` für größer, `?set=beach` nur eine Gruppe: frankie, world, scenery, forest, beach, farm, winter, party).
-- Bewegte Tiere und Bälle (laufen, rollen, hüpfen) brauchen in **jeder** Phase ihrer Bewegung ein Sprung-Fenster von mindestens 0,35 s. Am knappsten ist es, wenn das Tier von Frankie weg läuft.
+- Bewegte Tiere und Bälle (laufen, rollen, hüpfen) brauchen in **jeder** Phase ihrer Bewegung ein Sprung-Fenster von mindestens 0,35 s. Am knappsten ist es, wenn das Tier von Frankie weg läuft. Ausnahme: der Igel in Level 2 (älter als diese Regel, von Marius abgenommen) kommt im ungünstigsten Fall nur auf ca. 0,28–0,36 s; ändern nur nach Rückfrage (z. B. Trefferfläche etwas kleiner wie bei der Krabbe).
 
 ## Aufbau
 
@@ -39,7 +39,7 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische B
 
 Mit Playwright (Browser-Tab vorher nach vorne holen, sonst drosselt Chrome die Bildrate):
 1. Seite laden, keine Konsolenfehler.
-2. Mit `?fast=1`: Level wählen → Level → Futterszene → „Nochmal“ und „Weiter“ funktionieren.
+2. Mit `?fast=1`: Level wählen → Level → Futterszene → „Nochmal“ und „Weiter“ funktionieren. Nach Level 5 beginnt die Siegesfeier von selbst, ihr Haus-Knopf führt zur Level-Auswahl.
 3. Sprung-Zeitfenster messen: Frankie vor ein Hindernis/eine Lücke setzen, bei verschiedenen Abständen springen lassen, Erfolg zählen. Bei bewegten Hindernissen in Millisekunden messen (Sprung x ms nachdem das Hindernis näher als 400 px ist) und mehrere Bewegungs-Phasen prüfen (`patrol.seek(ms)` bzw. `hopStart` verschieben). Jedes Level muss mit einem Bot (springt vor hohen Würsteln, Hindernissen, Lücken und Blöcken) ohne Unfall durchlaufen und alle 20 Würstel sammeln.
 4. Screenshots am PC (960×540) und als Handy quer (844×390, Touch) ansehen.
 5. Zum Testen einen Server ohne Browser-Cache benutzen (oder den Cache abschalten): `python -m http.server` erlaubt dem Browser, alte Programmteile zu behalten.

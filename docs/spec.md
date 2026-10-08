@@ -41,7 +41,7 @@ Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf
 | 4 | Bauernhof: Felder (Traktor, Vogelscheuche, Kornfeld) → Hof (Scheune, Silo, Fachwerkhaus, Hühnerstall, Kühe und Schafe in der Ferne) → Weide (Pferdestall, Koppelzaun) | 256 px/s | 3 Heuballen, 1 Milchkanne, 2 Hühner (laufen etwas schneller), 2 hüpfende Frösche, 4 Gräben mit Matschwasser, 2 lange Kisten-Wege (einer mit zweiter Etage). |
 | 5 | Winter: verschneiter Wald (Holzhütte) → zugefrorener See → Dorf im Schnee (Weihnachtsbaum, Laternen); fallender Schnee, blassblauer Winterhimmel | 268 px/s | 3 Schneemänner, 2 rollende Schneebälle, 3 Hasen (hüpfen ein Stück auf Frankie zu und zurück), 5 Eislöcher, zwei davon (420 px) nur über Eisblock-Brücken, Blöcke in 2 Höhen. Danach Siegesfeier. |
 
-Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level: 7, 9, 11, 12, 13.
+Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level (Hindernisse und Lücken): 6, 9, 11, 12, 13.
 
 **Blöcke:** Von unten springt man durch, oben landet man (Einweg-Plattformen). Stufe 1 liegt 130 px über dem Boden (vom Boden erreichbar), Stufe 2 noch 105 px höher (nur von Stufe 1 erreichbar). Wer am Ende herunterläuft, landet wieder unten. Aussehen pro Welt: Holz mit Moos (Wald), Steg-Bretter (Strand), Obstkisten (Bauernhof), Eisblöcke (Winter).
 
@@ -50,7 +50,7 @@ Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Temp
 **Bewegte Hindernisse:**
 - Laufen (Igel, Krabbe, Huhn): hin und her um ihren Platz. Igel und Krabbe 40 px/s, Huhn 45 px/s.
 - Rollen (Wasserball 90 px/s, Schneeball 100 px/s): rollen los, sobald sie ins Bild kommen, und drehen sich dabei. Rollt einer in eine Lücke, versinkt er.
-- Hüpfen (Frosch: auf der Stelle, 45 px hoch; Hase: 3 Hüpfer à 40 px nach links und zurück, 38 px hoch). Der Takt ist fest, beim Neustart hüpfen sie wieder gleich.
+- Hüpfen (Frosch: auf der Stelle, 45 px hoch; Hase: 3 Hüpfer à 40 px nach links und zurück, 38 px hoch). Der Takt ist fest; nach einem Unfall-Neustart hüpfen sie wieder gleich (beim Start aus dem Menü ist die Phase je nach Wartezeit anders, siehe „Bekannte kleine Fehler“). Jede Phase ist gemessen sicher.
 - Angestoßen: Bälle fliegen weg, Tiere bleiben stehen und hüpfen erschrocken.
 
 ## Sprung-Zeitfenster (gemessen am 08.10.)
@@ -73,6 +73,8 @@ Wie lange man zum Springen Zeit hat, damit Frankie sicher darüber kommt. Ziel: 
 | 5 | Hase (12 Phasen des Hüpf-Takts) | 0,40–0,60 s |
 | 5 | Eislöcher 150 / 160 / 170 px | ≥ 0,75 s |
 | 5 | Eislöcher 420 px über die Eisbrücke | ≥ 1,3 s (direkt: 0 von 9) |
+
+Zum Vergleich Level 2: der Igel kommt in seiner ungünstigsten Phase (läuft von Frankie weg) nur auf ca. 0,28–0,36 s; in der Phase, in der man ihn beim normalen Spielen trifft, sind es mehr. Level 2 ist abgenommen und wurde nicht geändert.
 
 Würstel auf zwei Block-Etagen (Bonus): alle Würstel einer Gruppe in einem Durchlauf bekommt man bei einem Zeitfenster von 0,57 s (Level 3), ≥ 0,62 s (Level 4) und ≥ 0,52 s (Level 5).
 
@@ -112,7 +114,7 @@ Per Web Audio erzeugt: Sprung („Boing“), Einsammeln (Glöckchen), Stolpern, 
 
 ## Bekannte kleine Fehler
 
-- Beim allerersten Level-Start nach dem Laden der Seite läuft Frankie sofort los, ohne die kurze Pause (0,7 s). Grund: die Spiel-Uhr der Level-Szene ist beim ersten Start noch nicht aktuell. Betrifft alle Level, auch Level 1; noch nicht behoben, weil Level 1 nicht ohne Rückfrage geändert wird (Vorschlag: in `GameScene.create()` `this.game.loop.time` statt `this.time.now` nehmen).
+- Die kurze Pause vor dem Loslaufen (0,7 s, siehe Ablauf) gibt es nur nach einem Unfall-Neustart. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft Frankie sofort los (gemessen 08.10.). Grund: die Spiel-Uhr der Level-Szene läuft nur, solange die Szene läuft; beim Neueintritt ist sie noch auf dem Stand vom letzten Mal (Phaser 3.90 setzt `time.now` erst im ersten Update). Betrifft alle Level, auch Level 1; noch nicht behoben, weil Level 1 nicht ohne Rückfrage geändert wird (Vorschlag: in `GameScene.create()` `this.game.loop.time` statt `this.time.now` nehmen).
 
 ## Später
 
