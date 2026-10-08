@@ -8,12 +8,22 @@ import { preloadWinter } from '../art/winter.js';
 import { preloadParty } from '../art/party.js';
 
 // Turns all drawings into textures once, then shows the start screen.
+// Meanwhile a bar fills up (no text: the child cannot read yet).
 export class BootScene extends Phaser.Scene {
   constructor() {
     super('BootScene');
   }
 
   preload() {
+    const bar = this.add.graphics();
+    const draw = (progress) => {
+      bar.clear();
+      bar.fillStyle(0xffffff, 0.7).fillRoundedRect(330, 258, 300, 24, 12);
+      bar.fillStyle(0xd9673f, 1).fillRoundedRect(330, 258, Math.max(24, 300 * progress), 24, 12);
+    };
+    draw(0);
+    this.load.on('progress', draw);
+
     preloadFrankie(this);
     preloadWorld(this);
     preloadScenery(this);
