@@ -20,11 +20,13 @@ export const CONFIG = {
   crashMs: 1100, // after hitting an obstacle: dizzy pause, then the level starts over
   levelLength: FAST ? 2600 : 13200,
   frankieScale: 0.62,
-  // Frankie's look. Ask the owner for the real colors.
+  // Frankie's look, taken from photos of the real dog (fawn French bulldog).
   fur: {
-    base: 0xfaf3e8, // white-cream
-    patch: 0xc98a4b, // brown spots
-    collar: 0xe53935, // red collar
+    base: 0xd9a066, // fawn
+    mask: 0x3d2e27, // dark muzzle
+    earInner: 0x8a5a48, // inside of the ears
+    collar: 0x3b2618, // dark leather collar
+    bandana: 0x3fa9e0, // light blue gingham bandana
   },
 };
 

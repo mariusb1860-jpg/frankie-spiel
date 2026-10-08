@@ -56,7 +56,7 @@ export class GameScene extends Phaser.Scene {
 
   createFrankie() {
     this.frankie = this.physics.add.sprite(160, GROUND_Y - 60, 'frankie-happy').setScale(CONFIG.frankieScale).setDepth(10);
-    this.frankie.body.setSize(118, 100).setOffset(40, 34); // body and head, in texture pixels
+    this.frankie.body.setSize(118, 100).setOffset(40, 64); // body and head (without ears), in texture pixels
     this.frankie.setCollideWorldBounds(true);
   }
 
