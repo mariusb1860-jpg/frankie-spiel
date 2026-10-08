@@ -1,6 +1,6 @@
 # Spezifikation: Frankie sammelt Würstel
 
-Stand: 2026-10-08 (Version 3: alle 5 Level und Siegesfeier)
+Stand: 2026-10-08 (Version 3: alle 5 Level und Siegesfeier, online)
 
 ## Ziel
 
@@ -10,8 +10,8 @@ Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. He
 
 - Kind ist 3–5 Jahre alt: kann nicht lesen → keine Texte nötig, sehr einfache Steuerung.
 - Geräte: Tablet/Handy (Touch) und PC (Tastatur).
-- Verteilung: Link im Internet (GitHub Pages).
-- Grafik und Sound komplett per Code, keine Dateien.
+- Verteilung: Link im Internet (GitHub Pages): https://mariusb1860-jpg.github.io/frankie-spiel/. Schickt man den Link per WhatsApp, erscheint ein Vorschaubild.
+- Grafik und Sound komplett per Code, keine Dateien (einzige Ausnahme: das Vorschaubild `share.jpg` für Messenger).
 
 ## Ablauf
 

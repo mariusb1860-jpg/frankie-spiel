@@ -2,6 +2,8 @@
 
 Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch Garten, Wald, Strand, Bauernhof und Winter, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf. Nach dem fünften Level gibt es eine große Siegesfeier.
 
+**Spielen:** https://mariusb1860-jpg.github.io/frankie-spiel/
+
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
 - Wer an ein Hindernis stößt oder ins Wasser fällt, fängt das Level von vorn an.
 - Im Startbild wählt man das Level; geschaffte Level schalten das nächste frei.
@@ -26,7 +28,9 @@ Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 
 | Datei | Inhalt |
 |---|---|
-| `index.html`, `style.css` | Seite, Vollbild, Hinweis „Handy drehen“ |
+| `index.html`, `style.css` | Seite, Vollbild, Hinweis „Handy drehen“, Link-Vorschau für Messenger |
+| `share.jpg` | Vorschaubild, wenn man den Link z. B. per WhatsApp schickt (Screenshot des Startbilds) |
+| `.nojekyll` | Sorgt dafür, dass GitHub Pages alle Dateien unverändert ausliefert |
 | `lib/phaser.min.js` | Spiel-Bibliothek Phaser 3.90.0 |
 | `src/config.js` | Allgemeine Einstellungen |
 | `src/levels.js` | Die Level |

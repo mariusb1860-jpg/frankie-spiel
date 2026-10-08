@@ -12,7 +12,7 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische B
 - Lesbarkeit: Alles, was man berühren kann, hat einen kräftigen dunklen Umriss (`OUTLINE`) und einen Schatten; Hintergrund hat weiche Umrisse und liegt hinter dem Dunstschleier. Hintergrund-Deko darf nicht wie ein Hindernis aussehen.
 - Ein-Knopf-Steuerung: Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
 - Große Figuren und große Tippflächen (Tablet und Handy).
-- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Detailreiches als SVG-Code, einfache Formen als Phaser-Graphics. Die Landschaft soll so detailreich sein wie Frankie.
+- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Detailreiches als SVG-Code, einfache Formen als Phaser-Graphics. Die Landschaft soll so detailreich sein wie Frankie. Einzige Ausnahme: `share.jpg`, das Vorschaubild für Links in WhatsApp & Co. (Messenger zeigen kein SVG; das Spiel selbst benutzt es nicht).
 - Grafik ansehen ohne zu spielen: `http://localhost:8137/preview.html` (`?zoom=3` für größer, `?set=beach` nur eine Gruppe: frankie, world, scenery, forest, beach, farm, winter, party).
 - Bewegte Tiere und Bälle (laufen, rollen, hüpfen) brauchen in **jeder** Phase ihrer Bewegung ein Sprung-Fenster von mindestens 0,35 s. Am knappsten ist es, wenn das Tier von Frankie weg läuft. Das gilt seit 08.10. auch für den Igel in Level 2: Auf Wunsch von Marius ist seine Trefferfläche kleiner (vorher im ungünstigsten Fall nur ca. 0,28 s).
 
@@ -34,6 +34,15 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische B
 - `window.game` ist für automatische Browser-Tests freigegeben.
 - Physik mit `fixedStep: false` (sonst Ruckeln auf 59-Hz-Bildschirmen).
 - Code, Kommentare und Commits auf Englisch. Spieltexte (wenige) auf Deutsch.
+
+## Online (GitHub Pages)
+
+- Adresse: https://mariusb1860-jpg.github.io/frankie-spiel/ (öffentliches Repo `mariusb1860-jpg/frankie-spiel`, Pages aus `main`, Ordner `/`).
+- Arbeitsweise: Feature-Branch → lokal in `main` mergen → pushen. Jeder Push auf `main` ist nach ca. 1 Minute online. Pushen nur nach OK von Marius.
+- GitHub Pages lässt Browser Dateien bis zu 10 Minuten zwischenspeichern: Nach einem Update kann kurz noch der alte Stand kommen.
+- `.nojekyll` nicht löschen: Damit liefert GitHub die Dateien unverändert aus.
+- Link-Vorschau: Meta-Tags `og:*` in `index.html` mit absoluten Adressen. `share.jpg` (1200×630, JPEG unter 300 KB) ist ein Screenshot des Startbilds mit `?alle=1` (bei 960×540 aufgenommen, oben und unten je 18 px abgeschnitten, auf 1200×630 vergrößert); neu machen, wenn sich das Startbild deutlich ändert.
+- Pfade immer relativ und mit exakter Groß-/Kleinschreibung: Der Server von GitHub unterscheidet sie, Windows nicht.
 
 ## Prüfen vor „fertig“
 
