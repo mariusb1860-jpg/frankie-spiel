@@ -1,11 +1,19 @@
 import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
+import { PLANNED_LEVELS, getLevel } from '../levels.js';
+import { unlockedLevel } from '../progress.js';
 import { addBigButton, addMuteButton, enterFullscreen } from '../ui.js';
 import * as sfx from '../audio/sfx.js';
 
 export const TITLE_FONT = '"Arial Rounded MT Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif';
 
+const BUTTON_Y = 305;
+const BUTTON_X0 = 340;
+const BUTTON_GAP = 122;
+
+// Start screen with the level selection: one round button per level, in the
+// colour of its world. Levels not reached yet show a lock.
 export class StartScene extends Phaser.Scene {
   constructor() {
     super('StartScene');
@@ -16,7 +24,7 @@ export class StartScene extends Phaser.Scene {
     this.backdrop = createBackdrop(this, { zone: 'garden' });
 
     this.add
-      .text(480, 120, 'Frankie', {
+      .text(480, 105, 'Frankie', {
         fontFamily: TITLE_FONT,
         fontSize: '104px',
         fontStyle: 'bold',
@@ -27,33 +35,60 @@ export class StartScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setShadow(0, 6, 'rgba(0,0,0,0.25)', 4);
 
-    const sausage = this.add.image(480, 215, 'sausage').setScale(1.4).setAngle(-15);
-    this.tweens.add({ targets: sausage, angle: 15, y: 205, duration: 700, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+    const sausage = this.add.image(480, 196, 'sausage').setScale(1.3).setAngle(-15);
+    this.tweens.add({ targets: sausage, angle: 15, y: 188, duration: 700, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
     const frankie = this.add
-      .sprite(300, GROUND_Y, 'frankie-happy')
+      .sprite(160, GROUND_Y, 'frankie-happy')
       .setOrigin(0.5, FRANKIE_FEET_Y / FRANKIE_H)
-      .setScale(1.15);
+      .setScale(1.05);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
+    this.playable = [];
+    for (let n = 1; n <= PLANNED_LEVELS; n++) this.addLevelButton(n);
+
     addMuteButton(this);
-    addBigButton(this, 650, 330, 'btn-play', () => this.startGame());
-    this.input.keyboard.on('keydown-SPACE', () => this.startGame());
-    this.input.keyboard.on('keydown-ENTER', () => this.startGame());
+    // Keyboard: Space/Enter starts the newest open level, 1-5 a specific one.
+    const newest = this.playable[this.playable.length - 1];
+    this.input.keyboard.on('keydown-SPACE', () => this.startGame(newest));
+    this.input.keyboard.on('keydown-ENTER', () => this.startGame(newest));
+    this.input.keyboard.on('keydown', (event) => {
+      const n = Number(event.key);
+      if (this.playable.includes(n)) this.startGame(n);
+    });
 
     this.cameras.main.fadeIn(300);
+  }
+
+  addLevelButton(n) {
+    const x = BUTTON_X0 + (n - 1) * BUTTON_GAP;
+    const def = getLevel(n);
+    const open = def && n <= unlockedLevel();
+    if (!open) {
+      this.add.image(x, BUTTON_Y, 'btn-level-locked').setDepth(100);
+      return;
+    }
+    this.playable.push(n);
+    // Only the newest open level pulses, so the child knows where to tap.
+    const isNewest = !getLevel(n + 1) || n + 1 > unlockedLevel();
+    addBigButton(this, x, BUTTON_Y, `btn-level-${def.world}`, () => this.startGame(n), { pulse: isNewest });
+    const label = this.add
+      .text(x, BUTTON_Y - 4, String(n), { fontFamily: `"Arial Black", ${TITLE_FONT}`, fontSize: '58px', color: '#ffffff', stroke: '#2b3a2b', strokeThickness: 8 })
+      .setOrigin(0.5)
+      .setDepth(101);
+    if (isNewest) this.tweens.add({ targets: label, scale: 1.08, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
   }
 
   update() {
     this.backdrop.update(0, this.time.now);
   }
 
-  startGame() {
-    if (this.starting) return;
+  startGame(level) {
+    if (this.starting || !level) return;
     this.starting = true;
     sfx.unlock();
     sfx.bark();
     enterFullscreen(this);
-    this.scene.start('GameScene');
+    this.scene.start('GameScene', { level });
   }
 }

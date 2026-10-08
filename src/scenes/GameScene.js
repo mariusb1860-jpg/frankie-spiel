@@ -1,6 +1,10 @@
 import { CONFIG, GAME_HEIGHT, GROUND_Y } from '../config.js';
+import { getLevel } from '../levels.js';
 import { buildLevel } from '../level.js';
+import { WORLDS } from '../worlds.js';
 import { createBackdrop } from '../backdrop.js';
+import { DEPTH, createCourse } from '../course.js';
+import { unlockLevel } from '../progress.js';
 import { addMuteButton } from '../ui.js';
 import { TITLE_FONT } from './StartScene.js';
 import * as sfx from '../audio/sfx.js';
@@ -8,14 +12,19 @@ import * as sfx from '../audio/sfx.js';
 const HUD_Y = 34;
 const HUD_GAP = 34;
 const HUD_SCALE = 0.62;
+const FALL_DEPTH = 24; // Frankie counts as fallen in once his paws are this far below the grass
 
 export class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
   }
 
+  init(data) {
+    this.levelNo = data?.level ?? 1;
+  }
+
   create() {
-    this.level = buildLevel();
+    this.level = buildLevel(getLevel(this.levelNo));
     this.collected = 0;
     this.finished = false;
     this.crashed = false;
@@ -25,20 +34,18 @@ export class GameScene extends Phaser.Scene {
 
     const { length } = this.level;
     this.physics.world.setBounds(0, 0, length, GAME_HEIGHT);
-    this.backdrop = createBackdrop(this, { length });
-
-    const ground = this.add.zone(length / 2, GROUND_Y + 40, length, 80);
-    this.physics.add.existing(ground, true);
+    this.backdrop = createBackdrop(this, { world: this.level.world, length });
+    this.course = createCourse(this, this.level, WORLDS[this.level.world]);
 
     this.createGoal();
-    this.createSausages();
-    this.createObstacles();
     this.createFrankie();
     this.createHud();
 
-    this.physics.add.collider(this.frankie, ground);
-    this.physics.add.overlap(this.frankie, this.sausages, (_f, s) => this.collect(s));
-    this.physics.add.overlap(this.frankie, this.obstacles, (_f, o) => this.hitObstacle(o));
+    const c = this.course;
+    this.physics.add.collider(this.frankie, c.ground);
+    this.physics.add.collider(this.frankie, c.platforms);
+    this.physics.add.overlap(this.frankie, c.sausages, (_f, s) => this.collect(s));
+    this.physics.add.overlap(this.frankie, c.obstacles, (_f, o) => this.hitObstacle(o));
 
     const cam = this.cameras.main;
     cam.setBounds(0, 0, length, GAME_HEIGHT);
@@ -55,38 +62,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   createFrankie() {
-    this.frankie = this.physics.add.sprite(160, GROUND_Y - 60, 'frankie-happy').setScale(CONFIG.frankieScale).setDepth(10);
+    this.frankie = this.physics.add.sprite(160, GROUND_Y - 60, 'frankie-happy').setScale(CONFIG.frankieScale).setDepth(DEPTH.frankie);
     this.frankie.body.setSize(118, 100).setOffset(40, 64); // body and head (without ears), in texture pixels
     this.frankie.setCollideWorldBounds(true);
-  }
-
-  createSausages() {
-    this.sausages = this.physics.add.group({ allowGravity: false });
-    for (const { x, y } of this.level.sausages) {
-      const s = this.sausages.create(x, y, 'sausage');
-      s.body.moves = false;
-      this.tweens.add({ targets: s, y: y - 8, duration: 700 + (x % 300), yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-    }
-  }
-
-  // Hit boxes are smaller than the pictures, so a near miss still counts as a jump over.
-  createObstacles() {
-    this.obstacles = this.physics.add.group({ allowGravity: false });
-    for (const { kind, x } of this.level.obstacles) {
-      const o = this.obstacles.create(x, 0, kind);
-      o.kind = kind;
-      o.body.moves = false;
-      if (kind === 'puddle') {
-        o.y = GROUND_Y + 3;
-        o.body.setSize(64, 10).setOffset(23, 8);
-      } else if (kind === 'ball') {
-        o.y = GROUND_Y - 21;
-        o.body.setCircle(14, 8, 8);
-      } else {
-        o.y = GROUND_Y - 24;
-        o.body.setSize(34, 34).setOffset(8, 16);
-      }
-    }
+    this.shadow = this.add.image(160, GROUND_Y + 2, 'shadow').setDepth(DEPTH.frankieShadow);
   }
 
   createGoal() {
@@ -130,17 +109,33 @@ export class GameScene extends Phaser.Scene {
     }
 
     if (running) {
-      f.setVelocityX(CONFIG.runSpeed);
+      f.setVelocityX(this.level.speed);
       if (!onGround) {
         f.anims.stop();
         f.setTexture('frankie-jump');
       } else {
         f.play('frankie-run', true);
       }
-      if (f.x >= this.level.goalX) this.finish();
+      if (f.body.bottom > GROUND_Y + FALL_DEPTH) this.fallIn();
+      else if (f.x >= this.level.goalX) this.finish();
     }
 
+    this.updateShadow();
+    this.course.update();
     this.backdrop.update(this.cameras.main.scrollX, time);
+  }
+
+  // Shadow on whatever is under Frankie; smaller and lighter the higher he jumps.
+  updateShadow() {
+    const body = this.frankie.body;
+    const surface = this.course.surfaceBelow(body.center.x, body.bottom);
+    if (surface === null || this.crashed) {
+      this.shadow.setVisible(false);
+      return;
+    }
+    const height = Math.max(0, surface - body.bottom);
+    const k = Phaser.Math.Clamp(1 - height / 260, 0.35, 1);
+    this.shadow.setVisible(true).setPosition(body.center.x, surface + 2).setDisplaySize(86 * k, 18 * k).setAlpha(k);
   }
 
   collect(s) {
@@ -189,13 +184,38 @@ export class GameScene extends Phaser.Scene {
     } else if (o.kind === 'ball') {
       this.tweens.add({ targets: o, x: o.x + 320, angle: 540, duration: 900, ease: 'Cubic.easeOut' });
       this.tweens.add({ targets: o, y: o.y - 60, duration: 300, yoyo: true, ease: 'Quad.easeOut' });
+    } else if (o.patrol) {
+      // A walking animal stops, hops in surprise and looks at Frankie.
+      o.patrol.stop();
+      o.anims.stop();
+      o.setFlipX(false);
+      this.tweens.add({ targets: o, y: o.y - 24, duration: 180, yoyo: true, ease: 'Quad.easeOut' });
     } else {
       this.tweens.add({ targets: o, angle: 12, duration: 90, yoyo: true, repeat: 3 });
     }
+    this.restartSoon();
+  }
 
+  // Missed the jump over a gap: splash, then the level starts over.
+  fallIn() {
+    this.crashed = true;
+    const f = this.frankie;
+    f.anims.stop();
+    f.setTexture('frankie-bonk');
+    f.setDepth(DEPTH.fallen); // behind the water
+    f.setCollideWorldBounds(false);
+    f.setVelocity(0, 120);
+    f.body.setAllowGravity(false);
+    sfx.splash();
+    sfx.oops();
+    this.burst('drop', f.x, GROUND_Y + 30, 10, 80);
+    this.restartSoon();
+  }
+
+  restartSoon() {
     this.time.delayedCall(CONFIG.crashMs, () => {
       this.cameras.main.fadeOut(350);
-      this.cameras.main.once('camerafadeoutcomplete', () => this.scene.restart());
+      this.cameras.main.once('camerafadeoutcomplete', () => this.scene.restart({ level: this.levelNo }));
     });
   }
 
@@ -203,7 +223,7 @@ export class GameScene extends Phaser.Scene {
   dizzyStars() {
     const f = this.frankie;
     for (let i = 0; i < 3; i++) {
-      const star = this.add.image(f.x, f.y, 'sparkle').setDepth(20).setScale(0.8);
+      const star = this.add.image(f.x, f.y, 'sparkle').setDepth(DEPTH.effects).setScale(0.8);
       this.tweens.addCounter({
         from: 0,
         to: 1,
@@ -219,6 +239,7 @@ export class GameScene extends Phaser.Scene {
 
   finish() {
     this.finished = true;
+    unlockLevel(this.levelNo + 1);
     const f = this.frankie;
     f.setVelocityX(0);
     f.anims.stop();
@@ -229,7 +250,7 @@ export class GameScene extends Phaser.Scene {
     this.time.delayedCall(1300, () => {
       this.cameras.main.fadeOut(400);
       this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.start('EatScene', { collected: this.collected, total: this.level.sausages.length });
+        this.scene.start('EatScene', { level: this.levelNo, collected: this.collected });
       });
     });
   }
@@ -238,7 +259,7 @@ export class GameScene extends Phaser.Scene {
   burst(key, x, y, count, spread) {
     for (let i = 0; i < count; i++) {
       const angle = (Math.PI * 2 * i) / count - Math.PI / 2;
-      const p = this.add.image(x, y, key).setDepth(20);
+      const p = this.add.image(x, y, key).setDepth(DEPTH.effects);
       this.tweens.add({
         targets: p,
         x: x + Math.cos(angle) * spread,

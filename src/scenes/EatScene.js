@@ -1,6 +1,7 @@
 import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
+import { getLevel } from '../levels.js';
 import { addBigButton, addMuteButton } from '../ui.js';
 import { TITLE_FONT } from './StartScene.js';
 import * as sfx from '../audio/sfx.js';
@@ -21,13 +22,14 @@ export class EatScene extends Phaser.Scene {
   }
 
   init(data) {
+    this.levelNo = data.level ?? 1;
     // Even with zero sausages Frankie gets one treat.
     this.count = Math.max(1, data.collected ?? 1);
   }
 
   create() {
     this.leaving = false;
-    this.backdrop = createBackdrop(this, { zone: 'village' });
+    this.backdrop = createBackdrop(this, { world: getLevel(this.levelNo).world, zone: 'last' });
 
     this.add.image(800, GROUND_Y + 4, 'house').setOrigin(0.5, 1);
     this.add
@@ -165,18 +167,27 @@ export class EatScene extends Phaser.Scene {
     this.tweens.add({ targets: f, y: FRANKIE_Y - 40, duration: 200, yoyo: true, ease: 'Quad.easeOut' });
     this.hearts(8);
 
+    // Two big buttons: play this level again, and on to the next level
+    // (after the last level that exists: back to the level selection).
     this.time.delayedCall(700, () => {
-      addBigButton(this, 480, 230, 'btn-replay', () => this.replay());
-      this.input.keyboard.once('keydown-SPACE', () => this.replay());
-      this.input.keyboard.once('keydown-ENTER', () => this.replay());
+      const hasNext = Boolean(getLevel(this.levelNo + 1));
+      const next = hasNext ? () => this.playLevel(this.levelNo + 1) : () => this.leave('StartScene');
+      addBigButton(this, 390, 230, 'btn-replay', () => this.playLevel(this.levelNo), { pulse: false });
+      addBigButton(this, 570, 230, hasNext ? 'btn-next' : 'btn-home', next);
+      this.input.keyboard.once('keydown-SPACE', next);
+      this.input.keyboard.once('keydown-ENTER', next);
     });
   }
 
-  replay() {
+  playLevel(level) {
+    this.leave('GameScene', { level });
+  }
+
+  leave(sceneKey, data) {
     if (this.leaving) return;
     this.leaving = true;
     sfx.unlock();
-    this.scene.start('GameScene');
+    this.scene.start(sceneKey, data);
   }
 
   hearts(n) {

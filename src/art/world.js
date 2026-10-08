@@ -1,4 +1,5 @@
-import { GAME_WIDTH, GAME_HEIGHT } from '../config.js';
+import { GAME_WIDTH, GAME_HEIGHT, GROUND_Y } from '../config.js';
+import { WORLDS } from '../worlds.js';
 import { OUTLINE as LINE, loadSvg, svgDoc } from './svg.js';
 
 // Everything except Frankie: sausages, landscape, obstacles, buttons. All drawn with code:
@@ -7,13 +8,17 @@ const OUTLINE = 0x4a2c17;
 
 export function createWorldTextures(scene) {
   make(scene, 'sky', GAME_WIDTH, GAME_HEIGHT, drawSky);
+  make(scene, 'haze', GAME_WIDTH, GROUND_Y, drawHaze);
   make(scene, 'note', 30, 40, drawNote);
   make(scene, 'heart', 40, 36, drawHeart);
   make(scene, 'sparkle', 28, 28, drawSparkle);
   make(scene, 'crumb', 10, 10, (g) => { g.fillStyle(0xb5562f, 1); g.fillCircle(5, 5, 4); });
   make(scene, 'drop', 12, 12, (g) => { g.fillStyle(0x5fb4ff, 1); g.fillCircle(6, 6, 5); });
-  make(scene, 'btn-play', 170, 170, drawPlayButton);
   make(scene, 'btn-replay', 170, 170, drawReplayButton);
+  make(scene, 'btn-next', 170, 170, drawNextButton);
+  make(scene, 'btn-home', 170, 170, drawHomeButton);
+  for (const [key, world] of Object.entries(WORLDS)) make(scene, `btn-level-${key}`, 124, 124, (g) => drawLevelButton(g, world.color));
+  make(scene, 'btn-level-locked', 124, 124, drawLockedButton);
   make(scene, 'icon-sound-on', 72, 72, (g) => drawSpeaker(g, true));
   make(scene, 'icon-sound-off', 72, 72, (g) => drawSpeaker(g, false));
 }
@@ -32,6 +37,18 @@ function drawSky(g, w, h) {
     const t = i / (steps - 1);
     g.fillStyle(lerpColor(top[0], top[1], t), 1);
     g.fillRect(0, Math.floor((h / steps) * i), w, Math.ceil(h / steps) + 1);
+  }
+}
+
+// Light mist that gets stronger towards the ground line; it sits between the
+// background and the play area and makes the background look further away.
+function drawHaze(g, w, h) {
+  const start = 120;
+  // One row per pixel: overlapping see-through stripes would show as lines.
+  for (let y = start; y < h; y++) {
+    const t = (y - start) / (h - start);
+    g.fillStyle(0xeef7ff, 0.34 * t * t * (3 - 2 * t));
+    g.fillRect(0, y, w, 1);
   }
 }
 
@@ -71,12 +88,6 @@ function roundButton(g, color) {
   g.strokeCircle(85, 82, 72);
 }
 
-function drawPlayButton(g) {
-  roundButton(g, 0x43b047);
-  g.fillStyle(0xffffff, 1);
-  g.fillTriangle(66, 46, 66, 118, 124, 82);
-}
-
 function drawReplayButton(g) {
   roundButton(g, 0xff9800);
   g.lineStyle(14, 0xffffff, 1);
@@ -86,6 +97,45 @@ function drawReplayButton(g) {
   g.fillStyle(0xffffff, 1);
   // Arrow head at the end of the arc
   g.fillTriangle(98, 26, 130, 52, 96, 66);
+}
+
+function drawNextButton(g) {
+  roundButton(g, 0x43b047);
+  g.fillStyle(0xffffff, 1);
+  g.fillRect(48, 70, 52, 24);
+  g.fillTriangle(96, 44, 96, 120, 134, 82);
+}
+
+function drawHomeButton(g) {
+  roundButton(g, 0x3f7fd6);
+  g.fillStyle(0xffffff, 1);
+  g.fillTriangle(40, 82, 85, 40, 130, 82);
+  g.fillRect(54, 80, 62, 40);
+  g.fillStyle(0x3f7fd6, 1);
+  g.fillRect(76, 96, 18, 24);
+}
+
+// Round level button in the colour of the level's world; the number is added as text.
+function drawLevelButton(g, color) {
+  g.fillStyle(0x000000, 0.2);
+  g.fillCircle(62, 66, 56);
+  g.fillStyle(color, 1);
+  g.fillCircle(62, 60, 56);
+  g.lineStyle(7, 0xffffff, 1);
+  g.strokeCircle(62, 60, 52);
+}
+
+function drawLockedButton(g) {
+  drawLevelButton(g, 0xa7adb3);
+  g.fillStyle(0xffffff, 1);
+  g.fillRoundedRect(40, 56, 44, 34, 6);
+  g.lineStyle(8, 0xffffff, 1);
+  g.beginPath();
+  g.arc(62, 56, 13, Math.PI, 0);
+  g.strokePath();
+  g.fillStyle(0xa7adb3, 1);
+  g.fillCircle(62, 70, 5);
+  g.fillRect(60, 70, 4, 11);
 }
 
 function drawSpeaker(g, on) {
@@ -189,12 +239,20 @@ export function worldSvgs() {
         <ellipse cx="55" cy="12" rx="40" ry="4" fill="#2a4f86" opacity="0.5"/>
         <g fill="#fff" opacity="0.9"><ellipse cx="55" cy="30" rx="5" ry="4"/><circle cx="48" cy="24" r="2.2"/><circle cx="53" cy="22" r="2.2"/><circle cx="58" cy="22" r="2.2"/><circle cx="63" cy="24" r="2.2"/></g>`),
     },
+    // Soft round shadow under things that stand on the ground (and under Frankie).
+    shadow: {
+      w: 100,
+      h: 24,
+      svg: svgDoc(100, 24, `
+        <defs><radialGradient id="sh"><stop offset="0" stop-color="#000" stop-opacity="0.34"/><stop offset="0.65" stop-color="#000" stop-opacity="0.2"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+        <ellipse cx="50" cy="12" rx="50" ry="12" fill="url(#sh)"/>`),
+    },
     puddle: {
       w: 110,
       h: 26,
       svg: svgDoc(110, 26, `
-        <ellipse cx="55" cy="14" rx="52" ry="10.5" fill="#3d8fd6"/>
-        <ellipse cx="55" cy="12.5" rx="46" ry="7.5" fill="#7cc6ff"/>
+        <ellipse cx="55" cy="14" rx="51" ry="10" fill="#3d8fd6" stroke="#1f4f80" stroke-width="2.5"/>
+        <ellipse cx="55" cy="12.5" rx="45" ry="7" fill="#7cc6ff"/>
         <path d="M30 11 Q38 9 46 11 M64 14 Q72 12 80 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>`),
     },
   };

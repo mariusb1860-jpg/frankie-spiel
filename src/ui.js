@@ -13,12 +13,12 @@ export function addMuteButton(scene) {
   return btn;
 }
 
-// Big round button that gently pulses. onPress runs on pointerup,
-// because browsers only allow fullscreen from a pointerup.
-export function addBigButton(scene, x, y, key, onPress) {
+// Big round button that gently pulses (unless pulse is false). onPress runs on
+// pointerup, because browsers only allow fullscreen from a pointerup.
+export function addBigButton(scene, x, y, key, onPress, { pulse = true } = {}) {
   const btn = scene.add.image(x, y, key).setScrollFactor(0).setDepth(100);
   btn.setInteractive({ useHandCursor: true });
-  scene.tweens.add({ targets: btn, scale: 1.08, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+  if (pulse) scene.tweens.add({ targets: btn, scale: 1.08, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
   btn.on('pointerup', onPress);
   return btn;
 }
