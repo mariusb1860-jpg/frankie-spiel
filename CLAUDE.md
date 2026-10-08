@@ -1,6 +1,6 @@
 # CLAUDE.md – Frankie sammelt Würstel
 
-Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Englische Bulldogge, sammelt Würstel und frisst sie am Ende. Design: `docs/spec.md`.
+Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische Bulldogge (rehbraun, siehe `docs/spec.md`), sammelt Würstel und frisst sie am Ende. Design: `docs/spec.md`.
 
 ## Regeln für das Spiel
 

@@ -4,7 +4,7 @@ Stand: 2026-10-08 (Version 1.2 nach zweitem Feedback von Marius)
 
 ## Ziel
 
-Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. Held ist Frankie, eine kleine Englische Bulldogge. Sie sammelt Würstel und frisst sie am Ende.
+Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. Held ist Frankie, eine Französische Bulldogge (anfangs für eine Englische gehalten; die Fotos vom 08.10. zeigen eine Französische). Sie sammelt Würstel und frisst sie am Ende.
 
 ## Rahmen
 
@@ -39,7 +39,8 @@ Startbild → ein Level (ca. 60 Sekunden) → Futterszene → „Nochmal“.
 
 ## Frankie
 
-Körper von der Seite, Kopf leicht zum Betrachter gedreht (beide Augen sichtbar), Blick nach rechts. Breiter Kopf mit braunem Fleck ums linke Auge, kleine gefaltete Rosenohren, breite Schnauze mit zwei Hängebacken, kleines Kinn (Unterbiss), große glänzende Augen, kurze kräftige Beine, Stummelschwanz, rotes Halsband unter dem Kinn mit goldener Marke. Fellfarbe weiß-creme mit braunen Flecken (einstellbar in `src/config.js`). Version 1.1: als SVG neu gezeichnet, weil die erste Version zu grob war.
+Nach Fotos des echten Frankie (08.10.): rehbraune Französische Bulldogge. Körper von der Seite, Kopf leicht zum Betrachter gedreht (beide Augen sichtbar), Blick nach rechts. Große aufrechte Fledermausohren (innen dunkel), eckiger Kopf mit Stirnfalten und dunkleren Augenpartien, kurze schwarze Schnauze (Maske), große dunkelbraune Augen, kompakter muskulöser Körper mit hellerer Brust, Stummelschwanz. Dunkles Lederhalsband und hellblau kariertes Halstuch. Farben einstellbar in `src/config.js`.
+Versionen: 1.0 grobe Formen, 1.1 als SVG neu (noch als Englische Bulldogge, weiß-braun), 1.2 nach Fotos.
 
 Posen: Laufen (4 Bilder), Springen, Benommen, Glücklich, Fressen (2 Bilder).
 

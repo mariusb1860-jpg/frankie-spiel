@@ -1,6 +1,6 @@
 # Frankie sammelt Würstel
 
-Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Englische Bulldogge, läuft durch den Garten, sammelt Würstel und frisst sie am Ende in ihrer Hütte auf.
+Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch den Garten, sammelt Würstel und frisst sie am Ende in ihrer Hütte auf.
 
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
 - Wer an ein Hindernis stößt, fängt das Level von vorn an.
