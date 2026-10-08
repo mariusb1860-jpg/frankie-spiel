@@ -1,13 +1,14 @@
 import { GROUND_Y } from '../config.js';
+import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
 import { addBigButton, addMuteButton } from '../ui.js';
 import { TITLE_FONT } from './StartScene.js';
 import * as sfx from '../audio/sfx.js';
 
 const BOWL_X = 560;
-const FRANKIE_X = 430;
-const FRANKIE_SCALE = 1.3;
-const FRANKIE_Y = GROUND_Y - 46 * FRANKIE_SCALE; // center, so Frankie can roll around it
+const FRANKIE_X = 445;
+const FRANKIE_SCALE = 0.95;
+const FRANKIE_Y = GROUND_Y - (FRANKIE_FEET_Y - FRANKIE_H / 2) * FRANKIE_SCALE; // center, so Frankie can roll around it
 const BELLY_GROWTH = 0.008; // Frankie gets a little rounder with every sausage
 const PACE = {
   slow: { fly: 650, anim: 'frankie-eat', pause: 250 },

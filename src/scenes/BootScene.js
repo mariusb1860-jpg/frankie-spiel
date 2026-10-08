@@ -1,15 +1,20 @@
-import { createFrankieTextures } from '../art/frankie.js';
-import { createWorldTextures } from '../art/world.js';
+import { createFrankieAnims, preloadFrankie } from '../art/frankie.js';
+import { createWorldTextures, preloadWorld } from '../art/world.js';
 
-// Draws every texture once, then shows the start screen.
+// Turns all drawings into textures once, then shows the start screen.
 export class BootScene extends Phaser.Scene {
   constructor() {
     super('BootScene');
   }
 
+  preload() {
+    preloadFrankie(this);
+    preloadWorld(this);
+  }
+
   create() {
     createWorldTextures(this);
-    createFrankieTextures(this);
+    createFrankieAnims(this);
     this.scene.start('StartScene');
   }
 }

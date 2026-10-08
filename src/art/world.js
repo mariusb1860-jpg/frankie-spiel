@@ -1,20 +1,17 @@
 import { GAME_WIDTH, GAME_HEIGHT } from '../config.js';
+import { OUTLINE as LINE, loadSvg, svgDoc } from './svg.js';
 
-// Everything except Frankie: sausages, landscape, obstacles, buttons. All drawn with code.
+// Everything except Frankie: sausages, landscape, obstacles, buttons. All drawn with code:
+// the detailed pieces as SVG, the simple ones with Phaser graphics.
 const OUTLINE = 0x4a2c17;
 
 export function createWorldTextures(scene) {
-  make(scene, 'sausage', 56, 28, drawSausage);
-  make(scene, 'sausage-slot', 56, 28, drawSausageSlot);
   make(scene, 'sky', GAME_WIDTH, GAME_HEIGHT, drawSky);
   make(scene, 'sun', 130, 130, drawSun);
   make(scene, 'clouds', 640, 160, drawClouds);
   make(scene, 'hills', 640, 200, drawHills);
   make(scene, 'bushes', 512, 110, drawBushes);
   make(scene, 'ground', 128, 80, drawGround);
-  make(scene, 'puddle', 110, 26, drawPuddle);
-  make(scene, 'ball', 52, 52, drawBall);
-  make(scene, 'crate', 58, 58, drawCrate);
   make(scene, 'house', 190, 180, drawHouse);
   make(scene, 'bowl', 110, 44, drawBowl);
   make(scene, 'heart', 40, 36, drawHeart);
@@ -32,25 +29,6 @@ function make(scene, key, w, h, draw) {
   draw(g, w, h);
   g.generateTexture(key, w, h);
   g.destroy();
-}
-
-function drawSausage(g) {
-  g.fillStyle(0x8e3b2a, 1);
-  g.fillCircle(5, 14, 4);
-  g.fillCircle(51, 14, 4);
-  g.fillStyle(0xc8553d, 1);
-  g.lineStyle(3, OUTLINE, 1);
-  g.fillRoundedRect(6, 5, 44, 18, 9);
-  g.strokeRoundedRect(6, 5, 44, 18, 9);
-  g.fillStyle(0xf39a7b, 1);
-  g.fillRoundedRect(13, 8, 28, 4, 2);
-}
-
-function drawSausageSlot(g) {
-  g.fillStyle(0xffffff, 0.35);
-  g.lineStyle(3, 0xffffff, 0.75);
-  g.fillRoundedRect(6, 5, 44, 18, 9);
-  g.strokeRoundedRect(6, 5, 44, 18, 9);
 }
 
 function drawSky(g, w, h) {
@@ -128,39 +106,6 @@ function drawGround(g, w, h) {
   g.fillStyle(0x6cc94a, 1);
   g.fillRect(0, 0, w, 14);
   for (let x = 0; x <= w; x += 16) g.fillCircle(x, 14, 7);
-}
-
-function drawPuddle(g) {
-  g.fillStyle(0x3d8fd6, 1);
-  g.fillEllipse(55, 14, 106, 22);
-  g.fillStyle(0x7cc6ff, 1);
-  g.fillEllipse(55, 12, 92, 14);
-  g.fillStyle(0xffffff, 0.7);
-  g.fillEllipse(38, 10, 24, 4);
-}
-
-function drawBall(g) {
-  g.lineStyle(3, OUTLINE, 1);
-  g.fillStyle(0xff5252, 1);
-  g.fillCircle(26, 26, 23);
-  g.fillStyle(0xffffff, 1);
-  g.fillPoints([{ x: 8, y: 14 }, { x: 44, y: 14 }, { x: 48, y: 24 }, { x: 4, y: 24 }], true);
-  g.fillStyle(0xffd54f, 1);
-  g.fillPoints([{ x: 4, y: 30 }, { x: 48, y: 30 }, { x: 44, y: 38 }, { x: 8, y: 38 }], true);
-  g.strokeCircle(26, 26, 23);
-  g.fillStyle(0xffffff, 0.8);
-  g.fillCircle(18, 10, 4);
-}
-
-function drawCrate(g) {
-  g.lineStyle(3, OUTLINE, 1);
-  g.fillStyle(0xd1913f, 1);
-  g.fillRect(3, 3, 52, 52);
-  g.lineStyle(5, 0xa36a28, 1);
-  g.strokeRect(8, 8, 42, 42);
-  g.lineBetween(10, 10, 48, 48);
-  g.lineStyle(3, OUTLINE, 1);
-  g.strokeRect(3, 3, 52, 52);
 }
 
 function drawHouse(g) {
@@ -269,4 +214,67 @@ function lerpColor(a, b, t) {
   const ch = (c, s) => (c >> s) & 0xff;
   const mix = (s) => Math.round(ch(a, s) + (ch(b, s) - ch(a, s)) * t);
   return (mix(16) << 16) | (mix(8) << 8) | mix(0);
+}
+
+const line = `stroke="${LINE}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"`;
+const SAUSAGE_PATH = 'M8 15 C8 9 14 7 20 8 C28 10 34 10 42 8 C48 7 54 9 54 15 C54 22 48 25 42 24 C34 23 28 23 20 24 C14 25 8 22 8 15 Z';
+
+export function worldSvgs() {
+  return {
+    sausage: {
+      w: 62,
+      h: 32,
+      svg: svgDoc(62, 32, `
+        <defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ec825c"/><stop offset="1" stop-color="#b8472f"/>
+        </linearGradient></defs>
+        <circle cx="6" cy="15" r="3.5" fill="#8e3b2a"/>
+        <circle cx="56" cy="15" r="3.5" fill="#8e3b2a"/>
+        <path d="${SAUSAGE_PATH}" fill="url(#s)" ${line}/>
+        <path d="M24 13 l4 8 M32 13 l4 8 M40 12 l4 8" stroke="#9c3a26" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+        <path d="M15 12 C24 13 34 13 46 11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.6"/>`),
+    },
+    'sausage-slot': {
+      w: 62,
+      h: 32,
+      svg: svgDoc(62, 32, `<path d="${SAUSAGE_PATH}" fill="#fff" fill-opacity="0.35" stroke="#fff" stroke-opacity="0.8" stroke-width="3"/>`),
+    },
+    crate: {
+      w: 50,
+      h: 50,
+      svg: svgDoc(50, 50, `
+        <rect x="2.5" y="2.5" width="45" height="45" rx="4" fill="#d9a050" ${line}/>
+        <rect x="8" y="8" width="34" height="34" rx="2" fill="#e7b466" stroke="#a8692a" stroke-width="4"/>
+        <path d="M10 40 L40 10" stroke="#a8692a" stroke-width="6" stroke-linecap="round"/>
+        <g fill="#7a4a1c"><circle cx="7" cy="7" r="1.8"/><circle cx="43" cy="7" r="1.8"/><circle cx="7" cy="43" r="1.8"/><circle cx="43" cy="43" r="1.8"/></g>
+        <rect x="2.5" y="2.5" width="45" height="45" rx="4" fill="none" ${line}/>`),
+    },
+    ball: {
+      w: 44,
+      h: 44,
+      svg: svgDoc(44, 44, `
+        <defs><clipPath id="b"><circle cx="22" cy="22" r="19.5"/></clipPath></defs>
+        <g clip-path="url(#b)">
+          <rect width="44" height="44" fill="#ff5a5a"/>
+          <ellipse cx="0" cy="22" rx="12" ry="26" fill="#4fa3ff"/>
+          <ellipse cx="44" cy="22" rx="12" ry="26" fill="#ffd54f"/>
+          <ellipse cx="22" cy="22" rx="6" ry="24" fill="#fff"/>
+        </g>
+        <circle cx="22" cy="22" r="19.5" fill="none" ${line}/>
+        <ellipse cx="14" cy="12" rx="5" ry="3" fill="#fff" opacity="0.75" transform="rotate(-35 14 12)"/>`),
+    },
+    puddle: {
+      w: 110,
+      h: 26,
+      svg: svgDoc(110, 26, `
+        <ellipse cx="55" cy="14" rx="52" ry="10.5" fill="#3d8fd6"/>
+        <ellipse cx="55" cy="12.5" rx="46" ry="7.5" fill="#7cc6ff"/>
+        <path d="M30 11 Q38 9 46 11 M64 14 Q72 12 80 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>`),
+    },
+  };
+}
+
+// SVG pieces go through the loader, so call this from preload().
+export function preloadWorld(scene) {
+  for (const [key, { svg, w, h }] of Object.entries(worldSvgs())) loadSvg(scene, key, svg, w, h);
 }

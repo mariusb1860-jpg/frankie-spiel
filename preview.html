@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Frankie – Grafik-Vorschau</title>
+    <link rel="icon" href="data:," />
+    <style>
+      body { margin: 0; padding: 16px; background: #9fd6ff; font-family: sans-serif; }
+      .grid { display: flex; flex-wrap: wrap; gap: 12px; }
+      figure { margin: 0; background: #bfe6ff; border-radius: 8px; padding: 6px; }
+      figcaption { font-size: 12px; text-align: center; color: #4a2c17; }
+      img { display: block; }
+    </style>
+  </head>
+  <body>
+    <!-- Developer page: shows every drawing large, to judge the art without playing. -->
+    <div class="grid" id="grid"></div>
+    <script type="module">
+      import { frankieSvg, FRANKIE_W, FRANKIE_H } from './src/art/frankie.js';
+      import { worldSvgs } from './src/art/world.js';
+
+      const grid = document.getElementById('grid');
+      const zoom = Number(new URLSearchParams(location.search).get('zoom') || 2);
+      const add = (name, svg, w, h) => {
+        const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+        grid.insertAdjacentHTML('beforeend', `<figure><img src="${url}" width="${w * zoom}" height="${h * zoom}"><figcaption>${name}</figcaption></figure>`);
+      };
+      for (const name of ['run0', 'run1', 'run2', 'run3', 'jump', 'bonk', 'happy', 'eat0', 'eat1']) {
+        add(name, frankieSvg(name), FRANKIE_W, FRANKIE_H);
+      }
+      for (const [name, { svg, w, h }] of Object.entries(worldSvgs())) add(name, svg, w, h);
+    </script>
+  </body>
+</html>

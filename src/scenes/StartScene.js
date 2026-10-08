@@ -33,7 +33,7 @@ export class StartScene extends Phaser.Scene {
     const frankie = this.add
       .sprite(300, GROUND_Y, 'frankie-happy')
       .setOrigin(0.5, FRANKIE_FEET_Y / FRANKIE_H)
-      .setScale(1.6);
+      .setScale(1.15);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
     addMuteButton(this);
