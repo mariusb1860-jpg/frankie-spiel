@@ -1,0 +1,59 @@
+// All tuning knobs live here. Change values here, not inside the scenes.
+
+const params = new URLSearchParams(window.location.search);
+
+// ?fast=1 shortens the level (automated tests), ?debug=1 shows physics boxes.
+export const FAST = params.has('fast');
+export const DEBUG = params.has('debug');
+
+export const GAME_WIDTH = 960;
+export const GAME_HEIGHT = 540;
+export const GROUND_Y = 460; // top edge of the grass
+
+export const CONFIG = {
+  runSpeed: 220, // px per second
+  jumpVelocity: -620,
+  gravity: 1400,
+  jumpBufferMs: 180, // a tap shortly before landing still counts
+  coyoteMs: 120, // a tap shortly after running off an edge still counts
+  stumbleMs: 650,
+  stumbleSpeed: 60,
+  levelLength: FAST ? 2600 : 13200,
+  frankieScale: 0.85,
+  // Frankie's look. Ask the owner for the real colors.
+  fur: {
+    base: 0xfaf3e8, // white-cream
+    patch: 0xc98a4b, // brown spots
+    collar: 0xe53935, // red collar
+  },
+};
+
+// Level layout: what appears where (x in px). 'row' = 3 sausages on the ground,
+// 'arc' = 3 sausages along a jump, 'high' = 1 sausage that needs a jump.
+const LAYOUT_FULL = [
+  ['row', 700],
+  ['puddle', 1500],
+  ['high', 2250],
+  ['arc', 3000],
+  ['ball', 3800],
+  ['high', 4550],
+  ['crate', 5300],
+  ['row', 6050],
+  ['high', 6800],
+  ['puddle', 7550],
+  ['arc', 8300],
+  ['ball', 9100],
+  ['high', 9850],
+  ['crate', 10600],
+  ['row', 11350],
+  ['high', 12000],
+];
+
+const LAYOUT_FAST = [
+  ['row', 600],
+  ['high', 1050],
+  ['crate', 1450],
+  ['arc', 1850],
+];
+
+export const LAYOUT = FAST ? LAYOUT_FAST : LAYOUT_FULL;
