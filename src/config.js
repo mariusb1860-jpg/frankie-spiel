@@ -57,3 +57,10 @@ const LAYOUT_FAST = [
 ];
 
 export const LAYOUT = FAST ? LAYOUT_FAST : LAYOUT_FULL;
+
+// The landscape changes along the way: garden, meadow, village (share of the level length).
+export const ZONES = [
+  { key: 'garden', until: 1 / 3 },
+  { key: 'meadow', until: 2 / 3 },
+  { key: 'village', until: 1 },
+];

@@ -7,13 +7,7 @@ const OUTLINE = 0x4a2c17;
 
 export function createWorldTextures(scene) {
   make(scene, 'sky', GAME_WIDTH, GAME_HEIGHT, drawSky);
-  make(scene, 'sun', 130, 130, drawSun);
-  make(scene, 'clouds', 640, 160, drawClouds);
-  make(scene, 'hills', 640, 200, drawHills);
-  make(scene, 'bushes', 512, 110, drawBushes);
-  make(scene, 'ground', 128, 80, drawGround);
-  make(scene, 'house', 190, 180, drawHouse);
-  make(scene, 'bowl', 110, 44, drawBowl);
+  make(scene, 'note', 30, 40, drawNote);
   make(scene, 'heart', 40, 36, drawHeart);
   make(scene, 'sparkle', 28, 28, drawSparkle);
   make(scene, 'crumb', 10, 10, (g) => { g.fillStyle(0xb5562f, 1); g.fillCircle(5, 5, 4); });
@@ -41,105 +35,11 @@ function drawSky(g, w, h) {
   }
 }
 
-function drawSun(g) {
-  g.fillStyle(0xfff3a0, 0.5);
-  g.fillCircle(65, 65, 62);
-  g.fillStyle(0xffd84d, 1);
-  g.fillCircle(65, 65, 44);
-}
-
-function drawClouds(g) {
-  g.fillStyle(0xffffff, 0.95);
-  for (const [x, y, s] of [[80, 70, 1], [330, 40, 0.8], [520, 95, 1.1]]) {
-    g.fillCircle(x, y, 26 * s);
-    g.fillCircle(x + 30 * s, y - 12 * s, 32 * s);
-    g.fillCircle(x + 64 * s, y, 26 * s);
-    g.fillRoundedRect(x - 10 * s, y, 92 * s, 24 * s, 12 * s);
-  }
-}
-
-function drawHills(g, w, h) {
-  hillLayer(g, w, h, 0xb9e58c, 95, [[30, 1], [14, 3]]);
-  hillLayer(g, w, h, 0x9ed672, 130, [[22, 2], [10, 5]]);
-}
-
-// Tileable hills: every wave repeats a whole number of times across the width.
-function hillLayer(g, w, h, color, base, waves) {
-  const pts = [{ x: 0, y: h }];
-  for (let x = 0; x <= w; x += 8) {
-    let y = base;
-    for (const [amp, k] of waves) y -= amp * Math.sin((2 * Math.PI * k * x) / w);
-    pts.push({ x, y });
-  }
-  pts.push({ x: w, y: h });
-  g.fillStyle(color, 1);
-  g.fillPoints(pts, true);
-}
-
-function drawBushes(g) {
-  const flowers = [0xff6b9a, 0xffd54f, 0xffffff, 0xb388ff];
-  let f = 0;
-  for (const [x, s] of [[60, 1], [190, 0.8], [330, 1.15], [450, 0.75]]) {
-    const y = 90;
-    g.fillStyle(0x4caf50, 1);
-    g.fillCircle(x - 28 * s, y - 14 * s, 24 * s);
-    g.fillCircle(x + 28 * s, y - 14 * s, 24 * s);
-    g.fillCircle(x, y - 30 * s, 32 * s);
-    g.fillRect(x - 50 * s, y - 16 * s, 100 * s, 36 * s);
-    g.fillStyle(0x66c56b, 1);
-    g.fillCircle(x - 8 * s, y - 40 * s, 12 * s);
-    for (const [dx, dy] of [[-30, -18], [5, -30], [30, -12], [-10, -6]]) {
-      g.fillStyle(flowers[f++ % flowers.length], 1);
-      g.fillCircle(x + dx * s, y + dy * s, 5 * s);
-    }
-  }
-}
-
-function drawGround(g, w, h) {
-  g.fillStyle(0x9c6b3e, 1);
-  g.fillRect(0, 0, w, h);
-  g.fillStyle(0x87592f, 1);
-  for (const [x, y, r] of [[20, 44, 5], [70, 60, 4], [104, 38, 6], [44, 70, 3], [90, 72, 4]]) g.fillCircle(x, y, r);
-  g.fillStyle(0x4a9e30, 1);
-  g.fillRect(0, 0, w, 20);
-  for (let x = 8; x < w; x += 16) g.fillCircle(x, 20, 8);
-  g.fillStyle(0x6cc94a, 1);
-  g.fillRect(0, 0, w, 14);
-  for (let x = 0; x <= w; x += 16) g.fillCircle(x, 14, 7);
-}
-
-function drawHouse(g) {
-  g.lineStyle(4, OUTLINE, 1);
-  // Walls
-  g.fillStyle(0x4f8fd6, 1);
-  g.fillRect(22, 66, 146, 110);
-  g.strokeRect(22, 66, 146, 110);
-  // Door
-  g.fillStyle(0x3a2414, 1);
-  g.fillRect(65, 112, 60, 64);
-  g.fillCircle(95, 112, 30);
-  // Name plate
-  g.fillStyle(0xfff3d6, 1);
-  g.fillRoundedRect(55, 74, 80, 22, 6);
-  g.strokeRoundedRect(55, 74, 80, 22, 6);
-  // Roof
-  const roof = [{ x: 4, y: 76 }, { x: 95, y: 6 }, { x: 186, y: 76 }, { x: 172, y: 84 }, { x: 95, y: 26 }, { x: 18, y: 84 }];
-  g.fillStyle(0xd63d2e, 1);
-  g.fillPoints(roof, true);
-  g.strokePoints(roof, true);
-}
-
-function drawBowl(g) {
-  g.lineStyle(3, OUTLINE, 1);
-  const pts = [{ x: 6, y: 12 }, { x: 104, y: 12 }, { x: 90, y: 40 }, { x: 20, y: 40 }];
-  g.fillStyle(0x3a7bd5, 1);
-  g.fillPoints(pts, true);
-  g.strokePoints(pts, true);
-  g.fillStyle(0x7fb2f0, 1);
-  g.fillEllipse(55, 12, 98, 14);
-  g.strokeEllipse(55, 12, 98, 14);
-  g.fillStyle(0xffffff, 1);
-  g.fillCircle(55, 27, 6);
+function drawNote(g) {
+  g.fillStyle(0x7e57c2, 1);
+  g.fillEllipse(10, 32, 16, 12);
+  g.fillRect(15, 4, 4, 28);
+  g.fillTriangle(15, 4, 28, 12, 15, 16);
 }
 
 function drawHeart(g) {
@@ -262,6 +162,32 @@ export function worldSvgs() {
         </g>
         <circle cx="22" cy="22" r="19.5" fill="none" ${line}/>
         <ellipse cx="14" cy="12" rx="5" ry="3" fill="#fff" opacity="0.75" transform="rotate(-35 14 12)"/>`),
+    },
+    // Frankie's dog house; the name plate (95, 85) gets its text in the scene.
+    house: {
+      w: 190,
+      h: 180,
+      svg: svgDoc(190, 180, `
+        <rect x="24" y="66" width="142" height="110" fill="#4f8fd6" ${line}/>
+        ${[48, 72, 96, 120, 144].map((x) => `<path d="M${x} 70 V174" stroke="#3f7ac0" stroke-width="2.5"/>`).join('')}
+        <path d="M66 176 V122 a29 29 0 0 1 58 0 V176 Z" fill="#3a2414" ${line}/>
+        <path d="M74 176 V124 a21 21 0 0 1 42 0 V176 Z" fill="#24160b"/>
+        <rect x="55" y="74" width="80" height="22" rx="7" fill="#fff3d6" ${line}/>
+        <path d="M2 80 L95 6 L188 80 L174 88 L95 26 L16 88 Z" fill="#d63d2e" ${line}/>
+        <path d="M30 70 L95 18 M160 70 L95 18" stroke="#a82c20" stroke-width="2.5" opacity="0.7"/>
+        <path d="M40 60 L52 50 M64 42 L76 32 M150 60 L138 50 M126 42 L114 32" stroke="#ff6f5e" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#fff6e8" ${line}><circle cx="146" cy="160" r="4"/><circle cx="146" cy="168" r="4"/><circle cx="168" cy="160" r="4"/><circle cx="168" cy="168" r="4"/></g>
+        <rect x="145" y="160" width="24" height="8" fill="#fff6e8"/>`),
+    },
+    bowl: {
+      w: 110,
+      h: 44,
+      svg: svgDoc(110, 44, `
+        <defs><linearGradient id="bw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a8fe0"/><stop offset="1" stop-color="#2f67b8"/></linearGradient></defs>
+        <path d="M6 12 H104 L92 41 H18 Z" fill="url(#bw)" ${line}/>
+        <ellipse cx="55" cy="12" rx="49" ry="7.5" fill="#8fbdf2" ${line}/>
+        <ellipse cx="55" cy="12" rx="40" ry="4" fill="#2a4f86" opacity="0.5"/>
+        <g fill="#fff" opacity="0.9"><ellipse cx="55" cy="30" rx="5" ry="4"/><circle cx="48" cy="24" r="2.2"/><circle cx="53" cy="22" r="2.2"/><circle cx="58" cy="22" r="2.2"/><circle cx="63" cy="24" r="2.2"/></g>`),
     },
     puddle: {
       w: 110,

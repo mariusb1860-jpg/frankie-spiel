@@ -18,17 +18,18 @@
     <script type="module">
       import { frankieSvg, FRANKIE_W, FRANKIE_H } from './src/art/frankie.js';
       import { worldSvgs } from './src/art/world.js';
+      import { scenerySvgs } from './src/art/scenery.js';
 
       const grid = document.getElementById('grid');
       const zoom = Number(new URLSearchParams(location.search).get('zoom') || 2);
       const add = (name, svg, w, h) => {
         const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
-        grid.insertAdjacentHTML('beforeend', `<figure><img src="${url}" width="${w * zoom}" height="${h * zoom}"><figcaption>${name}</figcaption></figure>`);
+        grid.insertAdjacentHTML('beforeend', `<figure><img src="${url}" width="${w * zoom}" height="${h * zoom}" style="max-width: 90vw; height: auto"><figcaption>${name}</figcaption></figure>`);
       };
       for (const name of ['run0', 'run1', 'run2', 'run3', 'jump', 'bonk', 'happy', 'eat0', 'eat1']) {
         add(name, frankieSvg(name), FRANKIE_W, FRANKIE_H);
       }
-      for (const [name, { svg, w, h }] of Object.entries(worldSvgs())) add(name, svg, w, h);
+      for (const [name, { svg, w, h }] of Object.entries({ ...worldSvgs(), ...scenerySvgs() })) add(name, svg, w, h);
     </script>
   </body>
 </html>

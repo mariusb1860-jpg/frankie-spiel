@@ -25,7 +25,7 @@ export class GameScene extends Phaser.Scene {
 
     const { length } = this.level;
     this.physics.world.setBounds(0, 0, length, GAME_HEIGHT);
-    this.backdrop = createBackdrop(this);
+    this.backdrop = createBackdrop(this, { length });
 
     const ground = this.add.zone(length / 2, GROUND_Y + 40, length, 80);
     this.physics.add.existing(ground, true);
@@ -99,6 +99,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   createHud() {
+    // Soft panel behind the counter, so it stays readable in front of clouds.
+    const width = this.level.sausages.length * HUD_GAP + 14;
+    this.add.graphics().setScrollFactor(0).setDepth(49).fillStyle(0x2f5d8a, 0.35).fillRoundedRect(10, HUD_Y - 19, width, 38, 19);
     this.slots = this.level.sausages.map((_, i) =>
       this.add.image(34 + i * HUD_GAP, HUD_Y, 'sausage-slot').setScale(HUD_SCALE).setScrollFactor(0).setDepth(50),
     );

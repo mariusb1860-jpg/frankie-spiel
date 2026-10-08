@@ -13,7 +13,7 @@ export class StartScene extends Phaser.Scene {
 
   create() {
     this.starting = false;
-    createBackdrop(this).update(0);
+    this.backdrop = createBackdrop(this, { zone: 'garden' });
 
     this.add
       .text(480, 120, 'Frankie', {
@@ -42,6 +42,10 @@ export class StartScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-ENTER', () => this.startGame());
 
     this.cameras.main.fadeIn(300);
+  }
+
+  update() {
+    this.backdrop.update(0, this.time.now);
   }
 
   startGame() {
