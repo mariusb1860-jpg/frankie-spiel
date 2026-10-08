@@ -3,6 +3,7 @@ import { BootScene } from './scenes/BootScene.js';
 import { StartScene } from './scenes/StartScene.js';
 import { GameScene } from './scenes/GameScene.js';
 import { EatScene } from './scenes/EatScene.js';
+import { VictoryScene } from './scenes/VictoryScene.js';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -21,7 +22,7 @@ const game = new Phaser.Game({
     arcade: { gravity: { y: CONFIG.gravity }, debug: DEBUG, fixedStep: false },
   },
   input: { activePointers: 3 },
-  scene: [BootScene, StartScene, GameScene, EatScene],
+  scene: [BootScene, StartScene, GameScene, EatScene, VictoryScene],
 });
 
 // Handy for automated browser tests.

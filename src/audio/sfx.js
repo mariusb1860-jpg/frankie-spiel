@@ -131,3 +131,17 @@ export function melody() {
     tone({ type: 'triangle', from: f, start: i * 0.14, dur: 0.24, vol: 0.14 });
   });
 }
+
+// Little fanfare for the big celebration after the last level.
+export function fanfare() {
+  [[523, 0, 0.14], [659, 0.15, 0.14], [784, 0.3, 0.14], [1047, 0.46, 0.42], [784, 0.92, 0.14], [1047, 1.08, 0.6]].forEach(([f, start, dur]) => {
+    tone({ type: 'square', from: f, start, dur, vol: 0.07, lowpass: 2200 });
+    tone({ type: 'triangle', from: f / 2, start, dur, vol: 0.09 });
+  });
+}
+
+// A firework bursting: a soft bang and a little crackle.
+export function firework() {
+  noise({ dur: 0.18, vol: 0.16, freq: 500 });
+  for (let i = 0; i < 4; i++) noise({ start: 0.12 + i * 0.07, dur: 0.03, vol: 0.07, freq: 3000 });
+}

@@ -1,7 +1,7 @@
 import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
-import { getLevel } from '../levels.js';
+import { PLANNED_LEVELS, getLevel } from '../levels.js';
 import { addBigButton, addMuteButton } from '../ui.js';
 import { TITLE_FONT } from './StartScene.js';
 import * as sfx from '../audio/sfx.js';
@@ -166,6 +166,15 @@ export class EatScene extends Phaser.Scene {
     this.tweens.add({ targets: f, x: FRANKIE_X, duration: 200 });
     this.tweens.add({ targets: f, y: FRANKIE_Y - 40, duration: 200, yoyo: true, ease: 'Quad.easeOut' });
     this.hearts(8);
+
+    // After the last level the big celebration starts by itself.
+    if (this.levelNo >= PLANNED_LEVELS) {
+      this.time.delayedCall(1400, () => {
+        this.cameras.main.fadeOut(400);
+        this.cameras.main.once('camerafadeoutcomplete', () => this.leave('VictoryScene'));
+      });
+      return;
+    }
 
     // Two big buttons: play this level again, and on to the next level
     // (after the last level that exists: back to the level selection).
