@@ -26,6 +26,10 @@ export const OBSTACLE_TYPES = {
   sandcastle: { y: GROUND_Y - 29, box: [44, 32, 14, 26] },
   crab: { y: GROUND_Y - 21, box: [30, 18, 17, 24], patrol: 60, anim: 'crab-walk' },
   beachball: { y: GROUND_Y - 23, circle: [17, 8, 8], roll: 90 },
+  haybale: { y: GROUND_Y - 26, box: [38, 34, 12, 18] },
+  milkcan: { y: GROUND_Y - 25, box: [22, 36, 9, 15] },
+  chicken: { y: GROUND_Y - 24, box: [24, 26, 15, 20], patrol: 70, patrolSpeed: 45, anim: 'chicken-walk' },
+  frog: { y: GROUND_Y - 20, box: [30, 20, 9, 18], hop: { height: 45, ms: 520, pause: 900, air: 'frog-jump' } },
 };
 const PATROL_SPEED = 40; // px per second, unless the type sets its own
 const ROLL_START = GAME_WIDTH + 50; // rolling starts once this close to the left screen edge

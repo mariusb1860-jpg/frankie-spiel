@@ -16,6 +16,10 @@ const hedgehog = thing('hedgehog'); // walks back and forth
 const sandcastle = thing('sandcastle');
 const crab = thing('crab'); // walks sideways, back and forth
 const beachball = thing('beachball'); // rolls towards Frankie
+const haybale = thing('haybale');
+const milkcan = thing('milkcan');
+const chicken = thing('chicken'); // walks back and forth, a bit faster
+const frog = thing('frog'); // hops up and down
 // A gap in the ground with water; x is its middle. Falling in = start again.
 const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
@@ -93,6 +97,42 @@ export const LEVELS = [
     fast: {
       length: 3600,
       layout: [row(600), sandcastle(1000), blocks(1340, 10, { sausages: 2 }), stream(1580, 340), crab(2150), beachball(3100)],
+    },
+  },
+  {
+    // Level 4, farm: faster, four ditches, chickens, hopping frogs and long
+    // paths of crates (one with a second floor).
+    world: 'farm',
+    speed: 256,
+    layout: [
+      row(700),
+      haybale(1350),
+      high(1950),
+      stream(2500, 150),
+      chicken(3150),
+      arc(3800),
+      // A long crate path over the next ditch, with a second floor. Sausages on the
+      // lower path only before the upper one starts, so all of them can be reached.
+      blocks(4250, 4, { sausages: 2 }),
+      blocks(4442, 10),
+      blocks(4450, 5, { tier: 2, sausages: 2 }),
+      stream(4700, 150),
+      frog(5550),
+      haybale(6150),
+      stream(6800, 160),
+      row(7450),
+      chicken(8100),
+      high(8700),
+      milkcan(9300),
+      blocks(9800, 10, { sausages: 4 }),
+      stream(10050, 170),
+      frog(10850),
+      high(11400),
+      haybale(12000),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), haybale(1000), blocks(1350, 8, { sausages: 2 }), stream(1550, 150), chicken(2150), frog(2750), high(3050)],
     },
   },
 ];

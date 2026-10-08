@@ -21,6 +21,7 @@ const FLIPPABLE = [
   'tree-oak', 'tree-apple', 'tree-birch', 'tree-beech', 'rock', 'mossy-rock', 'bush', 'berry-bush',
   'grass-tuft', 'mushrooms', 'daisies', 'fern', 'log-pile', 'deer',
   'dune', 'dune-2', 'sailboat', 'sailboat-2', 'ferry', 'cutter', 'marram', 'shell-pile',
+  'cow', 'sheep', 'tractor', 'scarecrow', 'chicken-coop', 'wheat-tuft', 'poppies', 'dandelions',
 ];
 
 /**

@@ -100,4 +100,37 @@ export const WORLDS = {
       },
     ],
   },
+
+  farm: {
+    color: 0xe0702a,
+    tiles: { hillsFar: 'hills-far-farm', hillsNear: 'hills-near-farm', ground: 'ground-farm' },
+    gap: 'gap-farm',
+    block: 'block-crate',
+    zones: [
+      {
+        key: 'fields',
+        until: 1 / 3,
+        far: ['tree-oak', 'tree-pine', 'windmill', 'tree-oak', 'tree-birch'],
+        mid: ['tractor', 'scarecrow', 'tree-apple', 'tree-oak', 'tractor', 'tree-birch'],
+        near: ['wheat-tuft', 'poppies', 'grass-tuft', 'wheat-tuft', 'dandelions'],
+        strip: 'wheat-strip',
+      },
+      {
+        key: 'farmyard',
+        until: 2 / 3,
+        far: ['cow', 'sheep', 'tree-oak', 'cow', 'sheep', 'tree-pine'],
+        mid: ['barn', 'silo', 'farmhouse', 'chicken-coop', 'tree-apple', 'tractor'],
+        near: ['dandelions', 'grass-tuft', 'poppies', 'bush'],
+      },
+      {
+        key: 'pasture',
+        until: 1,
+        far: ['cow', 'sheep', 'sheep', 'tree-oak', 'cow'],
+        mid: ['stable', 'tree-apple', 'tree-oak', 'barn', 'tree-birch'],
+        near: ['daisies', 'grass-tuft', 'dandelions', 'poppies'],
+        strip: 'paddock-fence',
+        butterflies: true,
+      },
+    ],
+  },
 };
