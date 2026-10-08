@@ -91,7 +91,7 @@ export class GameScene extends Phaser.Scene {
     this.jumpQueuedAt = this.time.now;
   }
 
-  update() {
+  update(_time, delta) {
     // Scene clock, the same one queueJump() and the ready pause use.
     const time = this.time.now;
     const f = this.frankie;
@@ -121,7 +121,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     this.updateShadow();
-    this.course.update();
+    this.course.update(time, delta, this.cameras.main.scrollX);
     this.backdrop.update(this.cameras.main.scrollX, time);
   }
 
@@ -181,13 +181,20 @@ export class GameScene extends Phaser.Scene {
     if (o.kind === 'puddle') {
       sfx.splash();
       this.burst('drop', o.x, o.y - 6, 8, 70);
-    } else if (o.kind === 'ball') {
+    } else if (o.kind === 'ball' || o.roll) {
+      o.stopped = true;
       this.tweens.add({ targets: o, x: o.x + 320, angle: 540, duration: 900, ease: 'Cubic.easeOut' });
       this.tweens.add({ targets: o, y: o.y - 60, duration: 300, yoyo: true, ease: 'Quad.easeOut' });
-    } else if (o.patrol) {
-      // A walking animal stops, hops in surprise and looks at Frankie.
-      o.patrol.stop();
+    } else if (o.patrol || o.hop) {
+      // A walking or hopping animal stops, hops in surprise and looks at Frankie.
+      o.patrol?.stop();
+      o.stopped = true;
       o.anims.stop();
+      if (o.hop) {
+        o.setTexture(o.kind);
+        o.y = o.baseY;
+        o.shadow.setDisplaySize(o.shadowW, o.shadowH).setAlpha(1);
+      }
       o.setFlipX(false);
       this.tweens.add({ targets: o, y: o.y - 24, duration: 180, yoyo: true, ease: 'Quad.easeOut' });
     } else {

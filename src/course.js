@@ -1,4 +1,4 @@
-import { GROUND_Y } from './config.js';
+import { GAME_WIDTH, GROUND_Y } from './config.js';
 import { BLOCK } from './level.js';
 
 // Builds everything Frankie runs on and bumps into: ground (with gaps), floating
@@ -11,7 +11,11 @@ export const DEPTH = { blocks: 1, shadows: 2, frankieShadow: 3, things: 4, falle
 // so a near miss still counts as a jump over.
 // y: centre of the picture; box: [width, height, offsetX, offsetY] in picture pixels;
 // circle: [radius, offsetX, offsetY]; flat: lies on the ground (no shadow);
-// scale: picture size; patrol: walks this many px left and right of its spot.
+// scale: picture size; patrol: walks this many px left and right of its spot
+// (patrolSpeed: px per second); roll: rolls towards Frankie at this speed (px per
+// second) as soon as it comes into view; hop: { height, ms, pause, air } jumps up
+// and down (ms in the air with picture `air`, pause on the ground), with
+// { steps, step } it hops `steps` times `step` px to the left and back again.
 export const OBSTACLE_TYPES = {
   puddle: { y: GROUND_Y + 3, box: [64, 10, 23, 8], flat: true },
   ball: { y: GROUND_Y - 21, circle: [14, 8, 8] },
@@ -20,13 +24,14 @@ export const OBSTACLE_TYPES = {
   log: { y: GROUND_Y - 20, box: [52, 18, 22, 22] },
   hedgehog: { y: GROUND_Y - 23, scale: 1.2, box: [30, 18, 15, 19], patrol: 50, anim: 'hedgehog-walk' },
 };
-const PATROL_SPEED = 40; // px per second
+const PATROL_SPEED = 40; // px per second, unless the type sets its own
+const ROLL_START = GAME_WIDTH + 50; // rolling starts once this close to the left screen edge
 
 export function createCourse(scene, level, world) {
   const ground = createGround(scene, level, world);
   const platforms = createPlatforms(scene, level, world);
   const sausages = createSausages(scene, level);
-  const { obstacles, movers } = createObstacles(scene, level);
+  const { obstacles, movers, rollers, hoppers } = createObstacles(scene, level);
 
   return {
     ground,
@@ -44,7 +49,10 @@ export function createCourse(scene, level, world) {
       return level.gaps.some((g) => x > g.x0 && x < g.x1) ? null : GROUND_Y;
     },
 
-    update() {
+    /** time: scene clock, delta: ms since the last frame, scrollX: left edge of the screen in the world. */
+    update(time, delta, scrollX) {
+      for (const r of rollers) roll(scene, r, delta, scrollX, level.gaps);
+      for (const h of hoppers) hop(h, time);
       for (const m of movers) m.shadow.x = m.x;
     },
   };
@@ -107,7 +115,9 @@ function createSausages(scene, level) {
 
 function createObstacles(scene, level) {
   const group = scene.physics.add.group({ allowGravity: false });
-  const movers = [];
+  const movers = []; // everything that moves; their shadows follow them
+  const rollers = [];
+  const hoppers = [];
   for (const { kind, x } of level.obstacles) {
     const type = OBSTACLE_TYPES[kind];
     const o = group.create(x, type.y, kind).setDepth(DEPTH.things).setScale(type.scale ?? 1);
@@ -123,9 +133,18 @@ function createObstacles(scene, level) {
     if (type.patrol) {
       startPatrol(scene, o, type);
       movers.push(o);
+    } else if (type.roll) {
+      o.roll = type.roll;
+      rollers.push(o);
+      movers.push(o);
+    } else if (type.hop) {
+      o.hop = type.hop;
+      Object.assign(o, { baseX: o.x, baseY: o.y, hopStart: scene.time.now, shadowW: o.shadow.displayWidth, shadowH: o.shadow.displayHeight });
+      hoppers.push(o);
+      movers.push(o);
     }
   }
-  return { obstacles: group, movers };
+  return { obstacles: group, movers, rollers, hoppers };
 }
 
 // Walks left and right around its spot. The picture looks left.
@@ -136,11 +155,54 @@ function startPatrol(scene, o, type) {
   o.patrol = scene.tweens.add({
     targets: o,
     x: o.x + type.patrol * 2,
-    duration: ((type.patrol * 2) / PATROL_SPEED) * 1000,
+    duration: ((type.patrol * 2) / (type.patrolSpeed ?? PATROL_SPEED)) * 1000,
     ease: 'Sine.easeInOut',
     yoyo: true,
     repeat: -1,
     onYoyo: () => o.setFlipX(false),
     onRepeat: () => o.setFlipX(true),
   });
+}
+
+// Rolls towards Frankie once it is on screen, turning like a real ball.
+// If it reaches a gap, it drops into the water.
+function roll(scene, o, delta, scrollX, gaps) {
+  if (o.stopped || (!o.rolling && o.x - scrollX > ROLL_START)) return;
+  o.rolling = true;
+  const dx = (o.roll * delta) / 1000;
+  o.x -= dx;
+  o.angle -= Phaser.Math.RadToDeg(dx / (o.displayWidth / 2));
+  if (gaps.some((g) => o.x > g.x0 && o.x < g.x1)) {
+    o.stopped = true;
+    o.body.enable = false;
+    o.shadow.setVisible(false);
+    scene.tweens.add({ targets: o, y: o.y + 70, alpha: 0, duration: 500, ease: 'Quad.easeIn' });
+  }
+}
+
+// Jumps up and down on a steady beat; with steps it hops to the left and back.
+// The picture looks left.
+function hop(o, time) {
+  if (o.stopped) return;
+  const { height, ms, pause, air, steps = 0, step = 0 } = o.hop;
+  const t = time - o.hopStart;
+  const n = Math.floor(t / (ms + pause)); // hops so far
+  const k = Math.min(1, (t - n * (ms + pause)) / ms); // progress of the current hop, 1 = landed
+  const lift = height * 4 * k * (1 - k);
+  o.y = o.baseY - lift;
+  const key = k < 1 && air ? air : o.kind;
+  if (o.texture.key !== key) o.setTexture(key);
+  if (steps) {
+    const along = (i) => {
+      const j = i % (2 * steps);
+      return j <= steps ? j : 2 * steps - j;
+    };
+    const from = along(n);
+    const to = along(n + 1);
+    o.x = o.baseX - (from + (to - from) * k) * step;
+    o.setFlipX(to < from);
+  }
+  // The shadow stays on the ground and gets smaller while the animal is in the air.
+  const s = 1 - lift / 160;
+  o.shadow.setDisplaySize(o.shadowW * s, o.shadowH * s).setAlpha(s);
 }
