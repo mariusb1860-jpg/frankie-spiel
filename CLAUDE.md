@@ -14,7 +14,7 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Französische B
 - Große Figuren und große Tippflächen (Tablet und Handy).
 - Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Detailreiches als SVG-Code, einfache Formen als Phaser-Graphics. Die Landschaft soll so detailreich sein wie Frankie.
 - Grafik ansehen ohne zu spielen: `http://localhost:8137/preview.html` (`?zoom=3` für größer, `?set=beach` nur eine Gruppe: frankie, world, scenery, forest, beach, farm, winter, party).
-- Bewegte Tiere und Bälle (laufen, rollen, hüpfen) brauchen in **jeder** Phase ihrer Bewegung ein Sprung-Fenster von mindestens 0,35 s. Am knappsten ist es, wenn das Tier von Frankie weg läuft. Ausnahme: der Igel in Level 2 (älter als diese Regel, von Marius abgenommen) kommt im ungünstigsten Fall nur auf ca. 0,28–0,36 s; ändern nur nach Rückfrage (z. B. Trefferfläche etwas kleiner wie bei der Krabbe).
+- Bewegte Tiere und Bälle (laufen, rollen, hüpfen) brauchen in **jeder** Phase ihrer Bewegung ein Sprung-Fenster von mindestens 0,35 s. Am knappsten ist es, wenn das Tier von Frankie weg läuft. Das gilt seit 08.10. auch für den Igel in Level 2: Auf Wunsch von Marius ist seine Trefferfläche kleiner (vorher im ungünstigsten Fall nur ca. 0,28 s).
 
 ## Aufbau
 

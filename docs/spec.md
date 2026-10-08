@@ -59,6 +59,7 @@ Wie lange man zum Springen Zeit hat, damit Frankie sicher darüber kommt. Ziel: 
 
 | Level | Hindernis | Zeitfenster |
 |---|---|---|
+| 2 | Igel (9 Phasen; am knappsten, wenn er von Frankie weg läuft) | 0,36–0,56 s (vorher im ungünstigsten Fall 0,28 s) |
 | 3 | Sandburg | 0,43 s |
 | 3 | Krabbe (ungünstigste Phase: läuft von Frankie weg) | 0,36–0,40 s, sonst ≥ 0,5 s |
 | 3 | Wasserball (rollt entgegen) | 0,60 s |
@@ -74,7 +75,7 @@ Wie lange man zum Springen Zeit hat, damit Frankie sicher darüber kommt. Ziel: 
 | 5 | Eislöcher 150 / 160 / 170 px | ≥ 0,75 s |
 | 5 | Eislöcher 420 px über die Eisbrücke | ≥ 1,3 s (direkt: 0 von 9) |
 
-Zum Vergleich Level 2: der Igel kommt in seiner ungünstigsten Phase (läuft von Frankie weg) nur auf ca. 0,28–0,36 s; in der Phase, in der man ihn beim normalen Spielen trifft, sind es mehr. Level 2 ist abgenommen und wurde nicht geändert.
+Level 2 war schon abgenommen. Geändert wurde danach nur die Trefferfläche des Igels (Wunsch von Marius, 08.10.): 20×14 statt 30×18 Bild-Pixel, mittig, unten gleich. Er sieht gleich aus und läuft gleich schnell.
 
 Würstel auf zwei Block-Etagen (Bonus): alle Würstel einer Gruppe in einem Durchlauf bekommt man bei einem Zeitfenster von 0,57 s (Level 3), ≥ 0,62 s (Level 4) und ≥ 0,52 s (Level 5).
 

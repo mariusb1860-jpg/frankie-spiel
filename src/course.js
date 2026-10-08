@@ -22,7 +22,7 @@ export const OBSTACLE_TYPES = {
   crate: { y: GROUND_Y - 24, box: [34, 34, 8, 16] },
   stump: { y: GROUND_Y - 24, box: [34, 30, 13, 20] },
   log: { y: GROUND_Y - 20, box: [52, 18, 22, 22] },
-  hedgehog: { y: GROUND_Y - 23, scale: 1.2, box: [30, 18, 15, 19], patrol: 50, anim: 'hedgehog-walk' },
+  hedgehog: { y: GROUND_Y - 23, scale: 1.2, box: [20, 14, 20, 23], patrol: 50, anim: 'hedgehog-walk' },
   sandcastle: { y: GROUND_Y - 29, box: [44, 32, 14, 26] },
   crab: { y: GROUND_Y - 21, box: [30, 18, 17, 24], patrol: 60, anim: 'crab-walk' },
   beachball: { y: GROUND_Y - 23, circle: [17, 8, 8], roll: 90 },
