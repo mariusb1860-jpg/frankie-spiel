@@ -1,9 +1,9 @@
 # Frankie sammelt Würstel
 
-Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch Garten und Wald, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf.
+Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch Garten, Wald, Strand, Bauernhof und Winter, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf. Nach dem fünften Level gibt es eine große Siegesfeier.
 
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
-- Wer an ein Hindernis stößt oder in einen Bach fällt, fängt das Level von vorn an.
+- Wer an ein Hindernis stößt oder ins Wasser fällt, fängt das Level von vorn an.
 - Im Startbild wählt man das Level; geschaffte Level schalten das nächste frei.
 - Läuft im Browser auf Handy, Tablet und PC. Handy bitte quer halten.
 
@@ -30,13 +30,13 @@ Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 | `lib/phaser.min.js` | Spiel-Bibliothek Phaser 3.90.0 |
 | `src/config.js` | Allgemeine Einstellungen |
 | `src/levels.js` | Die Level |
-| `src/worlds.js` | Die Welten (Garten, Wald, …) |
+| `src/worlds.js` | Die Welten (Garten, Wald, Strand, Bauernhof, Winter) |
 | `src/level.js`, `src/course.js` | Machen aus dem Level-Ablauf Boden, Bäche, Blöcke, Würstel und Hindernisse |
 | `src/backdrop.js` | Baut die Landschaft mit Dunstschleier und Parallax |
 | `src/progress.js` | Merkt sich freigeschaltete Level |
 | `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics) |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |
-| `src/scenes/` | Startbild mit Level-Auswahl, Level, Futterszene |
+| `src/scenes/` | Startbild mit Level-Auswahl, Level, Futterszene, Siegesfeier |
 
 Design und Ideen für später: `docs/spec.md`.

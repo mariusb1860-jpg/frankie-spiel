@@ -1,6 +1,6 @@
 # Spezifikation: Frankie sammelt Würstel
 
-Stand: 2026-10-08 (Version 2: Level-Auswahl, Level 2 „Wald“, bessere Lesbarkeit)
+Stand: 2026-10-08 (Version 3: alle 5 Level und Siegesfeier)
 
 ## Ziel
 
@@ -26,7 +26,10 @@ Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Noch
    - Springen ist bewusst leicht: ca. 170 px hoch, ca. 1 Sekunde in der Luft, Trefferflächen der Hindernisse kleiner als die Bilder.
    - Vor dem Loslaufen wartet Frankie kurz (0,7 s).
 3. **Ziel:** Hundehütte „FRANKIE“ mit Napf. Frankie bleibt stehen und freut sich. Das nächste Level ist damit freigeschaltet.
-4. **Futterszene (am Ende der jeweiligen Welt):** Frankie macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Frankie mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level); nach dem letzten gebauten Level statt Weiter ein Haus-Knopf zurück zur Level-Auswahl.
+4. **Futterszene (am Ende der jeweiligen Welt):** Frankie macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Frankie mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
+5. **Siegesfeier (nach Level 5):** im Garten von Frankie, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Frankie springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl.
+
+Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf langsamen Handys ein paar Sekunden).
 
 ## Level
 
@@ -34,13 +37,44 @@ Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Noch
 |---|---|---|---|
 | 1 | Garten → Wiese → Dorf | 220 px/s | Pfützen, Bälle, Kisten. **Fertig, nicht mehr ändern** (Marius, 08.10.). |
 | 2 | Wald: Waldrand → tiefer Wald → Lichtung | 232 px/s | Baumstümpfe, Holzstämme, eine Pfütze, 2 laufende Igel, 2 Bäche (Lücken), Blöcke in 1 und 2 Höhen, eine Block-Brücke über den zweiten Bach. |
-| 3 | Strand (geplant) | schneller | Blöcke in zwei Höhen, 3 Wasserrinnen (eine nur über Blöcke), Sandburg, laufende Krabbe, entgegenrollender Wasserball, Seesterne. |
-| 4 | Bauernhof (geplant) | noch schneller | 4 Gräben, Heuballen, laufendes Huhn, hüpfender Frosch, längere Block-Wege. |
-| 5 | Winter (geplant) | am schnellsten | 5 Eislöcher, Schneemann, rollende Schneebälle, hüpfender Hase, Stellen nur über Blöcke. Danach kleine Siegesfeier. |
+| 3 | Strand (wie auf den Fotos von Frankie an der Nordsee): Dünen mit Strandkörben → offener Strand mit Booten auf dem Meer → kleiner Hafen mit Leuchtturm | 244 px/s | 3 Sandburgen, 3 Krabben (laufen seitwärts), 2 Wasserbälle (rollen Frankie entgegen), 3 Wasserrinnen, die breiteste (400 px) nur über den Holzsteg zu schaffen, Blöcke in 2 Höhen. Seesterne und Muscheln nur als Deko (orange Seesterne wie Frankies Spielzeug). |
+| 4 | Bauernhof: Felder (Traktor, Vogelscheuche, Kornfeld) → Hof (Scheune, Silo, Fachwerkhaus, Hühnerstall, Kühe und Schafe in der Ferne) → Weide (Pferdestall, Koppelzaun) | 256 px/s | 3 Heuballen, 1 Milchkanne, 2 Hühner (laufen etwas schneller), 2 hüpfende Frösche, 4 Gräben mit Matschwasser, 2 lange Kisten-Wege (einer mit zweiter Etage). |
+| 5 | Winter: verschneiter Wald (Holzhütte) → zugefrorener See → Dorf im Schnee (Weihnachtsbaum, Laternen); fallender Schnee, blassblauer Winterhimmel | 268 px/s | 3 Schneemänner, 2 rollende Schneebälle, 3 Hasen (hüpfen ein Stück auf Frankie zu und zurück), 5 Eislöcher, zwei davon (420 px) nur über Eisblock-Brücken, Blöcke in 2 Höhen. Danach Siegesfeier. |
 
-**Blöcke:** Von unten springt man durch, oben landet man (Einweg-Plattformen). Stufe 1 liegt 130 px über dem Boden (vom Boden erreichbar), Stufe 2 noch 105 px höher (nur von Stufe 1 erreichbar). Wer am Ende herunterläuft, landet wieder unten.
+Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level: 7, 9, 11, 12, 13.
 
-**Lücken:** Bach mit Wasser zwischen zwei Uferkanten; die dunklen Uferlinien liegen genau auf den echten Kanten. Hineinfallen = Platsch + Level von vorn.
+**Blöcke:** Von unten springt man durch, oben landet man (Einweg-Plattformen). Stufe 1 liegt 130 px über dem Boden (vom Boden erreichbar), Stufe 2 noch 105 px höher (nur von Stufe 1 erreichbar). Wer am Ende herunterläuft, landet wieder unten. Aussehen pro Welt: Holz mit Moos (Wald), Steg-Bretter (Strand), Obstkisten (Bauernhof), Eisblöcke (Winter).
+
+**Lücken:** Wasser zwischen zwei Uferkanten (Bach, Meerwasser-Rinne, Graben mit Matschwasser, Eisloch); die dunklen Uferlinien liegen genau auf den echten Kanten. Hineinfallen = Platsch + Level von vorn. Lücken bis 170 px kann man überspringen; Lücken ab 400 px nur über die Blöcke darüber (direkt springen klappt nie, gemessen).
+
+**Bewegte Hindernisse:**
+- Laufen (Igel, Krabbe, Huhn): hin und her um ihren Platz. Igel und Krabbe 40 px/s, Huhn 45 px/s.
+- Rollen (Wasserball 90 px/s, Schneeball 100 px/s): rollen los, sobald sie ins Bild kommen, und drehen sich dabei. Rollt einer in eine Lücke, versinkt er.
+- Hüpfen (Frosch: auf der Stelle, 45 px hoch; Hase: 3 Hüpfer à 40 px nach links und zurück, 38 px hoch). Der Takt ist fest, beim Neustart hüpfen sie wieder gleich.
+- Angestoßen: Bälle fliegen weg, Tiere bleiben stehen und hüpfen erschrocken.
+
+## Sprung-Zeitfenster (gemessen am 08.10.)
+
+Wie lange man zum Springen Zeit hat, damit Frankie sicher darüber kommt. Ziel: mindestens 0,35 s für jedes Hindernis, bei bewegten Hindernissen in **jeder** Phase ihrer Bewegung.
+
+| Level | Hindernis | Zeitfenster |
+|---|---|---|
+| 3 | Sandburg | 0,43 s |
+| 3 | Krabbe (ungünstigste Phase: läuft von Frankie weg) | 0,36–0,40 s, sonst ≥ 0,5 s |
+| 3 | Wasserball (rollt entgegen) | 0,60 s |
+| 3 | Wasserrinnen 140 / 160 px | ≥ 0,74 / ≥ 0,66 s |
+| 3 | Rinne 400 px über den Steg | ≥ 1,5 s (direkt: 0 von 10 Versuchen) |
+| 4 | Heuballen / Milchkanne | 0,45 / 0,50 s |
+| 4 | Huhn (ungünstigste Phase) | 0,40 s |
+| 4 | Frosch (5 Hüpf-Phasen) | 0,45–0,51 s |
+| 4 | Gräben 150 / 160 / 170 px | ≥ 0,70 s |
+| 5 | Schneemann | 0,48 s |
+| 5 | Schneeball (rollt entgegen) | 0,63 s |
+| 5 | Hase (12 Phasen des Hüpf-Takts) | 0,40–0,60 s |
+| 5 | Eislöcher 150 / 160 / 170 px | ≥ 0,75 s |
+| 5 | Eislöcher 420 px über die Eisbrücke | ≥ 1,3 s (direkt: 0 von 9) |
+
+Würstel auf zwei Block-Etagen (Bonus): alle Würstel einer Gruppe in einem Durchlauf bekommt man bei einem Zeitfenster von 0,57 s (Level 3), ≥ 0,62 s (Level 4) und ≥ 0,52 s (Level 5).
 
 ## Lesbarkeit: Was ist Hindernis, was ist Hintergrund?
 
@@ -69,15 +103,18 @@ Posen: Laufen (4 Bilder), Springen, Benommen, Glücklich, Fressen (2 Bilder).
 
 ## Sound
 
-Per Web Audio erzeugt: Sprung („Boing“), Einsammeln (Glöckchen), Stolpern, Platschen, Schmatzen, Bellen, Plopp, Schlussmelodie.
+Per Web Audio erzeugt: Sprung („Boing“), Einsammeln (Glöckchen), Stolpern, Platschen, Schmatzen, Bellen, Plopp, Schlussmelodie, Fanfare und Feuerwerk (Siegesfeier).
 
 ## Technik-Notizen
 
 - Physik mit variablem Zeitschritt (`fixedStep: false`): Marius' Bildschirm läuft mit 59 Hz; ein fester 60-Hz-Schritt ruckelte alle paar Sekunden.
 - Der Boden ist zwischen den Lücken in dicke Blöcke geteilt, damit Frankie auch bei einem Hänger auf einem langsamen Tablet nicht durch den Boden fällt.
 
+## Bekannte kleine Fehler
+
+- Beim allerersten Level-Start nach dem Laden der Seite läuft Frankie sofort los, ohne die kurze Pause (0,7 s). Grund: die Spiel-Uhr der Level-Szene ist beim ersten Start noch nicht aktuell. Betrifft alle Level, auch Level 1; noch nicht behoben, weil Level 1 nicht ohne Rückfrage geändert wird (Vorschlag: in `GameScene.create()` `this.game.loop.time` statt `this.time.now` nehmen).
+
 ## Später
 
-- Level 3–5 (siehe Tabelle), danach Siegesfeier nach Level 5.
 - Name des Kindes im Startbild.
-- Sammelalbum oder Sterne.
+- Sammelalbum oder Sterne (z. B. Pokal im Startbild, wenn alle 5 Level geschafft sind).
