@@ -69,21 +69,30 @@ function tone({ type = 'sine', from, to = from, start = 0, dur = 0.15, vol = 0.2
   osc.stop(t + dur + 0.05);
 }
 
+let noiseBuffer = null;
+
+// One shared buffer of white noise, made once instead of for every sound.
+function getNoise() {
+  if (!noiseBuffer) {
+    noiseBuffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  }
+  return noiseBuffer;
+}
+
 function noise({ start = 0, dur = 0.08, vol = 0.25, freq = 900 }) {
   if (!ready()) return;
   const t = ctx.currentTime + start;
-  const buffer = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * dur), ctx.sampleRate);
-  const data = buffer.getChannelData(0);
-  for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
   const src = ctx.createBufferSource();
-  src.buffer = buffer;
+  src.buffer = getNoise();
   const filter = ctx.createBiquadFilter();
   filter.type = 'bandpass';
   filter.frequency.value = freq;
   const gain = ctx.createGain();
   envelope(gain, t, vol, dur);
   src.connect(filter).connect(gain).connect(ctx.destination);
-  src.start(t);
+  src.start(t, Math.random() * 0.5, dur + 0.02);
 }
 
 export function jump() {
