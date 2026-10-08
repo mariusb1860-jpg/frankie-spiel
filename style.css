@@ -1,0 +1,54 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #6ec1f5;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+}
+
+#rotate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  background: #6ec1f5;
+}
+
+/* Phones held upright: the game is wide, so ask to turn the phone. */
+@media (orientation: portrait) and (max-width: 600px) {
+  #rotate {
+    display: flex;
+  }
+}
+
+/* The phone icon turns sideways, again and again. */
+#rotate .phone {
+  transform-origin: 60px 60px;
+  animation: turn 2.4s ease-in-out infinite;
+}
+
+@keyframes turn {
+  0%,
+  25% {
+    transform: rotate(0deg);
+  }
+  55%,
+  90% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#6ec1f5" />
+    <title>Frankie sammelt Würstel</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="game"></div>
+
+    <!-- Shown on phones held upright: "please turn the phone" -->
+    <div id="rotate" aria-label="Bitte das Handy drehen">
+      <svg viewBox="0 0 120 120" width="180" height="180" aria-hidden="true">
+        <g class="phone">
+          <rect x="38" y="16" width="44" height="88" rx="9" fill="#fff" stroke="#4a2c17" stroke-width="5" />
+          <rect x="45" y="27" width="30" height="62" rx="3" fill="#8fd3ff" />
+          <circle cx="60" cy="96" r="3" fill="#4a2c17" />
+        </g>
+      </svg>
+    </div>
+
+    <script src="lib/phaser.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
