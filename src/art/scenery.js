@@ -4,13 +4,13 @@ import { loadSvg, svgDoc } from './svg.js';
 // Landscape pieces as SVG: sky, hills, trees, garden, meadow and village.
 // Background outlines are softer than Frankie's, so he stays the eye-catcher.
 
-const WOOD = '#5a3a1e';
+export const WOOD = '#5a3a1e';
 const LEAF_LINE = '#2f5f2c';
 
-const attrs = (color, w = 2.5) => `stroke="${color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
+export const attrs = (color, w = 2.5) => `stroke="${color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 
 // A leafy crown from circles: thick outline pass, base colour, shade and light.
-function crown(circles, { line = LEAF_LINE, base = '#4f9e3f', shade = '#3f8a35', light = '#6dbb4f', dots = '#8fd36a' } = {}) {
+export function crown(circles, { line = LEAF_LINE, base = '#4f9e3f', shade = '#3f8a35', light = '#6dbb4f', dots = '#8fd36a' } = {}) {
   const outline = circles.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${line}" stroke="${line}" stroke-width="6"/>`);
   const fills = circles.map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${base}"/>`);
   const shades = circles.map(([x, y, r]) => `<circle cx="${x + r * 0.25}" cy="${y + r * 0.3}" r="${r * 0.62}" fill="${shade}" opacity="0.7"/>`);
@@ -61,7 +61,7 @@ function clouds() {
 }
 
 // Tileable wave line: every wave repeats a whole number of times across the width.
-function ridge(w, base, waves, step = 8) {
+export function ridge(w, base, waves, step = 8) {
   const pts = [];
   for (let x = 0; x <= w; x += step) {
     let y = base;
@@ -71,7 +71,7 @@ function ridge(w, base, waves, step = 8) {
   return pts;
 }
 
-function ridgeY(pts, x) {
+export function ridgeY(pts, x) {
   const i = Math.min(pts.length - 1, Math.round(x / 8));
   return pts[i][1];
 }
@@ -137,7 +137,7 @@ function ground() {
     <circle cx="40" cy="7" r="2.5" fill="#fff"/><circle cx="168" cy="6" r="2.5" fill="#ffe066"/>`);
 }
 
-function trunk(x, top, bottom, w) {
+export function trunk(x, top, bottom, w) {
   return `<path d="M${x - w} ${bottom} L${x - w * 0.7} ${top} L${x + w * 0.7} ${top} L${x + w} ${bottom} Z" fill="#8a5a33" ${attrs(WOOD, 3)}/>
     <path d="M${x - 3} ${bottom - 20} v-30 M${x + 4} ${bottom - 45} v-25" stroke="#6b4325" stroke-width="2" stroke-linecap="round"/>`;
 }
