@@ -7,7 +7,8 @@ import { OUTLINE as LINE, loadSvg, svgDoc } from './svg.js';
 const OUTLINE = 0x4a2c17;
 
 export function createWorldTextures(scene) {
-  make(scene, 'sky', GAME_WIDTH, GAME_HEIGHT, drawSky);
+  make(scene, 'sky', GAME_WIDTH, GAME_HEIGHT, (g, w, h) => drawSky(g, w, h, [0x6ec1f5, 0xd9f2ff]));
+  make(scene, 'sky-winter', GAME_WIDTH, GAME_HEIGHT, (g, w, h) => drawSky(g, w, h, [0x8dbde2, 0xeef6fc]));
   make(scene, 'haze', GAME_WIDTH, GROUND_Y, drawHaze);
   make(scene, 'note', 30, 40, drawNote);
   make(scene, 'heart', 40, 36, drawHeart);
@@ -30,12 +31,12 @@ function make(scene, key, w, h, draw) {
   g.destroy();
 }
 
-function drawSky(g, w, h) {
-  const top = [0x6ec1f5, 0xd9f2ff];
+// Sky from the colour at the top to the colour at the horizon.
+function drawSky(g, w, h, [top, bottom]) {
   const steps = 54;
   for (let i = 0; i < steps; i++) {
     const t = i / (steps - 1);
-    g.fillStyle(lerpColor(top[0], top[1], t), 1);
+    g.fillStyle(lerpColor(top, bottom, t), 1);
     g.fillRect(0, Math.floor((h / steps) * i), w, Math.ceil(h / steps) + 1);
   }
 }

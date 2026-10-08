@@ -8,7 +8,7 @@ import { WORLDS } from './worlds.js';
 
 const DEPTH = {
   sky: -100, sun: -95, clouds: -90, birds: -88, hillsFar: -85, far: -80,
-  hillsNear: -75, mid: -70, beams: -66, strip: -62, near: -60, butterflies: -58, haze: -55, ground: -50,
+  hillsNear: -75, mid: -70, beams: -66, strip: -62, near: -60, butterflies: -58, snow: -57, haze: -55, ground: -50,
 };
 
 const LAYERS = [
@@ -22,6 +22,7 @@ const FLIPPABLE = [
   'grass-tuft', 'mushrooms', 'daisies', 'fern', 'log-pile', 'deer',
   'dune', 'dune-2', 'sailboat', 'sailboat-2', 'ferry', 'cutter', 'marram', 'shell-pile',
   'cow', 'sheep', 'tractor', 'scarecrow', 'chicken-coop', 'wheat-tuft', 'poppies', 'dandelions',
+  'bare-tree', 'cabin', 'ice-pond', 'snow-bush', 'snow-rock', 'snow-reeds', 'holly',
 ];
 
 /**
@@ -41,7 +42,7 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
   const span = (factor) => Math.max(0, length - GAME_WIDTH) * factor + GAME_WIDTH + 120;
   const density = def.density ?? 1;
 
-  scene.add.image(0, 0, 'sky').setOrigin(0).setScrollFactor(0).setDepth(DEPTH.sky);
+  scene.add.image(0, 0, def.sky ?? 'sky').setOrigin(0).setScrollFactor(0).setDepth(DEPTH.sky);
   const rays = scene.add.image(830, 95, 'sun-rays').setScrollFactor(0).setDepth(DEPTH.sun);
   scene.add.image(830, 95, 'sun').setScrollFactor(0).setDepth(DEPTH.sun);
   scene.tweens.add({ targets: rays, angle: 360, duration: 90000, repeat: -1 });
@@ -53,6 +54,14 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
     { sprite: tile(GROUND_Y - 120, 140, def.tiles.hillsNear, DEPTH.hillsNear), factor: 0.4 },
     { sprite: tile(GROUND_Y, 80, def.tiles.ground, DEPTH.ground), factor: 1 },
   ];
+  // Falling snow, behind the haze so no flake looks like something to jump over:
+  // two layers, the nearer one with bigger and faster flakes.
+  if (def.snow) {
+    tiles.push(
+      { sprite: tile(0, GROUND_Y, 'snowflakes', DEPTH.snow), factor: 0.3, drift: 0.004, fall: 0.03 },
+      { sprite: tile(0, GROUND_Y, 'snowflakes', DEPTH.snow).setTileScale(1.7), factor: 0.6, drift: -0.006, fall: 0.05 },
+    );
+  }
   scene.add.image(0, 0, 'haze').setOrigin(0).setScrollFactor(0).setDepth(DEPTH.haze);
 
   for (const layer of LAYERS) {
@@ -90,7 +99,10 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
 
   return {
     update(scrollX, time = 0) {
-      for (const { sprite, factor, drift = 0 } of tiles) sprite.tilePositionX = scrollX * factor + time * drift;
+      for (const { sprite, factor, drift = 0, fall = 0 } of tiles) {
+        sprite.tilePositionX = scrollX * factor + time * drift;
+        if (fall) sprite.tilePositionY = -time * fall;
+      }
       for (const { sprite, start } of birds) {
         sprite.x = ((start + time * 0.035 - scrollX * 0.1) % (GAME_WIDTH + 400) + GAME_WIDTH + 400) % (GAME_WIDTH + 400) - 200;
       }
