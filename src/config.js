@@ -12,14 +12,14 @@ export const GROUND_Y = 460; // top edge of the grass
 
 export const CONFIG = {
   runSpeed: 220, // px per second
-  jumpVelocity: -620,
-  gravity: 1400,
+  jumpVelocity: -650, // with gravity: ~170 px high, ~1 s in the air
+  gravity: 1250,
   jumpBufferMs: 180, // a tap shortly before landing still counts
   coyoteMs: 120, // a tap shortly after running off an edge still counts
-  stumbleMs: 650,
-  stumbleSpeed: 60,
+  readyMs: 700, // Frankie waits a moment before he starts running
+  crashMs: 1100, // after hitting an obstacle: dizzy pause, then the level starts over
   levelLength: FAST ? 2600 : 13200,
-  frankieScale: 0.85,
+  frankieScale: 0.62,
   // Frankie's look. Ask the owner for the real colors.
   fur: {
     base: 0xfaf3e8, // white-cream

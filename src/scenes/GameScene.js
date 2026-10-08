@@ -18,7 +18,8 @@ export class GameScene extends Phaser.Scene {
     this.level = buildLevel();
     this.collected = 0;
     this.finished = false;
-    this.stumbling = false;
+    this.crashed = false;
+    this.runningFrom = this.time.now + CONFIG.readyMs;
     this.jumpQueuedAt = -Infinity;
     this.lastGroundAt = -Infinity;
 
@@ -54,10 +55,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   createFrankie() {
-    this.frankie = this.physics.add.sprite(160, GROUND_Y - 60, 'frankie-run0').setScale(CONFIG.frankieScale).setDepth(10);
-    this.frankie.body.setSize(84, 62).setOffset(24, 38);
+    this.frankie = this.physics.add.sprite(160, GROUND_Y - 60, 'frankie-happy').setScale(CONFIG.frankieScale).setDepth(10);
+    this.frankie.body.setSize(118, 100).setOffset(40, 34); // body and head, in texture pixels
     this.frankie.setCollideWorldBounds(true);
-    this.frankie.play('frankie-run');
   }
 
   createSausages() {
@@ -69,6 +69,7 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
+  // Hit boxes are smaller than the pictures, so a near miss still counts as a jump over.
   createObstacles() {
     this.obstacles = this.physics.add.group({ allowGravity: false });
     for (const { kind, x } of this.level.obstacles) {
@@ -77,13 +78,13 @@ export class GameScene extends Phaser.Scene {
       o.body.moves = false;
       if (kind === 'puddle') {
         o.y = GROUND_Y + 3;
-        o.body.setSize(86, 14);
+        o.body.setSize(64, 10).setOffset(23, 8);
       } else if (kind === 'ball') {
-        o.y = GROUND_Y - 24;
-        o.body.setCircle(21, 5, 5);
+        o.y = GROUND_Y - 21;
+        o.body.setCircle(14, 8, 8);
       } else {
-        o.y = GROUND_Y - 27;
-        o.body.setSize(48, 50);
+        o.y = GROUND_Y - 24;
+        o.body.setSize(34, 34).setOffset(8, 16);
       }
     }
   }
@@ -108,13 +109,16 @@ export class GameScene extends Phaser.Scene {
     this.jumpQueuedAt = this.time.now;
   }
 
-  update(time) {
+  update() {
+    // Scene clock, the same one queueJump() and the ready pause use.
+    const time = this.time.now;
     const f = this.frankie;
     const onGround = f.body.blocked.down || f.body.touching.down;
     if (onGround) this.lastGroundAt = time;
 
+    const running = time >= this.runningFrom && !this.finished && !this.crashed;
     const wantsJump = time - this.jumpQueuedAt < CONFIG.jumpBufferMs;
-    const canJump = time - this.lastGroundAt < CONFIG.coyoteMs && !this.stumbling && !this.finished;
+    const canJump = time - this.lastGroundAt < CONFIG.coyoteMs && running;
     if (wantsJump && canJump) {
       f.setVelocityY(CONFIG.jumpVelocity);
       this.jumpQueuedAt = -Infinity;
@@ -122,12 +126,9 @@ export class GameScene extends Phaser.Scene {
       sfx.jump();
     }
 
-    if (!this.finished) {
-      if (!this.stumbling) f.setVelocityX(CONFIG.runSpeed);
-      if (this.stumbling) {
-        f.anims.stop();
-        f.setTexture('frankie-stumble');
-      } else if (!onGround) {
+    if (running) {
+      f.setVelocityX(CONFIG.runSpeed);
+      if (!onGround) {
         f.anims.stop();
         f.setTexture('frankie-jump');
       } else {
@@ -166,14 +167,18 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
+  // Bumping into an obstacle: Frankie gets dizzy, then the level starts over.
   hitObstacle(o) {
-    if (o.hit || this.stumbling || this.finished) return;
-    o.hit = true;
+    if (this.crashed || this.finished) return;
+    this.crashed = true;
     o.body.enable = false;
-    this.stumbling = true;
-    this.frankie.setVelocity(CONFIG.stumbleSpeed, -220);
+    const f = this.frankie;
+    f.anims.stop();
+    f.setTexture('frankie-bonk');
+    f.setVelocity(-90, -260);
+    f.setDragX(240);
     sfx.oops();
-    this.burst('sparkle', this.frankie.x + 20, this.frankie.y - 40, 3, 40);
+    this.dizzyStars();
 
     if (o.kind === 'puddle') {
       sfx.splash();
@@ -185,10 +190,28 @@ export class GameScene extends Phaser.Scene {
       this.tweens.add({ targets: o, angle: 12, duration: 90, yoyo: true, repeat: 3 });
     }
 
-    // Stumbling is only a short pause: nothing is lost.
-    this.time.delayedCall(CONFIG.stumbleMs, () => {
-      this.stumbling = false;
+    this.time.delayedCall(CONFIG.crashMs, () => {
+      this.cameras.main.fadeOut(350);
+      this.cameras.main.once('camerafadeoutcomplete', () => this.scene.restart());
     });
+  }
+
+  // Three little stars circling above Frankie's head.
+  dizzyStars() {
+    const f = this.frankie;
+    for (let i = 0; i < 3; i++) {
+      const star = this.add.image(f.x, f.y, 'sparkle').setDepth(20).setScale(0.8);
+      this.tweens.addCounter({
+        from: 0,
+        to: 1,
+        duration: CONFIG.crashMs,
+        onUpdate: (tw) => {
+          const a = tw.getValue() * Math.PI * 4 + (i * Math.PI * 2) / 3;
+          star.setPosition(f.x + 18 + Math.cos(a) * 30, f.y - 52 + Math.sin(a) * 9);
+        },
+        onComplete: () => star.destroy(),
+      });
+    }
   }
 
   finish() {
