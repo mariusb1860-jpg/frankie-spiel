@@ -9,7 +9,7 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Englische Bulld
 - Hindernisse müssen gut zu überspringen sein: Trefferflächen kleiner als die Bilder, hoher und langer Sprung.
 - Ein-Knopf-Steuerung: Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
 - Große Figuren und große Tippflächen (Tablet und Handy).
-- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Frankie, Würstel und Hindernisse sind SVG-Code, einfache Formen Phaser-Graphics.
+- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Frankie, Würstel, Hindernisse und Landschaft (`src/art/scenery.js`) sind SVG-Code, einfache Formen Phaser-Graphics. Die Landschaft soll so detailreich sein wie Frankie.
 - Grafik ansehen ohne zu spielen: `http://localhost:8137/preview.html` (`?zoom=3` für größer).
 - Zahlenwerte (Tempo, Sprung, Levellänge, Fellfarbe, Level-Layout) nur in `src/config.js` ändern.
 

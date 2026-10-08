@@ -26,7 +26,8 @@ Alle Stellschrauben stehen in `src/config.js`: Tempo, Sprunghöhe, Levellänge, 
 | `lib/phaser.min.js` | Spiel-Bibliothek Phaser 3.90.0 |
 | `src/config.js` | Alle Einstellungen und das Level-Layout |
 | `src/level.js` | Macht aus dem Layout konkrete Würstel und Hindernisse |
-| `src/art/` | Frankie und die Welt, mit Code gezeichnet (SVG und Phaser-Graphics) |
+| `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics) |
+| `src/backdrop.js` | Baut die Landschaft: Garten → Wiese → Dorf, mit Parallax |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |
 | `src/scenes/` | Startbild, Level, Futterszene |
