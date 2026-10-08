@@ -1,9 +1,10 @@
 # Frankie sammelt Würstel
 
-Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch den Garten, sammelt Würstel und frisst sie am Ende in ihrer Hütte auf.
+Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch Garten und Wald, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf.
 
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
-- Wer an ein Hindernis stößt, fängt das Level von vorn an.
+- Wer an ein Hindernis stößt oder in einen Bach fällt, fängt das Level von vorn an.
+- Im Startbild wählt man das Level; geschaffte Level schalten das nächste frei.
 - Läuft im Browser auf Handy, Tablet und PC. Handy bitte quer halten.
 
 ## Lokal starten
@@ -13,10 +14,13 @@ python -m http.server 8137
 ```
 
 Dann im Browser `http://localhost:8137` öffnen. (Ein Doppelklick auf `index.html` reicht nicht, weil der Browser die Programmteile dann nicht lädt.)
+Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 
 ## Anpassen
 
-Alle Stellschrauben stehen in `src/config.js`: Tempo, Sprunghöhe, Levellänge, Fellfarbe, Halsband und wo welche Würstel und Hindernisse liegen.
+- `src/config.js`: Sprunghöhe, Levellänge, Fellfarbe, Halsband, Halstuch.
+- `src/levels.js`: Tempo und Ablauf jedes Levels (wo welche Würstel, Hindernisse, Bäche und Blöcke liegen).
+- `src/worlds.js`: welche Landschaft in welchem Level.
 
 ## Aufbau
 
@@ -24,12 +28,15 @@ Alle Stellschrauben stehen in `src/config.js`: Tempo, Sprunghöhe, Levellänge, 
 |---|---|
 | `index.html`, `style.css` | Seite, Vollbild, Hinweis „Handy drehen“ |
 | `lib/phaser.min.js` | Spiel-Bibliothek Phaser 3.90.0 |
-| `src/config.js` | Alle Einstellungen und das Level-Layout |
-| `src/level.js` | Macht aus dem Layout konkrete Würstel und Hindernisse |
+| `src/config.js` | Allgemeine Einstellungen |
+| `src/levels.js` | Die Level |
+| `src/worlds.js` | Die Welten (Garten, Wald, …) |
+| `src/level.js`, `src/course.js` | Machen aus dem Level-Ablauf Boden, Bäche, Blöcke, Würstel und Hindernisse |
+| `src/backdrop.js` | Baut die Landschaft mit Dunstschleier und Parallax |
+| `src/progress.js` | Merkt sich freigeschaltete Level |
 | `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics) |
-| `src/backdrop.js` | Baut die Landschaft: Garten → Wiese → Dorf, mit Parallax |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |
-| `src/scenes/` | Startbild, Level, Futterszene |
+| `src/scenes/` | Startbild mit Level-Auswahl, Level, Futterszene |
 
 Design und Ideen für später: `docs/spec.md`.
