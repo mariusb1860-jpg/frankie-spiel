@@ -5,10 +5,12 @@ Kleines 2D-Jump'n'Run für ein Kind (3–5 Jahre). Frankie, eine Englische Bulld
 ## Regeln für das Spiel
 
 - Zielgruppe 3–5 Jahre: keine Texte, die man lesen muss. Symbole statt Wörter.
-- Kein Game Over, keine Strafe. Hindernisse lassen Frankie nur kurz stolpern.
+- Hindernis berührt = Frankie ist kurz benommen, dann startet das Level von vorn (Wunsch von Marius, 2026-10-08). Sonst keine Strafe.
+- Hindernisse müssen gut zu überspringen sein: Trefferflächen kleiner als die Bilder, hoher und langer Sprung.
 - Ein-Knopf-Steuerung: Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
 - Große Figuren und große Tippflächen (Tablet und Handy).
-- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien.
+- Grafik und Sound nur per Code (`src/art/`, `src/audio/`). Keine Bild- oder Sounddateien. Frankie, Würstel und Hindernisse sind SVG-Code, einfache Formen Phaser-Graphics.
+- Grafik ansehen ohne zu spielen: `http://localhost:8137/preview.html` (`?zoom=3` für größer).
 - Zahlenwerte (Tempo, Sprung, Levellänge, Fellfarbe, Level-Layout) nur in `src/config.js` ändern.
 
 ## Technik

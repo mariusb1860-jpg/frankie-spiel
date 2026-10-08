@@ -1,6 +1,6 @@
 # Spezifikation: Frankie sammelt Würstel (Version 1)
 
-Stand: 2026-10-08
+Stand: 2026-10-08 (Version 1.1 nach Feedback von Marius)
 
 ## Ziel
 
@@ -8,7 +8,7 @@ Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. He
 
 ## Rahmen
 
-- Kind ist 3–5 Jahre alt: kann nicht lesen → keine Texte nötig, kein Game Over, sehr einfache Steuerung.
+- Kind ist 3–5 Jahre alt: kann nicht lesen → keine Texte nötig, sehr einfache Steuerung.
 - Geräte: Tablet/Handy (Touch) und PC (Tastatur).
 - Verteilung: Link im Internet (GitHub Pages).
 - Grafik und Sound komplett per Code, keine Dateien.
@@ -22,14 +22,16 @@ Startbild → ein Level (ca. 60 Sekunden) → Futterszene → „Nochmal“.
    - Frankie läuft automatisch nach rechts. Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
    - 20 Würstel: am Boden (sammelt Frankie im Laufen), in der Luft (Sprung nötig) und als Bogen (ein Sprung holt alle drei).
    - Gesammelte Würstel fliegen in die Leiste oben (Symbole statt Zahl).
-   - Hindernisse (Pfütze, Ball, Kiste): Frankie stolpert kurz. Nichts geht verloren.
+   - Hindernisse (Pfütze, Ball, Kiste): Wer dagegen läuft, ist kurz benommen (Sternchen), dann startet das Level von vorn. (Version 1: nur kurzes Stolpern. Geändert auf Wunsch von Marius am 08.10.)
+   - Springen ist bewusst leicht: ca. 170 px hoch, ca. 1 Sekunde in der Luft, Trefferflächen der Hindernisse kleiner als die Bilder. Zeitfenster für einen erfolgreichen Sprung über die Kiste: ca. 0,45 Sekunden.
+   - Vor dem Loslaufen wartet Frankie kurz (0,7 s).
    - Hintergrund mit Parallax: Himmel, Sonne, Wolken, Hügel, Büsche, Wiese.
 3. **Ziel:** Hundehütte „FRANKIE“ mit Napf. Frankie bleibt stehen und freut sich.
 4. **Futterszene:** Alle gesammelten Würstel fliegen nacheinander in den Napf. Frankie frisst jede einzeln (Schmatzen, Herzchen) und wird dabei ein bisschen runder. Am Ende Melodie, Bellen, Freudensprung mit Rolle und großer „Nochmal“-Knopf. Wer nichts gesammelt hat, bekommt trotzdem ein Würstel.
 
 ## Kindgerecht
 
-- Große Figuren und Tippflächen, kein Zeitdruck, keine Strafe.
+- Große Figuren und Tippflächen, kein Zeitdruck. Einzige Strafe: Neustart nach einem Hindernis.
 - Sprung-Puffer: Ein Tippen kurz vor der Landung zählt trotzdem.
 - Ton-aus-Knopf oben rechts (wird im Browser gemerkt).
 - Handy hochkant: animierter Hinweis „Handy drehen“.
@@ -37,9 +39,9 @@ Startbild → ein Level (ca. 60 Sekunden) → Futterszene → „Nochmal“.
 
 ## Frankie
 
-Seitenansicht nach rechts: kompakter Körper, großer runder Kopf, kurze flache Schnauze mit Hängebacken, Unterbiss mit zwei Zähnchen, Knickohr, kurze Beine, Stummelschwanz, rotes Halsband mit Marke. Fellfarbe weiß-creme mit braunen Flecken (einstellbar in `src/config.js`).
+Körper von der Seite, Kopf leicht zum Betrachter gedreht (beide Augen sichtbar), Blick nach rechts. Breiter Kopf mit braunem Fleck ums linke Auge, kleine gefaltete Rosenohren, breite Schnauze mit zwei Hängebacken, kleines Kinn (Unterbiss), große glänzende Augen, kurze kräftige Beine, Stummelschwanz, rotes Halsband unter dem Kinn mit goldener Marke. Fellfarbe weiß-creme mit braunen Flecken (einstellbar in `src/config.js`). Version 1.1: als SVG neu gezeichnet, weil die erste Version zu grob war.
 
-Posen: Laufen (4 Bilder), Springen, Stolpern, Glücklich, Fressen (2 Bilder).
+Posen: Laufen (4 Bilder), Springen, Benommen, Glücklich, Fressen (2 Bilder).
 
 ## Sound
 
