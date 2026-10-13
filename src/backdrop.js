@@ -17,12 +17,16 @@ const LAYERS = [
   { name: 'near', factor: 0.85, baseY: GROUND_Y + 6, spacing: [140, 240], scale: [0.75, 0.9] },
 ];
 const STRIP = { factor: 0.85, baseY: GROUND_Y + 4, width: 156 };
+const FIXED_LANDMARK_SPAN = 400; // fixed scenes keep landmarks left of Frankie and the bowl
+const LANDMARK_SCALE = 0.56; // landmarks have one fixed size, the middle of the far scale range
 const FLIPPABLE = [
   'tree-oak', 'tree-apple', 'tree-birch', 'tree-beech', 'rock', 'mossy-rock', 'bush', 'berry-bush',
   'grass-tuft', 'mushrooms', 'daisies', 'fern', 'log-pile', 'deer',
   'dune', 'dune-2', 'sailboat', 'sailboat-2', 'ferry', 'cutter', 'marram', 'shell-pile',
   'cow', 'sheep', 'tractor', 'scarecrow', 'chicken-coop', 'wheat-tuft', 'poppies', 'dandelions',
   'bare-tree', 'cabin', 'ice-pond', 'snow-bush', 'snow-rock', 'snow-reeds', 'holly',
+  'poplar', 'grey-cattle', 'racka-sheep', 'csikos', 'haystack-puszta', 'goulash-pot', 'paprika-plant', 'steppe-grass', 'thistle',
+  'danube-boat', 'flower-tub',
 ];
 
 /**
@@ -64,11 +68,28 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
   }
   scene.add.image(0, 0, 'haze').setOrigin(0).setScrollFactor(0).setDepth(DEPTH.haze);
 
+  // Landmarks (zone property `landmarks`) stand exactly once per zone, evenly spread along
+  // it, so a famous building never shows up twice. A scene that does not scroll spreads
+  // the landmarks of its zone over the left part of the screen. They go in before the random far pieces,
+  // so those (boats on the river) are drawn in front of them.
+  const far = LAYERS[0];
+  def.zones.forEach((z, k) => {
+    if (!z.landmarks || (fixedZone && z !== fixedZone)) return;
+    const [from, to] = fixedZone ? [0, FIXED_LANDMARK_SPAN] : [(def.zones[k - 1]?.until ?? 0) * length, z.until * length];
+    z.landmarks.forEach((key, i) => {
+      const at = from + ((i + 0.5) / z.landmarks.length) * (to - from);
+      // World x to far-layer x (the inverse of worldAt); a scene that does not scroll keeps screen x.
+      const x = fixedZone ? at : (at - GAME_WIDTH / 2) * far.factor + GAME_WIDTH / 2;
+      scene.add.image(x, far.baseY, key).setOrigin(0.5, 1).setScale(LANDMARK_SCALE).setScrollFactor(far.factor).setDepth(DEPTH.far);
+    });
+  });
+
   for (const layer of LAYERS) {
     const [min, max] = layer.spacing.map((s) => Math.round(s * density));
     for (let x = -60 + rng.between(0, 120); x < span(layer.factor); x += rng.between(min, max)) {
       const key = rng.pick(zoneAt(worldAt(x, layer.factor))[layer.name]);
       const scale = rng.realInRange(...layer.scale);
+      if (!key) continue; // null in a zone list: an empty slot
       if (key === 'sunbeam') {
         addSunbeam(scene, x, layer.factor, scale);
         continue;

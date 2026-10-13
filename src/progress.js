@@ -1,9 +1,10 @@
-import { UNLOCK_ALL } from './config.js';
+import { PAPRIKA, UNLOCK_ALL } from './config.js';
 
 // Remembers on this device how far the child got (highest level that is open).
 // If the browser blocks storage (private mode), progress lasts until the page is closed.
 
-const KEY = 'frankie-unlocked';
+// The secret link keeps its own progress, so grown-up progress never opens the child's levels on a shared device.
+const KEY = PAPRIKA ? 'frankie-unlocked-paprika' : 'frankie-unlocked';
 let inMemory = 1;
 
 function stored() {

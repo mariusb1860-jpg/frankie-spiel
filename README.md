@@ -38,7 +38,8 @@ Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 | `src/level.js`, `src/course.js` | Machen aus dem Level-Ablauf Boden, Bäche, Blöcke, Würstel und Hindernisse |
 | `src/backdrop.js` | Baut die Landschaft mit Dunstschleier und Parallax |
 | `src/progress.js` | Merkt sich freigeschaltete Level |
-| `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics) |
+| `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics); `puszta.js` und `budapest.js` sind zwei Zusatz-Welten, die nur in besonderen Fällen geladen werden |
+| `tools/` | Hilfen zum Testen: Browser-Helfer `test-helpers.js` und Server ohne Cache `nocache_server.py` |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |
 | `src/scenes/` | Startbild mit Level-Auswahl, Level, Futterszene, Siegesfeier |

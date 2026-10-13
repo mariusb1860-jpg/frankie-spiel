@@ -1,6 +1,7 @@
 // Every level plays in a world. A world sets the landscape (zones along the way,
 // each with its own far / mid / near decorations), the look of gaps and blocks,
-// and its colour on the level buttons.
+// and its colour on the level buttons. Decorations are picked at random; null in a list
+// is an empty slot. `landmarks` are far pictures that appear exactly once per zone.
 
 export const WORLDS = {
   garden: {
@@ -164,6 +165,78 @@ export const WORLDS = {
         mid: ['house-snow', 'xmas-tree', 'house-snow-2', 'fir-snow', 'house-snow'],
         near: ['lamp-snow', 'snow-bush', 'holly', 'lamp-snow'],
         strip: 'snow-fence',
+      },
+    ],
+  },
+
+  // Level 6, only for grown-ups (secret link ?paprika): the Hungarian Puszta. Ground,
+  // ditches and crates come from the farm; the crates now hold paprika.
+  puszta: {
+    color: 0xce2939, // red of the Hungarian flag
+    tiles: { hillsFar: 'hills-far-puszta', hillsNear: 'hills-near-puszta', ground: 'ground-farm' },
+    gap: 'gap-farm',
+    block: 'block-crate',
+    zones: [
+      {
+        key: 'paprika-fields',
+        until: 1 / 3,
+        far: ['poplar', 'poplar', 'grey-cattle', 'poplar'],
+        mid: ['paprika-house', 'flag-hu', 'haystack-puszta', 'paprika-house', 'well-sweep'],
+        near: ['paprika-plant', 'paprika-plant', 'sunflower', 'paprika-plant', 'grass-tuft'],
+        strip: 'paprika-strip',
+      },
+      {
+        key: 'puszta',
+        until: 2 / 3,
+        far: ['grey-cattle', 'racka-sheep', 'csikos', 'grey-cattle', 'racka-sheep', 'poplar'],
+        mid: ['well-sweep', 'haystack-puszta', 'goulash-pot', 'haystack-puszta', 'well-sweep'],
+        near: ['steppe-grass', 'thistle', 'steppe-grass', 'grass-tuft'],
+        butterflies: true,
+      },
+      {
+        key: 'goulash-feast',
+        until: 1,
+        far: ['poplar', 'grey-cattle', 'poplar'],
+        mid: ['paprika-house', 'goulash-pot', 'flag-hu', 'paprika-house', 'goulash-pot'],
+        near: ['paprika-plant', 'bush', 'steppe-grass', 'sunflower'],
+        strip: 'bunting-fence',
+      },
+    ],
+  },
+
+  // Level 7, only for grown-ups (secret link ?paprika): Budapest on the Danube. Ground and
+  // brooks come from the forest, the jetties from the beach.
+  budapest: {
+    color: 0x477050, // green of the Hungarian flag
+    tiles: { hillsFar: 'hills-far-budapest', hillsNear: 'hills-near-budapest', ground: 'ground-forest' },
+    gap: 'gap-forest',
+    block: 'block-pier',
+    zones: [
+      {
+        key: 'danube-bank',
+        until: 1 / 3,
+        landmarks: ['parliament'],
+        far: ['danube-boat', null, null],
+        mid: ['tram-yellow', 'tree-oak', 'flag-hu', 'tree-birch', 'tram-yellow'],
+        near: ['lamp', 'flower-tub', 'bush', 'lamp'],
+        strip: 'danube-rail',
+      },
+      {
+        key: 'chain-bridge',
+        until: 2 / 3,
+        landmarks: ['chain-bridge', 'buda-castle'],
+        far: ['danube-boat', null, null],
+        mid: ['tree-oak', 'tram-yellow', 'flag-hu', 'tree-birch'],
+        near: ['lamp', 'flower-tub', 'lamp', 'daisies'],
+        strip: 'danube-rail',
+      },
+      {
+        key: 'market',
+        until: 1,
+        landmarks: ['fishermens-bastion'],
+        far: ['danube-boat', null, null],
+        mid: ['market-hall', 'paprika-stall', 'goulash-stall', 'flag-hu', 'paprika-stall'],
+        near: ['flower-tub', 'lamp', 'bush'],
       },
     ],
   },

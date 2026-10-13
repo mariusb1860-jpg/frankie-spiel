@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- Developer page: shows every drawing large, to judge the art without playing.
-         ?zoom=3 shows them bigger, ?set=beach only one group (frankie, world, scenery, forest, beach, farm, winter, party). -->
+         ?zoom=3 shows them bigger, ?set=beach only one group (frankie, world, scenery, forest, beach, farm, winter, party, puszta, budapest). -->
     <div class="grid" id="grid"></div>
     <script type="module">
       import { frankieSvg, FRANKIE_W, FRANKIE_H } from './src/art/frankie.js';
@@ -25,6 +25,8 @@
       import { farmSvgs } from './src/art/farm.js';
       import { winterSvgs } from './src/art/winter.js';
       import { partySvgs } from './src/art/party.js';
+      import { pusztaSvgs } from './src/art/puszta.js';
+      import { budapestSvgs } from './src/art/budapest.js';
 
       const grid = document.getElementById('grid');
       const params = new URLSearchParams(location.search);
@@ -39,7 +41,7 @@
           add(name, frankieSvg(name), FRANKIE_W, FRANKIE_H);
         }
       }
-      const sets = { world: worldSvgs, scenery: scenerySvgs, forest: forestSvgs, beach: beachSvgs, farm: farmSvgs, winter: winterSvgs, party: partySvgs };
+      const sets = { world: worldSvgs, scenery: scenerySvgs, forest: forestSvgs, beach: beachSvgs, farm: farmSvgs, winter: winterSvgs, party: partySvgs, puszta: pusztaSvgs, budapest: budapestSvgs };
       for (const [set, svgs] of Object.entries(sets)) {
         if (only && only !== set) continue;
         for (const [name, { svg, w, h }] of Object.entries(svgs())) add(name, svg, w, h);

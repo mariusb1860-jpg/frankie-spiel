@@ -1,4 +1,4 @@
-import { CONFIG, FAST } from './config.js';
+import { CONFIG, FAST, PAPRIKA } from './config.js';
 
 // The levels. Each layout is a list of what comes where (x in px from the start).
 // Every level has 20 sausages; Frankie stops at the dog house at the end.
@@ -28,6 +28,9 @@ const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
 // tier 2 only from tier 1. Sausages lie on top.
 const blocks = (x, tiles, { tier = 1, sausages = 0 } = {}) => ({ kind: 'blocks', x, tiles, tier, sausages });
+
+// Kept for one release so browsers with cached old scenes still load; remove later. Nothing uses it.
+export const PLANNED_LEVELS = 5;
 
 export const LEVELS = [
   {
@@ -171,10 +174,142 @@ export const LEVELS = [
       layout: [row(600), snowman(1000), blocks(1300, 12, { sausages: 2 }), stream(1590, 400), snowball(2700), rabbit(3150)],
     },
   },
+  {
+    // Level 6, Puszta: only for grown-ups (secret link ?paprika). Faster, a lower and
+    // shorter jump, animals 1.4 times as fast, chains of obstacles and stepping stones.
+    world: 'puszta',
+    speed: 290,
+    jump: { velocity: -788, gravity: 2020 }, // ~147 px high, ~0.78 s in the air
+    animalSpeed: 1.4,
+    layout: [
+      row(650),
+      haybale(1150),
+      milkcan(1450), // two in a row: land and jump again
+      high(1800),
+      stream(2150, 190),
+      hedgehog(2550),
+      arc(2950),
+      stream(3350, 200),
+      crate(3680), // right behind the ditch
+      frog(4000),
+      chicken(4300),
+      // Stepping stones: crates over a ditch far too wide to jump, one hop per crate.
+      blocks(4600, 2, { sausages: 1 }),
+      blocks(4800, 2),
+      blocks(5000, 2, { sausages: 1 }),
+      blocks(5200, 2),
+      stream(4950, 560),
+      log(5650),
+      rabbit(5950),
+      row(6300),
+      stump(6650),
+      stream(6950, 210),
+      puddle(7300), // right behind the ditch
+      high(7550),
+      chicken(7850),
+      haybale(8150),
+      // A staircase over a wide ditch: up to the second floor, then down on the far side.
+      blocks(8450, 4, { sausages: 1 }),
+      blocks(8600, 4, { tier: 2, sausages: 2 }),
+      stream(8700, 420),
+      hedgehog(9250),
+      milkcan(9550),
+      crate(9850), // three in a row
+      arc(10200),
+      stream(10550, 220),
+      frog(10850),
+      rabbit(11150),
+      log(11450),
+      high(11750),
+      haybale(12050),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), haybale(1000), stream(1350, 190), hedgehog(1750), blocks(2050, 4, { sausages: 2 }), frog(2650), high(3000)],
+    },
+  },
+  {
+    // Level 7, Budapest: only for grown-ups. The fastest level, the shortest jump and
+    // animals at 1.7 times speed; long chains, single-block stepping stones, rolling balls
+    // that meet Frankie just behind a brook. Only hedgehogs walk here: at this speed a
+    // chicken or a hopping rabbit leaves under 0.10 s to jump (measured), a hedgehog at
+    // least 0.115 s in every phase. At 1.8 times speed the hedgehog dropped to about 0.10 s.
+    world: 'budapest',
+    speed: 310,
+    jump: { velocity: -913, gravity: 2766 }, // ~143 px high, ~0.66 s in the air
+    animalSpeed: 1.7,
+    layout: [
+      row(600),
+      crate(950),
+      ball(1220),
+      log(1490), // three in a row
+      stream(1830, 200),
+      hedgehog(2200),
+      ball(2450),
+      high(2450), // the sausage hangs right above the ball
+      hedgehog(2750),
+      log(3020),
+      puddle(3290),
+      stream(3620, 215),
+      beachball(4100), // starts rolling when Frankie is at ~3350, meets him at ~3850 (solid ground, 120 px behind the brook)
+      crate(4230),
+      arc(4230), // the jump over the crate collects the arc
+      // Stepping stones: single blocks over a brook far too wide to jump.
+      blocks(4520, 1),
+      blocks(4710, 1, { sausages: 1 }),
+      blocks(4900, 1),
+      blocks(5090, 1, { sausages: 1 }),
+      stream(4870, 640),
+      crate(5500),
+      hedgehog(5780),
+      ball(6050),
+      stream(6380, 220),
+      log(6630), // right behind the brook
+      row(6950),
+      hedgehog(7250),
+      hedgehog(7520),
+      stream(7860, 225),
+      puddle(8110), // right behind the brook
+      log(8400),
+      high(8400),
+      beachball(8950), // meets Frankie at ~8700, between the log and the ball
+      ball(9270),
+      log(9540),
+      // A staircase over a wide brook: up to the second floor, then down on the far side.
+      blocks(9850, 3, { sausages: 1 }),
+      blocks(10010, 3, { tier: 2, sausages: 2 }),
+      stream(10090, 420),
+      hedgehog(10620),
+      stream(10920, 210),
+      hedgehog(11220),
+      crate(11500),
+      arc(11500),
+      hedgehog(11800),
+      crate(12070),
+      stream(12350, 225),
+      high(12600),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), crate(1000), ball(1270), stream(1650, 210), beachball(2400), blocks(2700, 3, { sausages: 2 }), high(3200)],
+    },
+  },
 ];
 
-// How many levels are planned (the start screen shows a button for each).
-export const PLANNED_LEVELS = 5;
+// Levels 1-5 are the child's game. Levels 6 and 7 are very hard levels for grown-ups;
+// only the secret link (?paprika) shows them, and then only them.
+const KIDS = [1, 2, 3, 4, 5];
+const GROWN_UPS = [6, 7];
+
+/** Level numbers that get a button on the start screen. */
+export function shownLevels() {
+  return PAPRIKA ? GROWN_UPS : KIDS;
+}
+
+/** True for the last level of its group (5 or 7): the big celebration follows it. */
+export function isFinale(n) {
+  return n === KIDS[KIDS.length - 1] || n === GROWN_UPS[GROWN_UPS.length - 1];
+}
 
 /** Level definition for level number n (1-based), with its length; null if not built yet. */
 export function getLevel(n) {

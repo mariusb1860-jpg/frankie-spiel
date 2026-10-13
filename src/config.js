@@ -3,10 +3,12 @@
 const params = new URLSearchParams(window.location.search);
 
 // ?fast=1 shortens the levels (automated tests), ?debug=1 shows physics boxes,
-// ?alle=1 unlocks every level (to try them all).
+// ?alle=1 unlocks every level (to try them all), ?paprika is the secret link for
+// grown-ups (only the hard levels 6 and 7).
 export const FAST = params.has('fast');
 export const DEBUG = params.has('debug');
 export const UNLOCK_ALL = params.has('alle');
+export const PAPRIKA = params.has('paprika');
 
 export const GAME_WIDTH = 960;
 export const GAME_HEIGHT = 540;

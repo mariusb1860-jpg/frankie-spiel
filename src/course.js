@@ -16,6 +16,7 @@ export const DEPTH = { blocks: 1, shadows: 2, frankieShadow: 3, things: 4, falle
 // second) as soon as it comes into view; hop: { height, ms, pause, air } jumps up
 // and down (ms in the air with picture `air`, pause on the ground), with
 // { steps, step } it hops `steps` times `step` px to the left and back again.
+// A level's animalSpeed (see levels.js) makes all walking, rolling and hopping faster.
 export const OBSTACLE_TYPES = {
   puddle: { y: GROUND_Y + 3, box: [64, 10, 23, 8], flat: true },
   ball: { y: GROUND_Y - 21, circle: [14, 8, 8] },
@@ -124,6 +125,7 @@ function createSausages(scene, level) {
 }
 
 function createObstacles(scene, level) {
+  const pace = level.animalSpeed; // 1 = the speeds written in OBSTACLE_TYPES
   const group = scene.physics.add.group({ allowGravity: false });
   const movers = []; // everything that moves; their shadows follow them
   const rollers = [];
@@ -141,14 +143,14 @@ function createObstacles(scene, level) {
     }
     if (!type.flat) o.shadow = addShadow(scene, x, GROUND_Y + 2, o.displayWidth * 0.9);
     if (type.patrol) {
-      startPatrol(scene, o, type);
+      startPatrol(scene, o, type, pace);
       movers.push(o);
     } else if (type.roll) {
-      o.roll = type.roll;
+      o.roll = type.roll * pace;
       rollers.push(o);
       movers.push(o);
     } else if (type.hop) {
-      o.hop = type.hop;
+      o.hop = { ...type.hop, ms: type.hop.ms / pace, pause: type.hop.pause / pace };
       Object.assign(o, { baseX: o.x, baseY: o.y, hopStart: scene.time.now, shadowW: o.shadow.displayWidth, shadowH: o.shadow.displayHeight });
       hoppers.push(o);
       movers.push(o);
@@ -158,14 +160,17 @@ function createObstacles(scene, level) {
 }
 
 // Walks left and right around its spot. The picture looks left.
-function startPatrol(scene, o, type) {
+function startPatrol(scene, o, type, pace) {
   o.x -= type.patrol;
   o.setFlipX(true);
-  if (type.anim) o.play(type.anim);
+  if (type.anim) {
+    o.play(type.anim);
+    o.anims.timeScale = pace; // faster animals move their legs faster
+  }
   o.patrol = scene.tweens.add({
     targets: o,
     x: o.x + type.patrol * 2,
-    duration: ((type.patrol * 2) / (type.patrolSpeed ?? PATROL_SPEED)) * 1000,
+    duration: ((type.patrol * 2) / ((type.patrolSpeed ?? PATROL_SPEED) * pace)) * 1000,
     ease: 'Sine.easeInOut',
     yoyo: true,
     repeat: -1,

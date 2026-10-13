@@ -50,6 +50,8 @@ export function buildLevel(def) {
     number: def.number,
     world: def.world,
     speed: def.speed,
+    jump: def.jump ?? null, // { velocity, gravity } of this level; null = the usual jump from CONFIG
+    animalSpeed: def.animalSpeed ?? 1, // walking, rolling and hopping animals move this much faster
     length,
     sausages,
     obstacles,

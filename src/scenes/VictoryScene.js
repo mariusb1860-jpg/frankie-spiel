@@ -15,14 +15,20 @@ const STAR_Y = 150;
 const STAR_GAP = 100;
 const HOME_X = 790;
 const HOME_Y = 255;
+const HOME_Y_SEVEN_STARS = 280; // the 7th star stands right above the button
 const COLORS = [0xe53935, 0xffd23f, 0x43b047, 0x3b7fc4, 0xff8a3d, 0xa259d9, 0xff6b9a];
 
-// The big celebration after the last level: one star for every world flies in,
+// The big celebration after the last level: one star for every world played so far flies in,
 // the sausage trophy rises, confetti, balloons and fireworks, and Frankie jumps
 // for joy. Then the home button leads back to the level selection.
 export class VictoryScene extends Phaser.Scene {
   constructor() {
     super('VictoryScene');
+  }
+
+  init(data) {
+    // The level just finished: 5 for the child's game, 7 for the grown-ups.
+    this.lastLevel = data?.level ?? 5;
   }
 
   create() {
@@ -50,9 +56,9 @@ export class VictoryScene extends Phaser.Scene {
     this.backdrop.update(0, this.time.now);
   }
 
-  // One star in the colour of every world (= every level) flies up, one after the other.
+  // One star in the colour of every world played so far (levels 1 up to the one just finished).
   flyInStars() {
-    const colors = LEVELS.map((l) => WORLDS[l.world].color);
+    const colors = LEVELS.slice(0, this.lastLevel).map((l) => WORLDS[l.world].color);
     const x0 = 480 - ((colors.length - 1) * STAR_GAP) / 2;
     colors.forEach((color, i) => {
       const x = x0 + i * STAR_GAP;
@@ -211,7 +217,7 @@ export class VictoryScene extends Phaser.Scene {
 
   showHomeButton() {
     const home = () => this.goHome();
-    addBigButton(this, HOME_X, HOME_Y, 'btn-home', home);
+    addBigButton(this, HOME_X, this.lastLevel > 5 ? HOME_Y_SEVEN_STARS : HOME_Y, 'btn-home', home);
     this.input.keyboard.once('keydown-SPACE', home);
     this.input.keyboard.once('keydown-ENTER', home);
   }

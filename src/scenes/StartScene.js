@@ -1,7 +1,7 @@
 import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
-import { PLANNED_LEVELS, getLevel } from '../levels.js';
+import { getLevel, shownLevels } from '../levels.js';
 import { unlockedLevel } from '../progress.js';
 import { addBigButton, addMuteButton, enterFullscreen } from '../ui.js';
 import * as sfx from '../audio/sfx.js';
@@ -11,6 +11,7 @@ export const TITLE_FONT = '"Arial Rounded MT Bold", "Trebuchet MS", "Segoe UI", 
 const BUTTON_Y = 305;
 const BUTTON_X0 = 340;
 const BUTTON_GAP = 122;
+const ROW = 5; // the button row is laid out for five buttons
 
 // Start screen with the level selection: one round button per level, in the
 // colour of its world. Levels not reached yet show a lock.
@@ -44,12 +45,18 @@ export class StartScene extends Phaser.Scene {
       .setScale(1.05);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
-    this.playable = [];
-    for (let n = 1; n <= PLANNED_LEVELS; n++) this.addLevelButton(n);
+    // One button per level of the shown group (1-5, or 6-7 with the secret link),
+    // centred where the five buttons of the child's game stand.
+    const levels = shownLevels();
+    const isOpen = (n) => Boolean(getLevel(n)) && (n === levels[0] || n <= unlockedLevel());
+    this.playable = levels.filter(isOpen);
+    // Only the newest open level pulses, so the child knows where to tap.
+    const newest = this.playable[this.playable.length - 1];
+    const x0 = BUTTON_X0 + ((ROW - levels.length) * BUTTON_GAP) / 2;
+    levels.forEach((n, i) => this.addLevelButton(n, x0 + i * BUTTON_GAP, isOpen(n), n === newest));
 
     addMuteButton(this);
-    // Keyboard: Space/Enter starts the newest open level, 1-5 a specific one.
-    const newest = this.playable[this.playable.length - 1];
+    // Keyboard: Space/Enter starts the newest open level, a number key that level.
     this.input.keyboard.on('keydown-SPACE', () => this.startGame(newest));
     this.input.keyboard.on('keydown-ENTER', () => this.startGame(newest));
     this.input.keyboard.on('keydown', (event) => {
@@ -60,17 +67,12 @@ export class StartScene extends Phaser.Scene {
     this.cameras.main.fadeIn(300);
   }
 
-  addLevelButton(n) {
-    const x = BUTTON_X0 + (n - 1) * BUTTON_GAP;
-    const def = getLevel(n);
-    const open = def && n <= unlockedLevel();
+  addLevelButton(n, x, open, isNewest) {
     if (!open) {
       this.add.image(x, BUTTON_Y, 'btn-level-locked').setDepth(100);
       return;
     }
-    this.playable.push(n);
-    // Only the newest open level pulses, so the child knows where to tap.
-    const isNewest = !getLevel(n + 1) || n + 1 > unlockedLevel();
+    const def = getLevel(n);
     addBigButton(this, x, BUTTON_Y, `btn-level-${def.world}`, () => this.startGame(n), { pulse: isNewest });
     const label = this.add
       .text(x, BUTTON_Y - 4, String(n), { fontFamily: `"Arial Black", ${TITLE_FONT}`, fontSize: '58px', color: '#ffffff', stroke: '#2b3a2b', strokeThickness: 8 })

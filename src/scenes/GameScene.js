@@ -25,6 +25,11 @@ export class GameScene extends Phaser.Scene {
 
   create() {
     this.level = buildLevel(getLevel(this.levelNo));
+    // Levels may bring their own jump (the grown-up levels jump lower and shorter).
+    // Set it every time, so a level without its own jump gets the usual one back.
+    const jump = this.level.jump ?? { velocity: CONFIG.jumpVelocity, gravity: CONFIG.gravity };
+    this.jumpVelocity = jump.velocity;
+    this.physics.world.gravity.y = jump.gravity;
     this.collected = 0;
     this.finished = false;
     this.crashed = false;
@@ -102,7 +107,7 @@ export class GameScene extends Phaser.Scene {
     const wantsJump = time - this.jumpQueuedAt < CONFIG.jumpBufferMs;
     const canJump = time - this.lastGroundAt < CONFIG.coyoteMs && running;
     if (wantsJump && canJump) {
-      f.setVelocityY(CONFIG.jumpVelocity);
+      f.setVelocityY(this.jumpVelocity);
       this.jumpQueuedAt = -Infinity;
       this.lastGroundAt = -Infinity;
       sfx.jump();
