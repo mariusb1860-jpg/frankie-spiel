@@ -297,13 +297,80 @@ export const LEVELS = [
 
   // ---- Level 8 (grown-ups) ----
   {
-    // Level 8, Lake Balaton: placeholder, the real layout follows.
+    // Level 8, Lake Balaton: only for grown-ups. Faster again, a shorter jump, animals at
+    // 1.7 times speed. What makes it hard: pairs of obstacles only 176 px apart (the first jump
+    // must go late, the second follows on landing), gaps of 272-274 px (jump window about
+    // 0.12 s), a rolling beach ball released right behind a gap, jetty stepping stones and a
+    // staircase that both end in an obstacle on the landing. Crabs are replaced by hedgehogs:
+    // a crab (wide hit box) leaves only about 0.06 s at 1.7 times speed (measured), a hedgehog
+    // at least 0.15 s in every phase.
     world: 'balaton',
     speed: 320,
     jump: { velocity: -942, gravity: 2943 }, // ~143 px high, ~0.64 s in the air
     animalSpeed: 1.7,
-    layout: [row(700), row(2000), row(3300), row(4600), row(5900), row(7200), high(8500), high(9800)],
-    fast: { length: 3600, layout: [row(600), high(1050), row(1600), high(2400)] },
+    layout: [
+      row(650),
+      sandcastle(920),
+      crate(1096), // pair 176 px apart
+      puddle(1341),
+      ball(1519),
+      high(1519), // the sausage hangs right above the ball
+      stream(1830, 272),
+      hedgehog(2251),
+      sandcastle(2581),
+      crate(2757), // pair
+      puddle(3002),
+      stream(3309, 274),
+      beachball(3879), // starts rolling when Frankie is at ~3130, meets him at ~3640, 190 px behind the gap
+      sandcastle(3906),
+      crate(4082), // pair
+      row(4322), // breather
+      hedgehog(4572),
+      sandcastle(4902),
+      puddle(5078), // pair
+      stream(5409, 272),
+      crate(5780),
+      hedgehog(6030),
+      ball(6330),
+      high(6330),
+      crate(6506), // pair
+      high(6506),
+      // Jetty stepping stones: single blocks over water far too wide to jump; the last one
+      // ends 52 px before the bank, and a sandcastle waits on the landing.
+      blocks(6776, 1),
+      blocks(6966, 1, { sausages: 1 }),
+      blocks(7156, 1),
+      blocks(7346, 1, { sausages: 1 }),
+      stream(7126, 640),
+      sandcastle(7541),
+      hedgehog(7803),
+      puddle(8103),
+      sandcastle(8281),
+      stream(8613, 274),
+      row(8990), // breather
+      sandcastle(9240),
+      crate(9416), // pair
+      puddle(9661),
+      ball(9839),
+      arc(9839),
+      stream(10171, 274),
+      hedgehog(10558),
+      sandcastle(10888),
+      crate(11064), // pair
+      // A staircase over a wide water: up to the second floor, then walk off its end
+      // straight into a sandcastle.
+      blocks(11309, 3, { sausages: 1 }),
+      blocks(11469, 3, { tier: 2, sausages: 2 }),
+      stream(11549, 420),
+      sandcastle(11859),
+      hedgehog(12149),
+      ball(12434),
+      crate(12610), // pair
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), sandcastle(960), crate(1136), puddle(1381), stream(1590, 272), hedgehog(2110), sandcastle(2440), crate(2616), beachball(3143)],
+    },
   },
 
   // ---- Level 9 (grown-ups) ----
