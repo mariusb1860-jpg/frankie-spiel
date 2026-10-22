@@ -272,16 +272,39 @@ export const WORLDS = {
   },
 
   // ---- World of level 10 (grown-ups) ----
-  // Level 10, only for grown-ups: Visegrád castle at the Danube bend at sunset. Placeholder with the forest pictures.
+  // Level 10, only for grown-ups: Visegrád castle at the Danube bend at sunset (finale). Ground,
+  // brooks and blocks come from the forest.
   visegrad: {
     color: 0xe0a800, // gold
-    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
+    sky: 'sky-visegrad',
+    tiles: { hillsFar: 'hills-far-visegrad', hillsNear: 'hills-near-visegrad', ground: 'ground-forest' },
     gap: 'gap-forest',
     block: 'block-wood',
+    flip: ['vg-oak', 'vg-willow', 'vg-pine', 'vg-sailboat', 'reeds', 'wild-flowers', 'wild-rose', 'tent-red', 'tent-green', 'net-poles'],
     zones: [
-      { key: 'visegrad-1', until: 1 / 3, far: ['tree-fir'], mid: ['tree-oak'], near: ['fern'] },
-      { key: 'visegrad-2', until: 2 / 3, far: ['tree-pine'], mid: ['tree-beech'], near: ['mushrooms'] },
-      { key: 'visegrad-3', until: 1, far: ['deer'], mid: ['hunter-stand'], near: ['bush'] },
+      {
+        key: 'danube-bend',
+        until: 1 / 3,
+        far: ['vg-pine', 'danube-boat', 'vg-pine', 'vg-sailboat', null],
+        mid: ['vg-oak', 'fisher-hut', 'vg-willow', 'net-poles', 'vg-oak', 'vg-willow'],
+        near: ['reeds', 'wild-flowers', 'wild-rose', 'reeds', 'wild-flowers'],
+      },
+      {
+        key: 'castle-hill',
+        until: 2 / 3,
+        landmarks: ['fellegvar', 'salamon-tower'],
+        far: ['vg-pine', 'vg-sailboat', 'vg-pine', null],
+        mid: ['castle-wall', 'wall-tower', 'banner-pole', 'vg-oak', 'castle-wall', 'banner-pole'],
+        near: ['torch-post', 'wild-rose', 'wild-flowers', 'torch-post'],
+      },
+      {
+        key: 'knights-feast',
+        until: 1,
+        far: ['hussar', 'vg-pine', 'hussar', 'vg-pine', 'danube-boat'],
+        mid: ['tent-red', 'heraldic-banner', 'tent-green', 'archery-target', 'banner-pole', 'tent-red', 'heraldic-banner'],
+        near: ['torch-post', 'wild-flowers', 'torch-post', 'wild-rose'],
+        strip: 'tourney-fence',
+      },
     ],
   },
 };
