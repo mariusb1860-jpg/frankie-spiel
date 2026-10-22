@@ -258,16 +258,40 @@ export const WORLDS = {
   },
 
   // ---- World of level 9 (grown-ups) ----
-  // Level 9, only for grown-ups: the Tokaj vineyards in autumn. Placeholder with the farm pictures.
+  // Level 9, only for grown-ups: the Tokaj vineyards in autumn (vineyard, cellar row, harvest feast).
   tokaj: {
     color: 0x8e2453, // wine red
-    tiles: { hillsFar: 'hills-far-farm', hillsNear: 'hills-near-farm', ground: 'ground-farm' },
+    tiles: { hillsFar: 'hills-far-tokaj', hillsNear: 'hills-near-tokaj', ground: 'ground-farm' },
     gap: 'gap-farm',
     block: 'block-wood',
+    flip: ['vine-row', 'vine-row-gold', 'tree-walnut', 'tree-chestnut', 'vine-slope', 'asters', 'leaf-scatter', 'vine-low', 'autumn-bush', 'arbour', 'cellar-door', 'pickers'],
     zones: [
-      { key: 'tokaj-1', until: 1 / 3, far: ['tree-oak'], mid: ['barn'], near: ['grass-tuft'] },
-      { key: 'tokaj-2', until: 2 / 3, far: ['tree-pine'], mid: ['silo'], near: ['poppies'] },
-      { key: 'tokaj-3', until: 1, far: ['tree-birch'], mid: ['farmhouse'], near: ['daisies'] },
+      {
+        key: 'vineyard',
+        until: 1 / 3,
+        landmarks: ['chapel-hill'],
+        far: ['vine-slope', 'tree-walnut', null, 'tree-chestnut'],
+        mid: ['vine-row', 'press-house', 'tree-walnut', 'vine-row-gold', 'tree-chestnut', 'vine-row'],
+        near: ['vine-low', 'asters', 'leaf-scatter', 'autumn-bush', 'lantern'],
+        strip: 'trellis-strip',
+      },
+      {
+        key: 'cellar-row',
+        until: 2 / 3,
+        landmarks: ['kopasz-hill'],
+        far: ['vine-slope', 'big-barrel', 'tree-walnut'],
+        mid: ['cellar-hill', 'wine-press', 'cellar-door', 'arbour', 'cellar-hill', 'tree-chestnut'],
+        near: ['asters', 'leaf-scatter', 'lantern', 'vine-low'],
+        strip: 'trellis-strip',
+      },
+      {
+        key: 'harvest-feast',
+        until: 1,
+        landmarks: ['tokaj-town'],
+        far: ['pickers', 'tree-chestnut', null, 'pickers'],
+        mid: ['harvest-cart', 'bunting-poles', 'grape-stall', 'flag-hu', 'tree-chestnut', 'tree-walnut', 'arbour'],
+        near: ['asters', 'autumn-bush', 'leaf-scatter', 'lantern'],
+      },
     ],
   },
 
