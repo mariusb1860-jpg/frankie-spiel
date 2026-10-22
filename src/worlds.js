@@ -244,16 +244,44 @@ export const WORLDS = {
   },
 
   // ---- World of level 8 (grown-ups) ----
-  // Level 8, only for grown-ups: Lake Balaton. Placeholder with the beach pictures.
+  // Level 8, only for grown-ups: Lake Balaton in high summer. Ground, ditches and blocks come
+  // from the beach, but the lake is turquoise and the shore is a meadow with reeds.
   balaton: {
     color: 0x16a6a0, // turquoise of the lake
-    tiles: { hillsFar: 'hills-far-beach', hillsNear: 'hills-near-beach', ground: 'ground-beach' },
+    tiles: { hillsFar: 'hills-far-balaton', hillsNear: 'hills-near-balaton', ground: 'ground-beach' },
     gap: 'gap-beach',
     block: 'block-pier',
+    flip: [
+      'sail-red', 'sail-rainbow', 'sail-yellow', 'sail-blue', 'pedal-boat', 'pedal-boat-2', 'water-slide',
+      'changing-cabins', 'langos-stand', 'willow', 'fisher-house', 'lavender-field', 'press-house',
+      'reeds', 'flower-bed', 'lavender-tuft', 'balaton-lamp', 'hydrangea',
+    ],
     zones: [
-      { key: 'balaton-1', until: 1 / 3, far: ['sailboat'], mid: ['parasol'], near: ['marram'] },
-      { key: 'balaton-2', until: 2 / 3, far: ['sailboat-2'], mid: ['beach-chair'], near: ['shell-pile'] },
-      { key: 'balaton-3', until: 1, far: ['ferry'], mid: ['lighthouse'], near: ['marram'] },
+      {
+        key: 'balaton-beach',
+        until: 1 / 3,
+        far: ['sail-red', 'pedal-boat', 'water-slide', 'sail-rainbow', 'pedal-boat-2', 'sail-blue', null],
+        mid: ['changing-cabins', 'willow', 'langos-stand', 'poplar', 'changing-cabins', 'willow', 'flag-hu'],
+        near: ['reeds', 'flower-bed', 'reeds', 'daisies', 'flower-bed'],
+      },
+      {
+        key: 'tihany',
+        until: 2 / 3,
+        landmarks: ['tihany-abbey'],
+        far: ['sail-rainbow', 'sail-yellow', 'sail-red', 'sail-blue', null, 'sail-yellow'],
+        mid: ['lavender-field', 'fisher-house', 'willow', 'lavender-field', 'fisher-house', 'poplar'],
+        near: ['lavender-tuft', 'reeds', 'lavender-tuft', 'daisies', 'lavender-tuft'],
+        strip: 'lavender-strip',
+      },
+      {
+        key: 'badacsony',
+        until: 1,
+        landmarks: ['badacsony'],
+        far: ['paddle-steamer', null, 'sail-blue', 'sail-red', null, 'sail-yellow'],
+        mid: ['harbor-masts', 'press-house', 'flag-hu', 'harbor-masts', 'willow', 'press-house'],
+        near: ['balaton-lamp', 'hydrangea', 'balaton-lamp', 'flower-bed', 'hydrangea'],
+        strip: 'promenade-rail',
+      },
     ],
   },
 
