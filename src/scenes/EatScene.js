@@ -167,7 +167,7 @@ export class EatScene extends Phaser.Scene {
     this.tweens.add({ targets: f, y: FRANKIE_Y - 40, duration: 200, yoyo: true, ease: 'Quad.easeOut' });
     this.hearts(8);
 
-    // After the last level of a group (5, or 7 for grown-ups) the big celebration starts by itself.
+    // After the last level of a group (5, or 10 for grown-ups) the big celebration starts by itself.
     if (isFinale(this.levelNo)) {
       this.time.delayedCall(1400, () => {
         this.cameras.main.fadeOut(400);

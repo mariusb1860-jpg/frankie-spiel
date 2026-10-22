@@ -294,19 +294,52 @@ export const LEVELS = [
       layout: [row(600), crate(1000), ball(1270), stream(1650, 210), beachball(2400), blocks(2700, 3, { sausages: 2 }), high(3200)],
     },
   },
+
+  // ---- Level 8 (grown-ups) ----
+  {
+    // Level 8, Lake Balaton: placeholder, the real layout follows.
+    world: 'balaton',
+    speed: 320,
+    jump: { velocity: -942, gravity: 2943 }, // ~143 px high, ~0.64 s in the air
+    animalSpeed: 1.7,
+    layout: [row(700), row(2000), row(3300), row(4600), row(5900), row(7200), high(8500), high(9800)],
+    fast: { length: 3600, layout: [row(600), high(1050), row(1600), high(2400)] },
+  },
+
+  // ---- Level 9 (grown-ups) ----
+  {
+    // Level 9, Tokaj vineyards: placeholder, the real layout follows.
+    world: 'tokaj',
+    speed: 330,
+    jump: { velocity: -972, gravity: 3136 }, // ~143 px high, ~0.62 s in the air
+    animalSpeed: 1.7,
+    layout: [row(700), row(2000), row(3300), row(4600), row(5900), row(7200), high(8500), high(9800)],
+    fast: { length: 3600, layout: [row(600), high(1050), row(1600), high(2400)] },
+  },
+
+  // ---- Level 10 (grown-ups) ----
+  {
+    // Level 10, Visegrád at the Danube bend: placeholder, the real layout follows.
+    world: 'visegrad',
+    speed: 340,
+    jump: { velocity: -1005, gravity: 3349 }, // ~142 px high, ~0.60 s in the air
+    animalSpeed: 1.7,
+    layout: [row(700), row(2000), row(3300), row(4600), row(5900), row(7200), high(8500), high(9800)],
+    fast: { length: 3600, layout: [row(600), high(1050), row(1600), high(2400)] },
+  },
 ];
 
-// Levels 1-5 are the child's game. Levels 6 and 7 are very hard levels for grown-ups;
+// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups;
 // only the secret link (?paprika) shows them, and then only them.
 const KIDS = [1, 2, 3, 4, 5];
-const GROWN_UPS = [6, 7];
+const GROWN_UPS = [6, 7, 8, 9, 10];
 
 /** Level numbers that get a button on the start screen. */
 export function shownLevels() {
   return PAPRIKA ? GROWN_UPS : KIDS;
 }
 
-/** True for the last level of its group (5 or 7): the big celebration follows it. */
+/** True for the last level of its group (5 or 10): the big celebration follows it. */
 export function isFinale(n) {
   return n === KIDS[KIDS.length - 1] || n === GROWN_UPS[GROWN_UPS.length - 1];
 }

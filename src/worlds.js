@@ -2,6 +2,8 @@
 // each with its own far / mid / near decorations), the look of gaps and blocks,
 // and its colour on the level buttons. Decorations are picked at random; null in a list
 // is an empty slot. `landmarks` are far pictures that appear exactly once per zone.
+// Optional per world: `sky` (sky picture), `snow`, `density`, and `flip` (more decoration
+// keys that may be mirrored at random, on top of the shared list in backdrop.js).
 
 export const WORLDS = {
   garden: {
@@ -238,6 +240,48 @@ export const WORLDS = {
         mid: ['market-hall', 'paprika-stall', 'goulash-stall', 'flag-hu', 'paprika-stall'],
         near: ['flower-tub', 'lamp', 'bush'],
       },
+    ],
+  },
+
+  // ---- World of level 8 (grown-ups) ----
+  // Level 8, only for grown-ups: Lake Balaton. Placeholder with the beach pictures.
+  balaton: {
+    color: 0x16a6a0, // turquoise of the lake
+    tiles: { hillsFar: 'hills-far-beach', hillsNear: 'hills-near-beach', ground: 'ground-beach' },
+    gap: 'gap-beach',
+    block: 'block-pier',
+    zones: [
+      { key: 'balaton-1', until: 1 / 3, far: ['sailboat'], mid: ['parasol'], near: ['marram'] },
+      { key: 'balaton-2', until: 2 / 3, far: ['sailboat-2'], mid: ['beach-chair'], near: ['shell-pile'] },
+      { key: 'balaton-3', until: 1, far: ['ferry'], mid: ['lighthouse'], near: ['marram'] },
+    ],
+  },
+
+  // ---- World of level 9 (grown-ups) ----
+  // Level 9, only for grown-ups: the Tokaj vineyards in autumn. Placeholder with the farm pictures.
+  tokaj: {
+    color: 0x8e2453, // wine red
+    tiles: { hillsFar: 'hills-far-farm', hillsNear: 'hills-near-farm', ground: 'ground-farm' },
+    gap: 'gap-farm',
+    block: 'block-wood',
+    zones: [
+      { key: 'tokaj-1', until: 1 / 3, far: ['tree-oak'], mid: ['barn'], near: ['grass-tuft'] },
+      { key: 'tokaj-2', until: 2 / 3, far: ['tree-pine'], mid: ['silo'], near: ['poppies'] },
+      { key: 'tokaj-3', until: 1, far: ['tree-birch'], mid: ['farmhouse'], near: ['daisies'] },
+    ],
+  },
+
+  // ---- World of level 10 (grown-ups) ----
+  // Level 10, only for grown-ups: Visegrád castle at the Danube bend at sunset. Placeholder with the forest pictures.
+  visegrad: {
+    color: 0xe0a800, // gold
+    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
+    gap: 'gap-forest',
+    block: 'block-wood',
+    zones: [
+      { key: 'visegrad-1', until: 1 / 3, far: ['tree-fir'], mid: ['tree-oak'], near: ['fern'] },
+      { key: 'visegrad-2', until: 2 / 3, far: ['tree-pine'], mid: ['tree-beech'], near: ['mushrooms'] },
+      { key: 'visegrad-3', until: 1, far: ['deer'], mid: ['hunter-stand'], near: ['bush'] },
     ],
   },
 };

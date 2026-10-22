@@ -9,6 +9,9 @@ import { preloadParty } from '../art/party.js';
 import { PAPRIKA } from '../config.js';
 import { preloadPuszta } from '../art/puszta.js';
 import { preloadBudapest } from '../art/budapest.js';
+import { preloadBalaton } from '../art/balaton.js';
+import { preloadTokaj } from '../art/tokaj.js';
+import { preloadVisegrad } from '../art/visegrad.js';
 
 // Turns all drawings into textures once, then shows the start screen.
 // Meanwhile a bar fills up (no text: the child cannot read yet).
@@ -39,6 +42,9 @@ export class BootScene extends Phaser.Scene {
     if (PAPRIKA) {
       preloadPuszta(this);
       preloadBudapest(this);
+      preloadBalaton(this);
+      preloadTokaj(this);
+      preloadVisegrad(this);
     }
   }
 

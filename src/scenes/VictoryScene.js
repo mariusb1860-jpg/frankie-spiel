@@ -13,9 +13,10 @@ const FRANKIE_Y = GROUND_Y - (FRANKIE_FEET_Y - FRANKIE_H / 2) * FRANKIE_SCALE; /
 const TROPHY_X = 530;
 const STAR_Y = 150;
 const STAR_GAP = 100;
+const STAR_ROW = 760; // widest the row of stars may get (10 stars stand closer together)
 const HOME_X = 790;
 const HOME_Y = 255;
-const HOME_Y_SEVEN_STARS = 280; // the 7th star stands right above the button
+const HOME_Y_MANY_STARS = 280; // from 7 stars on, a star stands right above the button
 const COLORS = [0xe53935, 0xffd23f, 0x43b047, 0x3b7fc4, 0xff8a3d, 0xa259d9, 0xff6b9a];
 
 // The big celebration after the last level: one star for every world played so far flies in,
@@ -27,7 +28,7 @@ export class VictoryScene extends Phaser.Scene {
   }
 
   init(data) {
-    // The level just finished: 5 for the child's game, 7 for the grown-ups.
+    // The level just finished: 5 for the child's game, 10 for the grown-ups.
     this.lastLevel = data?.level ?? 5;
   }
 
@@ -59,9 +60,10 @@ export class VictoryScene extends Phaser.Scene {
   // One star in the colour of every world played so far (levels 1 up to the one just finished).
   flyInStars() {
     const colors = LEVELS.slice(0, this.lastLevel).map((l) => WORLDS[l.world].color);
-    const x0 = 480 - ((colors.length - 1) * STAR_GAP) / 2;
+    const gap = Math.min(STAR_GAP, STAR_ROW / Math.max(1, colors.length - 1));
+    const x0 = 480 - ((colors.length - 1) * gap) / 2;
     colors.forEach((color, i) => {
-      const x = x0 + i * STAR_GAP;
+      const x = x0 + i * gap;
       const star = this.add.image(x, 620, 'star-big').setTint(color).setDepth(35).setScale(0.6);
       this.tweens.add({
         targets: star,
@@ -217,7 +219,7 @@ export class VictoryScene extends Phaser.Scene {
 
   showHomeButton() {
     const home = () => this.goHome();
-    addBigButton(this, HOME_X, this.lastLevel > 5 ? HOME_Y_SEVEN_STARS : HOME_Y, 'btn-home', home);
+    addBigButton(this, HOME_X, this.lastLevel > 5 ? HOME_Y_MANY_STARS : HOME_Y, 'btn-home', home);
     this.input.keyboard.once('keydown-SPACE', home);
     this.input.keyboard.once('keydown-ENTER', home);
   }

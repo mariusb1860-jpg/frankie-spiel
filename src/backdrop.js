@@ -96,7 +96,7 @@ export function createBackdrop(scene, { world = 'garden', length = GAME_WIDTH, z
       }
       const img = scene.add.image(x, layer.baseY, key).setOrigin(0.5, 1).setScale(scale);
       img.setScrollFactor(layer.factor).setDepth(DEPTH[layer.name]);
-      if (FLIPPABLE.includes(key)) img.setFlipX(rng.frac() < 0.5);
+      if (FLIPPABLE.includes(key) || def.flip?.includes(key)) img.setFlipX(rng.frac() < 0.5);
       if (key === 'windmill') addWindmillBlades(scene, img, layer.factor);
       if (key === 'lighthouse') addLighthouseBeam(scene, img, layer.factor);
     }
