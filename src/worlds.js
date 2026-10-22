@@ -299,7 +299,7 @@ export const WORLDS = {
         until: 1 / 3,
         landmarks: ['chapel-hill'],
         far: ['vine-slope', 'tree-walnut', null, 'tree-chestnut'],
-        mid: ['vine-row', 'press-house', 'tree-walnut', 'vine-row-gold', 'tree-chestnut', 'vine-row'],
+        mid: ['vine-row', 'presshaz', 'tree-walnut', 'vine-row-gold', 'tree-chestnut', 'vine-row'],
         near: ['vine-low', 'asters', 'leaf-scatter', 'autumn-bush', 'lantern'],
         strip: 'trellis-strip',
       },
@@ -332,14 +332,14 @@ export const WORLDS = {
     tiles: { hillsFar: 'hills-far-visegrad', hillsNear: 'hills-near-visegrad', ground: 'ground-forest' },
     gap: 'gap-forest',
     block: 'block-wood',
-    flip: ['vg-oak', 'vg-willow', 'vg-pine', 'vg-sailboat', 'reeds', 'wild-flowers', 'wild-rose', 'tent-red', 'tent-green', 'net-poles'],
+    flip: ['vg-oak', 'vg-willow', 'vg-pine', 'vg-sailboat', 'vg-reeds', 'wild-flowers', 'wild-rose', 'tent-red', 'tent-green', 'net-poles'],
     zones: [
       {
         key: 'danube-bend',
         until: 1 / 3,
         far: ['vg-pine', 'danube-boat', 'vg-pine', 'vg-sailboat', null],
         mid: ['vg-oak', 'fisher-hut', 'vg-willow', 'net-poles', 'vg-oak', 'vg-willow'],
-        near: ['reeds', 'wild-flowers', 'wild-rose', 'reeds', 'wild-flowers'],
+        near: ['vg-reeds', 'wild-flowers', 'wild-rose', 'vg-reeds', 'wild-flowers'],
       },
       {
         key: 'castle-hill',

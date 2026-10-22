@@ -551,7 +551,7 @@ const PIECES = {
   'tent-green': [190, 150, () => tent('#4d8a5a', '#fff4e0', '#3f6a48')],
   'heraldic-banner': [124, 200, heraldicBanner],
   'archery-target': [120, 210, archeryTarget],
-  reeds: [100, 90, reeds],
+  'vg-reeds': [100, 90, reeds],
   'wild-flowers': [90, 68, wildFlowers],
   'wild-rose': [100, 76, wildRose],
   'torch-post': [54, 140, torchPost],

@@ -446,7 +446,7 @@ const PIECES = {
   'hills-near-tokaj': [GAME_WIDTH, 140, hillsNear],
   'vine-row': [220, 130, vineRow],
   'vine-row-gold': [220, 130, vineRowGold],
-  'press-house': [220, 200, pressHouse],
+  presshaz: [220, 200, pressHouse],
   'chapel-hill': [170, 210, chapel],
   'tree-walnut': [220, 260, walnut],
   'tree-chestnut': [200, 250, chestnut],
