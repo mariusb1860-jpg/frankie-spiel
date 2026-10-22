@@ -308,78 +308,77 @@ export const LEVELS = [
 
   // ---- Level 9 (grown-ups) ----
   {
-    // Level 9, Tokaj vineyards: the jump reaches ~205 px, so ditches of 258-262 px leave only
-    // ~0.12-0.14 s; hedgehogs (1.7 times speed) in their worst phase leave ~0.12 s. Obstacles
-    // come in chains of 222 px, with an obstacle right behind every ditch and two ditches in
-    // a row with a short island. Terrace: a long two-floor walkway over a wide ditch that ends
-    // in a hop down to the far floor. Staircase down into a chain, a hedgehog under a block
-    // row. No chickens or hopping rabbits (under 0.10 s at this speed, see level 7): only
-    // hedgehogs walk and frogs hop on the spot. Hedgehogs stand where their walking phase is
-    // hard when Frankie arrives (positions 970 px apart repeat that phase).
+    // Level 9, Tokaj vineyards: the jump reaches ~205 px, so ditches of 264 px leave only ~0.13 s
+    // to take off; hedgehogs (1.7 times speed) leave ~0.13 s in their worst phase. Obstacles come
+    // in chains of 222 px with an obstacle right behind a ditch, and two ditches in a row with a
+    // short island. New: a long two-floor terrace over a 716 px ditch that ends in a hop down to
+    // the far block, a staircase that ends in a chain, a hedgehog under a block row. No chickens
+    // or hopping rabbits (under 0.10 s at this speed, see level 7): only hedgehogs walk and frogs
+    // hop on the spot. The hedgehog is 285 px or more from the next hazard (it needs the room).
     world: 'tokaj',
     speed: 330,
     jump: { velocity: -972, gravity: 3136 }, // ~143 px high, ~0.62 s in the air
     animalSpeed: 1.7,
     layout: [
       row(500),
-      crate(783),
-      haybale(1005),
-      milkcan(1227),
-      ball(1449),
-      stump(1671), // five in a row
-      arc(1671),
-      stream(1915, 258),
-      log(2104), // right behind the ditch
-      hedgehog(2374),
-      ball(2644),
-      stream(2895, 262),
-      puddle(3086), // right behind the ditch
-      hedgehog(3345),
-      stump(3615),
-      stream(3864, 258),
-      frog(4083),
-      hedgehog(4316),
+      crate(783), // the first pair is only 182 px apart
+      haybale(965),
+      milkcan(1187),
+      ball(1409),
+      stump(1631),
+      arc(1631),
+      stream(1878, 264), // 264 px: the jump reaches ~205 px, only ~0.13 s to take off
+      log(2085), // right behind the ditch
+      hedgehog(2375),
+      ball(2665),
+      stream(2912, 264),
+      puddle(3114),
+      hedgehog(3404),
+      stump(3694),
+      stream(3941, 264),
+      frog(4153),
+      hedgehog(4443),
       // Staircase over a wide ditch: up to the second floor, then down on the far side, into a chain.
-      blocks(4916, 3, { sausages: 1 }),
-      blocks(5076, 3, { tier: 2, sausages: 2 }),
-      stream(5158, 404),
-      crate(5600),
-      stump(5822),
-      arc(5822),
-      haybale(6044),
-      hedgehog(6270),
-      milkcan(6540),
-      stream(6790, 260),
-      crate(6980), // right behind the ditch
-      arc(6980),
-      hedgehog(7226),
-      stump(7496),
-      stream(7745, 258),
-      milkcan(7934),
-      hedgehog(8197),
-      puddle(8460),
-      ball(8682),
-      log(8904),
-      high(8904),
-      // Terrace: first floor, up to the second floor, then a hop down to the third block (the way ahead is a wide ditch).
-      blocks(9230, 3, { sausages: 1 }),
-      blocks(9450, 4, { tier: 2, sausages: 2 }),
-      blocks(9772, 5, { sausages: 1 }),
-      stream(9648, 716),
-      crate(10260),
-      milkcan(10520),
-      blocks(10740, 6), // the hedgehog walks under these blocks
-      hedgehog(10840),
-      ball(11110),
-      stream(11359, 258), // two ditches in a row, a short island between
-      stream(11769, 262),
-      crate(11960),
-      log(12182),
-      milkcan(12404),
+      blocks(4963, 3, { sausages: 1 }),
+      blocks(5123, 3, { tier: 2, sausages: 2 }),
+      stream(5205, 404),
+      crate(5647),
+      arc(5647),
+      stump(5869),
+      haybale(6051),
+      hedgehog(6341),
+      milkcan(6631),
+      stream(6878, 264),
+      crate(7080),
+      arc(7080),
+      hedgehog(7370),
+      stump(7660),
+      stream(7907, 264),
+      milkcan(8114),
+      hedgehog(8404),
+      puddle(8694),
+      log(8880),
+      crate(9102),
+      high(9102),
+      // Terrace: first floor, up to the second floor, then a hop down to the third block, over a wide ditch.
+      blocks(9462, 3, { sausages: 1 }),
+      blocks(9682, 4, { tier: 2, sausages: 2 }),
+      blocks(10004, 5, { sausages: 1 }),
+      stream(9880, 716),
+      crate(10478),
+      milkcan(10700),
+      blocks(10912, 6), // the hedgehog walks under these blocks
+      hedgehog(11000),
+      ball(11290),
+      stream(11557, 264),
+      stream(11971, 264),
+      crate(12173),
+      milkcan(12395),
+      log(12591),
     ],
     fast: {
       length: 3600,
-      layout: [row(500), crate(900), haybale(1122), stump(1344), stream(1588, 258), log(1777), arc(1777), hedgehog(2100), ball(2370), stream(2616, 262), puddle(2807), high(2807)],
+      layout: [row(500), crate(900), haybale(1082), stump(1304), stream(1551, 264), log(1758), arc(1758), hedgehog(2048), ball(2338), stream(2585, 264), puddle(2787), high(2787)],
     },
   },
 
