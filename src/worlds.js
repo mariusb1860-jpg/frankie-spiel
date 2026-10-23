@@ -2,6 +2,8 @@
 // each with its own far / mid / near decorations), the look of gaps and blocks,
 // and its colour on the level buttons. Decorations are picked at random; null in a list
 // is an empty slot. `landmarks` are far pictures that appear exactly once per zone.
+// Optional per world: `sky` (sky picture), `snow`, `density`, and `flip` (more decoration
+// keys that may be mirrored at random, on top of the shared list in backdrop.js).
 
 export const WORLDS = {
   garden: {
@@ -237,6 +239,123 @@ export const WORLDS = {
         far: ['danube-boat', null, null],
         mid: ['market-hall', 'paprika-stall', 'goulash-stall', 'flag-hu', 'paprika-stall'],
         near: ['flower-tub', 'lamp', 'bush'],
+      },
+    ],
+  },
+
+  // ---- World of level 8 (grown-ups) ----
+  // Level 8, only for grown-ups: Lake Balaton in high summer. Ground, ditches and blocks come
+  // from the beach, but the lake is turquoise and the shore is a meadow with reeds.
+  balaton: {
+    color: 0x16a6a0, // turquoise of the lake
+    tiles: { hillsFar: 'hills-far-balaton', hillsNear: 'hills-near-balaton', ground: 'ground-beach' },
+    gap: 'gap-beach',
+    block: 'block-pier',
+    flip: [
+      'sail-red', 'sail-rainbow', 'sail-yellow', 'sail-blue', 'pedal-boat', 'pedal-boat-2', 'water-slide',
+      'changing-cabins', 'langos-stand', 'willow', 'fisher-house', 'lavender-field', 'press-house',
+      'reeds', 'flower-bed', 'lavender-tuft', 'balaton-lamp', 'hydrangea',
+    ],
+    zones: [
+      {
+        key: 'balaton-beach',
+        until: 1 / 3,
+        far: ['sail-red', 'pedal-boat', 'water-slide', 'sail-rainbow', 'pedal-boat-2', 'sail-blue', null],
+        mid: ['changing-cabins', 'willow', 'langos-stand', 'poplar', 'changing-cabins', 'willow', 'flag-hu'],
+        near: ['reeds', 'flower-bed', 'reeds', 'daisies', 'flower-bed'],
+      },
+      {
+        key: 'tihany',
+        until: 2 / 3,
+        landmarks: ['tihany-abbey'],
+        far: ['sail-rainbow', 'sail-yellow', 'sail-red', 'sail-blue', null, 'sail-yellow'],
+        mid: ['lavender-field', 'fisher-house', 'willow', 'lavender-field', 'fisher-house', 'poplar'],
+        near: ['lavender-tuft', 'reeds', 'lavender-tuft', 'daisies', 'lavender-tuft'],
+        strip: 'lavender-strip',
+      },
+      {
+        key: 'badacsony',
+        until: 1,
+        landmarks: ['badacsony'],
+        far: ['paddle-steamer', null, 'sail-blue', 'sail-red', null, 'sail-yellow'],
+        mid: ['harbor-masts', 'press-house', 'flag-hu', 'harbor-masts', 'willow', 'press-house'],
+        near: ['balaton-lamp', 'hydrangea', 'balaton-lamp', 'flower-bed', 'hydrangea'],
+        strip: 'promenade-rail',
+      },
+    ],
+  },
+
+  // ---- World of level 9 (grown-ups) ----
+  // Level 9, only for grown-ups: the Tokaj vineyards in autumn (vineyard, cellar row, harvest feast).
+  tokaj: {
+    color: 0x8e2453, // wine red
+    tiles: { hillsFar: 'hills-far-tokaj', hillsNear: 'hills-near-tokaj', ground: 'ground-farm' },
+    gap: 'gap-farm',
+    block: 'block-wood',
+    flip: ['vine-row', 'vine-row-gold', 'tree-walnut', 'tree-chestnut', 'vine-slope', 'asters', 'leaf-scatter', 'vine-low', 'autumn-bush', 'arbour', 'cellar-door', 'pickers'],
+    zones: [
+      {
+        key: 'vineyard',
+        until: 1 / 3,
+        landmarks: ['chapel-hill'],
+        far: ['vine-slope', 'tree-walnut', null, 'tree-chestnut'],
+        mid: ['vine-row', 'presshaz', 'tree-walnut', 'vine-row-gold', 'tree-chestnut', 'vine-row'],
+        near: ['vine-low', 'asters', 'leaf-scatter', 'autumn-bush', 'lantern'],
+        strip: 'trellis-strip',
+      },
+      {
+        key: 'cellar-row',
+        until: 2 / 3,
+        landmarks: ['kopasz-hill'],
+        far: ['vine-slope', 'big-barrel', 'tree-walnut'],
+        mid: ['cellar-hill', 'wine-press', 'cellar-door', 'arbour', 'cellar-hill', 'tree-chestnut'],
+        near: ['asters', 'leaf-scatter', 'lantern', 'vine-low'],
+        strip: 'trellis-strip',
+      },
+      {
+        key: 'harvest-feast',
+        until: 1,
+        landmarks: ['tokaj-town'],
+        far: ['pickers', 'tree-chestnut', null, 'pickers'],
+        mid: ['harvest-cart', 'bunting-poles', 'grape-stall', 'flag-hu', 'tree-chestnut', 'tree-walnut', 'arbour'],
+        near: ['asters', 'autumn-bush', 'leaf-scatter', 'lantern'],
+      },
+    ],
+  },
+
+  // ---- World of level 10 (grown-ups) ----
+  // Level 10, only for grown-ups: Visegrád castle at the Danube bend at sunset (finale). Ground,
+  // brooks and blocks come from the forest.
+  visegrad: {
+    color: 0xe0a800, // gold
+    sky: 'sky-visegrad',
+    tiles: { hillsFar: 'hills-far-visegrad', hillsNear: 'hills-near-visegrad', ground: 'ground-forest' },
+    gap: 'gap-forest',
+    block: 'block-wood',
+    flip: ['vg-oak', 'vg-willow', 'vg-pine', 'vg-sailboat', 'vg-reeds', 'wild-flowers', 'wild-rose', 'tent-red', 'tent-green', 'net-poles'],
+    zones: [
+      {
+        key: 'danube-bend',
+        until: 1 / 3,
+        far: ['vg-pine', 'danube-boat', 'vg-pine', 'vg-sailboat', null],
+        mid: ['vg-oak', 'fisher-hut', 'vg-willow', 'net-poles', 'vg-oak', 'vg-willow'],
+        near: ['vg-reeds', 'wild-flowers', 'wild-rose', 'vg-reeds', 'wild-flowers'],
+      },
+      {
+        key: 'castle-hill',
+        until: 2 / 3,
+        landmarks: ['fellegvar', 'salamon-tower'],
+        far: ['vg-pine', 'vg-sailboat', 'vg-pine', null],
+        mid: ['castle-wall', 'wall-tower', 'banner-pole', 'vg-oak', 'castle-wall', 'banner-pole'],
+        near: ['torch-post', 'wild-rose', 'wild-flowers', 'torch-post'],
+      },
+      {
+        key: 'knights-feast',
+        until: 1,
+        far: ['hussar', 'vg-pine', 'hussar', 'vg-pine', 'danube-boat'],
+        mid: ['tent-red', 'heraldic-banner', 'tent-green', 'archery-target', 'banner-pole', 'tent-red', 'heraldic-banner'],
+        near: ['torch-post', 'wild-flowers', 'torch-post', 'wild-rose'],
+        strip: 'tourney-fence',
       },
     ],
   },

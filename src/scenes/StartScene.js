@@ -45,7 +45,7 @@ export class StartScene extends Phaser.Scene {
       .setScale(1.05);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
-    // One button per level of the shown group (1-5, or 6-7 with the secret link),
+    // One button per level of the shown group (1-5, or 6-10 with the secret link),
     // centred where the five buttons of the child's game stand.
     const levels = shownLevels();
     const isOpen = (n) => Boolean(getLevel(n)) && (n === levels[0] || n <= unlockedLevel());
@@ -56,11 +56,11 @@ export class StartScene extends Phaser.Scene {
     levels.forEach((n, i) => this.addLevelButton(n, x0 + i * BUTTON_GAP, isOpen(n), n === newest));
 
     addMuteButton(this);
-    // Keyboard: Space/Enter starts the newest open level, a number key that level.
+    // Keyboard: Space/Enter starts the newest open level, a number key that level (0 = level 10).
     this.input.keyboard.on('keydown-SPACE', () => this.startGame(newest));
     this.input.keyboard.on('keydown-ENTER', () => this.startGame(newest));
     this.input.keyboard.on('keydown', (event) => {
-      const n = Number(event.key);
+      const n = event.key === '0' ? 10 : Number(event.key);
       if (this.playable.includes(n)) this.startGame(n);
     });
 

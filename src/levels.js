@@ -294,19 +294,256 @@ export const LEVELS = [
       layout: [row(600), crate(1000), ball(1270), stream(1650, 210), beachball(2400), blocks(2700, 3, { sausages: 2 }), high(3200)],
     },
   },
+
+  // ---- Level 8 (grown-ups) ----
+  {
+    // Level 8, Lake Balaton: only for grown-ups. Faster again, a shorter jump, animals at
+    // 1.7 times speed. What makes it hard: pairs of obstacles only 176 px apart (the first jump
+    // must go late, the second follows on landing), gaps of 272-274 px (jump window about
+    // 0.12 s), a rolling beach ball released right behind a gap, jetty stepping stones and a
+    // staircase that both end in an obstacle on the landing. Crabs are replaced by hedgehogs:
+    // a crab (wide hit box) leaves only about 0.06 s at 1.7 times speed (measured), a hedgehog
+    // at least 0.15 s in every phase.
+    world: 'balaton',
+    speed: 320,
+    jump: { velocity: -942, gravity: 2943 }, // ~143 px high, ~0.64 s in the air
+    animalSpeed: 1.7,
+    layout: [
+      row(650),
+      sandcastle(920),
+      crate(1096), // pair 176 px apart
+      puddle(1341),
+      ball(1519),
+      high(1519), // the sausage hangs right above the ball
+      stream(1830, 272),
+      hedgehog(2251),
+      sandcastle(2581),
+      crate(2757), // pair
+      puddle(3002),
+      stream(3309, 274),
+      beachball(3879), // starts rolling when Frankie is at ~3130, meets him at ~3640, 190 px behind the gap
+      sandcastle(3906),
+      crate(4082), // pair
+      row(4322), // breather
+      hedgehog(4572),
+      sandcastle(4902),
+      puddle(5078), // pair
+      stream(5409, 272),
+      crate(5780),
+      hedgehog(6030),
+      ball(6330),
+      high(6330),
+      crate(6506), // pair
+      high(6506),
+      // Jetty stepping stones: single blocks over water far too wide to jump; the last one
+      // ends 52 px before the bank, and a sandcastle waits on the landing.
+      blocks(6776, 1),
+      blocks(6966, 1, { sausages: 1 }),
+      blocks(7156, 1),
+      blocks(7346, 1, { sausages: 1 }),
+      stream(7126, 640),
+      sandcastle(7541),
+      hedgehog(7803),
+      puddle(8103),
+      sandcastle(8281),
+      stream(8613, 274),
+      row(8990), // breather
+      sandcastle(9240),
+      crate(9416), // pair
+      puddle(9661),
+      ball(9839),
+      arc(9839),
+      stream(10171, 274),
+      hedgehog(10558),
+      sandcastle(10888),
+      crate(11064), // pair
+      // A staircase over a wide water: up to the second floor, then walk off its end
+      // straight into a sandcastle.
+      blocks(11309, 3, { sausages: 1 }),
+      blocks(11469, 3, { tier: 2, sausages: 2 }),
+      stream(11549, 420),
+      sandcastle(11859),
+      hedgehog(12149),
+      ball(12434),
+      crate(12610), // pair
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), sandcastle(960), crate(1136), puddle(1381), stream(1590, 272), hedgehog(2110), sandcastle(2440), crate(2616), beachball(3143)],
+    },
+  },
+
+  // ---- Level 9 (grown-ups) ----
+  {
+    // Level 9, Tokaj vineyards: the jump reaches ~205 px, so ditches of 264 px leave only ~0.13 s
+    // to take off; hedgehogs (1.7 times speed) leave ~0.13 s in their worst phase. Obstacles come
+    // in chains of 222 px with an obstacle right behind a ditch, and two ditches in a row with a
+    // short island. New: a long two-floor terrace over a 716 px ditch that ends in a hop down to
+    // the far block, a staircase that ends in a chain, a hedgehog under a block row. No chickens
+    // or hopping rabbits (under 0.10 s at this speed, see level 7): only hedgehogs walk and frogs
+    // hop on the spot. The hedgehog is 285 px or more from the next hazard (it needs the room).
+    world: 'tokaj',
+    speed: 330,
+    jump: { velocity: -972, gravity: 3136 }, // ~143 px high, ~0.62 s in the air
+    animalSpeed: 1.7,
+    layout: [
+      row(500),
+      crate(783), // the first pair is only 182 px apart
+      haybale(965),
+      milkcan(1187),
+      ball(1409),
+      stump(1631),
+      arc(1631),
+      stream(1878, 264), // 264 px: the jump reaches ~205 px, only ~0.13 s to take off
+      log(2085), // right behind the ditch
+      hedgehog(2375),
+      ball(2665),
+      stream(2912, 264),
+      puddle(3114),
+      hedgehog(3404),
+      stump(3694),
+      stream(3941, 264),
+      frog(4153),
+      hedgehog(4443),
+      // Staircase over a wide ditch: up to the second floor, then down on the far side, into a chain.
+      blocks(4963, 3, { sausages: 1 }),
+      blocks(5123, 3, { tier: 2, sausages: 2 }),
+      stream(5205, 404),
+      crate(5647),
+      arc(5647),
+      stump(5869),
+      haybale(6051),
+      hedgehog(6341),
+      milkcan(6631),
+      stream(6878, 264),
+      crate(7080),
+      arc(7080),
+      hedgehog(7370),
+      stump(7660),
+      stream(7907, 264),
+      milkcan(8114),
+      hedgehog(8404),
+      puddle(8694),
+      log(8880),
+      crate(9102),
+      high(9102),
+      // Terrace: first floor, up to the second floor, then a hop down to the third block, over a wide ditch.
+      blocks(9462, 3, { sausages: 1 }),
+      blocks(9682, 4, { tier: 2, sausages: 2 }),
+      blocks(10004, 5, { sausages: 1 }),
+      stream(9880, 716),
+      crate(10478),
+      milkcan(10700),
+      blocks(10912, 6), // the hedgehog walks under these blocks
+      hedgehog(11000),
+      ball(11290),
+      stream(11557, 264),
+      stream(11971, 264),
+      crate(12173),
+      milkcan(12395),
+      log(12591),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(500), crate(900), haybale(1082), stump(1304), stream(1551, 264), log(1758), arc(1758), hedgehog(2048), ball(2338), stream(2585, 264), puddle(2787), high(2787)],
+    },
+  },
+
+  // ---- Level 10 (grown-ups) ----
+  {
+    // Level 10, Visegrád at the Danube bend: the finale and the hardest level of the game. The
+    // fastest run (340 px/s), the shortest jump (~0.60 s in the air, it reaches ~204 px) and
+    // 46 hazards. What makes it hard: nine ditches of 268 px (only ~0.12 s to take off; 290 px
+    // would leave 0.04 s), three islands (ditch, crate, ditch), ditches right behind a puddle,
+    // pairs 184 px apart after a free run (the first jump must go late), two hedgehogs in a row
+    // and then a chain of four obstacles 198 px apart with a run-up on the ground (every jump follows
+    // on landing, so the first jump must not come late). No chickens, rabbits or crabs (under 0.10 s
+    // at this speed, see levels 7 and 8): only hedgehogs walk, the frog hops on the spot, beach
+    // balls roll. Every hedgehog has 285 px or more to the next hazard.
+    world: 'visegrad',
+    speed: 340,
+    jump: { velocity: -1005, gravity: 3349 }, // ~142 px high, ~0.60 s in the air
+    animalSpeed: 1.7,
+    layout: [
+      row(560),
+      crate(800), // pair 184 px apart: the first jump must go late
+      high(800),
+      haybale(984),
+      puddle(1208),
+      stream(1448, 268), // 268 px: the jump reaches ~204 px, only ~0.12 s to take off
+      arc(1448),
+      log(1654),
+      hedgehog(1944),
+      stump(2234),
+      puddle(2430),
+      // Island: ditch, crate, ditch.
+      stream(2670, 268),
+      crate(2876),
+      stream(3116, 268),
+      arc(3116),
+      ball(3322),
+      hedgehog(3612),
+      beachball(4172), // rolls towards Frankie, a pair waits behind it
+      crate(4352),
+      haybale(4536),
+      stump(4748),
+      arc(4748),
+      puddle(4944),
+      // Island.
+      stream(5184, 268),
+      crate(5390),
+      stream(5630, 268),
+      frog(5944),
+      hedgehog(6234),
+      // Staircase over a wide ditch: up to the second floor, then down on the far side.
+      blocks(6544, 3, { sausages: 1 }),
+      blocks(6704, 3, { tier: 2, sausages: 2 }),
+      stream(6786, 404),
+      crate(7218), // pair
+      haybale(7402),
+      milkcan(7602),
+      puddle(7822),
+      stream(8062, 268),
+      log(8268),
+      hedgehog(8558),
+      hedgehog(8898), // two hedgehogs in a row
+      // Chain of four, 198 px apart: every jump follows on landing, so the first one must not come late.
+      crate(9238),
+      haybale(9436),
+      stump(9634),
+      puddle(9832),
+      // Island.
+      stream(10072, 268),
+      crate(10278),
+      stream(10518, 268),
+      arc(10518),
+      log(10724),
+      hedgehog(11014),
+      beachball(11574),
+      crate(11754), // pair
+      haybale(11938),
+      high(11938),
+      puddle(12150),
+      stream(12390, 268),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(560), crate(800), high(800), haybale(984), puddle(1208), stream(1448, 268), arc(1448), log(1654), hedgehog(1944), stump(2234), puddle(2430), stream(2670, 268), crate(2876), high(2876)],
+    },
+  },
 ];
 
-// Levels 1-5 are the child's game. Levels 6 and 7 are very hard levels for grown-ups;
+// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups;
 // only the secret link (?paprika) shows them, and then only them.
 const KIDS = [1, 2, 3, 4, 5];
-const GROWN_UPS = [6, 7];
+const GROWN_UPS = [6, 7, 8, 9, 10];
 
 /** Level numbers that get a button on the start screen. */
 export function shownLevels() {
   return PAPRIKA ? GROWN_UPS : KIDS;
 }
 
-/** True for the last level of its group (5 or 7): the big celebration follows it. */
+/** True for the last level of its group (5 or 10): the big celebration follows it. */
 export function isFinale(n) {
   return n === KIDS[KIDS.length - 1] || n === GROWN_UPS[GROWN_UPS.length - 1];
 }
