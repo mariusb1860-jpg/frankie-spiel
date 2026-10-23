@@ -456,7 +456,7 @@ export const LEVELS = [
     // 46 hazards. What makes it hard: nine ditches of 268 px (only ~0.12 s to take off; 290 px
     // would leave 0.04 s), three islands (ditch, crate, ditch), ditches right behind a puddle,
     // pairs 184 px apart after a free run (the first jump must go late), two hedgehogs in a row
-    // and then a chain of four obstacles 198 px apart from a standing start (every jump follows
+    // and then a chain of four obstacles 198 px apart with a run-up on the ground (every jump follows
     // on landing, so the first jump must not come late). No chickens, rabbits or crabs (under 0.10 s
     // at this speed, see levels 7 and 8): only hedgehogs walk, the frog hops on the spot, beach
     // balls roll. Every hedgehog has 285 px or more to the next hazard.
