@@ -451,65 +451,84 @@ export const LEVELS = [
 
   // ---- Level 10 (grown-ups) ----
   {
-    // Level 10, Visegrád at the Danube bend: the finale (work in progress, layout v5 from the builder, 43 hazards, not yet measured).
+    // Level 10, Visegrád at the Danube bend: the finale and the hardest level of the game. The
+    // fastest run (340 px/s), the shortest jump (~0.60 s in the air, it reaches ~204 px) and
+    // 46 hazards. What makes it hard: nine ditches of 268 px (only ~0.12 s to take off; 290 px
+    // would leave 0.04 s), three islands (ditch, crate, ditch), ditches right behind a puddle,
+    // pairs 184 px apart after a free run (the first jump must go late), two hedgehogs in a row
+    // and then a chain of four obstacles 198 px apart from a standing start (every jump follows
+    // on landing, so the first jump must not come late). No chickens, rabbits or crabs (under 0.10 s
+    // at this speed, see levels 7 and 8): only hedgehogs walk, the frog hops on the spot, beach
+    // balls roll. Every hedgehog has 285 px or more to the next hazard.
     world: 'visegrad',
     speed: 340,
     jump: { velocity: -1005, gravity: 3349 }, // ~142 px high, ~0.60 s in the air
     animalSpeed: 1.7,
     layout: [
       row(560),
-      crate(800),
+      crate(800), // pair 184 px apart: the first jump must go late
       high(800),
       haybale(984),
-      milkcan(1208),
-      stream(1532, 268),
-      arc(1532),
-      log(1738),
-      hedgehog(2028),
-      stump(2318),
-      puddle(2514),
-      ball(2710),
-      stream(3034, 268),
-      crate(3240),
-      stream(3480, 268),
-      arc(3480),
-      hedgehog(3904),
-      beachball(4664),
-      crate(4844),
-      haybale(5036),
-      stump(5228),
-      milkcan(5424),
-      stream(5748, 268),
-      frog(6062),
-      hedgehog(6352),
-      blocks(6662, 3, { sausages: 1 }),
-      blocks(6822, 3, { tier: 2, sausages: 2 }),
-      stream(6904, 404),
-      crate(7336),
-      haybale(7528),
-      milkcan(7728),
-      stream(8052, 268),
-      log(8258),
-      hedgehog(8548),
-      beachball(8978),
-      crate(9168),
-      haybale(9364),
-      stump(9560),
-      milkcan(9756),
-      ball(9952),
-      stream(10276, 268),
-      crate(10482),
-      stream(10722, 268),
-      hedgehog(11146),
-      milkcan(11436),
-      stump(11632),
-      puddle(11828),
-      stream(12152, 268),
-      log(12358),
+      puddle(1208),
+      stream(1448, 268), // 268 px: the jump reaches ~204 px, only ~0.12 s to take off
+      arc(1448),
+      log(1654),
+      hedgehog(1944),
+      stump(2234),
+      puddle(2430),
+      // Island: ditch, crate, ditch.
+      stream(2670, 268),
+      crate(2876),
+      stream(3116, 268),
+      arc(3116),
+      ball(3322),
+      hedgehog(3612),
+      beachball(4172), // rolls towards Frankie, a pair waits behind it
+      crate(4352),
+      haybale(4536),
+      stump(4748),
+      arc(4748),
+      puddle(4944),
+      // Island.
+      stream(5184, 268),
+      crate(5390),
+      stream(5630, 268),
+      frog(5944),
+      hedgehog(6234),
+      // Staircase over a wide ditch: up to the second floor, then down on the far side.
+      blocks(6544, 3, { sausages: 1 }),
+      blocks(6704, 3, { tier: 2, sausages: 2 }),
+      stream(6786, 404),
+      crate(7218), // pair
+      haybale(7402),
+      milkcan(7602),
+      puddle(7822),
+      stream(8062, 268),
+      log(8268),
+      hedgehog(8558),
+      hedgehog(8898), // two hedgehogs in a row
+      // Chain of four, 198 px apart: every jump follows on landing, so the first one must not come late.
+      crate(9238),
+      haybale(9436),
+      stump(9634),
+      puddle(9832),
+      // Island.
+      stream(10072, 268),
+      crate(10278),
+      stream(10518, 268),
+      arc(10518),
+      log(10724),
+      hedgehog(11014),
+      beachball(11574),
+      crate(11754), // pair
+      haybale(11938),
+      high(11938),
+      puddle(12150),
+      stream(12390, 268),
     ],
     fast: {
       length: 3600,
-      layout: [row(520), crate(840), high(840), haybale(1024), milkcan(1248), ball(1432), stream(1672, 268), arc(1690), log(1872), hedgehog(2117), stump(2392), puddle(2576), stream(2816, 268), arc(2834)],
+      layout: [row(560), crate(800), high(800), haybale(984), puddle(1208), stream(1448, 268), arc(1448), log(1654), hedgehog(1944), stump(2234), puddle(2430), stream(2670, 268), crate(2876), high(2876)],
     },
   },
 ];
