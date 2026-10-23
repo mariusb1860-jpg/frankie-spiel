@@ -1,6 +1,6 @@
 # Spezifikation: Frankie sammelt Würstel
 
-Stand: 2026-10-13 (Version 4: Level 6 und 7 für Erwachsene, nur über den geheimen Link; Level 1–5 und Siegesfeier unverändert)
+Stand: 2026-10-23 (Version 5: Level 6 bis 10 für Erwachsene, nur über den geheimen Link; Level 1–5 und Siegesfeier für das Kind unverändert)
 
 ## Ziel
 
@@ -17,7 +17,7 @@ Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. He
 
 Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Nochmal“ oder „Weiter“.
 
-1. **Startbild:** Titel „Frankie“, Frankie hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Der geheime Link `?paprika` (nur für Erwachsene) zeigt statt dessen nur die Knöpfe 6 und 7: Level 6 ist dann immer offen, Level 7 öffnet sich nach Level 6. Der normale Link zeigt weiter nur 1–5, auch auf Geräten mit altem Fortschritt.
+1. **Startbild:** Titel „Frankie“, Frankie hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Der geheime Link `?paprika` (nur für Erwachsene) zeigt statt dessen die Knöpfe 6 bis 10 an den Plätzen der Kinder-Knöpfe: Level 6 ist dann immer offen, jedes weitere öffnet sich, sobald das vorige geschafft ist. Tastatur: Ziffern 6 bis 9, die Taste 0 startet Level 10. Der normale Link zeigt weiter nur 1–5, auch auf Geräten mit altem Fortschritt.
 2. **Level:**
    - Frankie läuft automatisch nach rechts. Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
    - Jedes Level hat 20 Würstel: am Boden (sammelt Frankie im Laufen), in der Luft (Sprung nötig), als Bogen (ein Sprung holt alle drei) und ab Level 2 auf schwebenden Blöcken.
@@ -26,8 +26,8 @@ Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Noch
    - Springen ist bewusst leicht: ca. 170 px hoch, ca. 1 Sekunde in der Luft, Trefferflächen der Hindernisse kleiner als die Bilder.
    - Nach einem Unfall wartet Frankie kurz (0,7 s), bevor er wieder losläuft. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft er sofort los (so abgenommen, siehe „Bekannte kleine Fehler“).
 3. **Ziel:** Hundehütte „FRANKIE“ mit Napf. Frankie bleibt stehen und freut sich. Das nächste Level ist damit freigeschaltet.
-4. **Futterszene (am Ende der jeweiligen Welt):** Frankie macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Frankie mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (mit `?paprika` nach Level 7) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
-5. **Siegesfeier (nach Level 5, mit `?paprika` nach Level 7):** im Garten von Frankie, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Frankie springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 7 sind es sieben Sterne, und der Haus-Knopf führt zum Startbild mit 6 und 7.
+4. **Futterszene (am Ende der jeweiligen Welt):** Frankie macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Frankie mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (mit `?paprika` nach Level 10) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
+5. **Siegesfeier (nach Level 5, mit `?paprika` nach Level 10):** im Garten von Frankie, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Frankie springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 10 sind es zehn Sterne in den Farben der zehn Welten (ab 8 Sternen rücken sie enger zusammen), und der Haus-Knopf führt zum Startbild mit 6 bis 10.
 
 Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf langsamen Handys ein paar Sekunden).
 
@@ -41,9 +41,12 @@ Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf
 | 4 | Bauernhof: Felder (Traktor, Vogelscheuche, Kornfeld) → Hof (Scheune, Silo, Fachwerkhaus, Hühnerstall, Kühe und Schafe in der Ferne) → Weide (Pferdestall, Koppelzaun) | 256 px/s | 3 Heuballen, 1 Milchkanne, 2 Hühner (laufen etwas schneller), 2 hüpfende Frösche, 4 Gräben mit Matschwasser, 2 lange Kisten-Wege (einer mit zweiter Etage). |
 | 5 | Winter: verschneiter Wald (Holzhütte) → zugefrorener See → Dorf im Schnee (Weihnachtsbaum, Laternen); fallender Schnee, blassblauer Winterhimmel | 268 px/s | 3 Schneemänner, 2 rollende Schneebälle, 3 Hasen (hüpfen ein Stück auf Frankie zu und zurück), 5 Eislöcher, zwei davon (420 px) nur über Eisblock-Brücken, Blöcke in 2 Höhen. Danach Siegesfeier. |
 | 6 | Puszta (nur über `?paprika`): ungarische Steppe mit Paprika-Feldern, Gehöften und Ziehbrunnen; Boden, Gräben und Kisten wie auf dem Bauernhof | 290 px/s | 25 Gefahren: Heuballen, Milchkanne, Kisten, Baumstumpf, Baumstamm, Pfütze, Igel, Hühner, Frösche, Hasen (Tiere 1,4-fach), Gräben bis 220 px, Kisten-Trittsteine über einen breiten Graben, Treppe in 2 Etagen, Ketten. Für Erwachsene. |
-| 7 | Budapest (nur über `?paprika`): Donau mit Parlament, Kettenbrücke und Burg, gelbe Straßenbahn, am Ende der Markt mit Paprika; Boden und Bach wie im Wald, Stege wie am Strand | 310 px/s | 34 Gefahren: Kisten, Wasserbälle (rollen entgegen), Pfützen, Baumstämme, 8 Igel (1,7-fach), Bäche bis 225 px, einzelne Stege als Trittsteine, Treppe in 2 Etagen, lange Ketten. Das schwerste Level. Danach Siegesfeier mit 7 Sternen. |
+| 7 | Budapest (nur über `?paprika`): Donau mit Parlament, Kettenbrücke und Burg, gelbe Straßenbahn, am Ende der Markt mit Paprika; Boden und Bach wie im Wald, Stege wie am Strand | 310 px/s | 34 Gefahren: Kisten, Wasserbälle (rollen entgegen), Pfützen, Baumstämme, 8 Igel (1,7-fach), Bäche bis 225 px, einzelne Stege als Trittsteine, Treppe in 2 Etagen, lange Ketten. |
+| 8 | Plattensee (nur über `?paprika`): Strandbad mit Badehäuschen und Wasserrutsche → Halbinsel Tihany mit Abtei und Lavendel → Tafelberg Badacsony mit Segelhafen; Boden, Rinnen und Stege wie am Strand | 320 px/s | 40 Gefahren: Sandburgen, Kisten, Pfützen, Bälle, Wasserbälle, 6 Igel (1,7-fach; Krabben ersetzt), Gräben bis 274 px, Hindernis-Paare mit nur 176 px Abstand, ein Wasserball direkt hinter einem Graben, Steg-Trittsteine und eine Treppe mit Sandburg auf der Landung. |
+| 9 | Tokaj (nur über `?paprika`): Weinberg am Hang mit Presshaus → Kellergasse → Weinlesefest; Boden und Gräben wie auf dem Bauernhof, Blöcke aus Holz | 330 px/s | 42 Gefahren: Kisten, Baumstümpfe, Baumstämme, Milchkannen, Heuballen, Pfützen, Bälle, 7 Igel, ein Frosch, 7 Gräben von 264 px, eine lange Terrasse in 2 Etagen über einem 716-px-Graben, eine Treppe in eine Kette, ein Igel unter einer Blockreihe, zwei Gräben mit kurzer Insel. |
+| 10 | Visegrád (nur über `?paprika`): Donauknie bei Sonnenuntergang → Burgberg mit Hochburg und Salomonturm → Ritterfest; Boden und Bach wie im Wald, Blöcke aus Holz | 340 px/s | LEVEL10_ROW Das schwerste Level. Danach Siegesfeier mit 10 Sternen. |
 
-Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level (Hindernisse und Lücken): 6, 9, 11, 12, 13, 25, 34. Bot-Durchlauf Level 6: 45 s, Level 7: 42 s (Messungen unten).
+Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level (Hindernisse und Lücken): 6, 9, 11, 12, 13, 25, 34, 40, 42, LEVEL10_HAZ. Bot-Durchlauf Level 6: 45 s, Level 7: 42 s, Level 8: 41 s, Level 9: 40 s, Level 10: LEVEL10_SEC (Messungen unten).
 
 **Blöcke:** Von unten springt man durch, oben landet man (Einweg-Plattformen). Stufe 1 liegt 130 px über dem Boden (vom Boden erreichbar), Stufe 2 noch 105 px höher (nur von Stufe 1 erreichbar). Wer am Ende herunterläuft, landet wieder unten. Aussehen pro Welt: Holz mit Moos (Wald), Steg-Bretter (Strand), Obstkisten (Bauernhof), Eisblöcke (Winter).
 
@@ -116,7 +119,7 @@ Knappste Stelle: das Huhn mit 0,185 s. Das sind nur 5 ms über der Grenze von 0,
 
 ## Sprung-Zeitfenster Level 7 (gemessen am 13.10.)
 
-Level 7 (Budapest, nur mit dem geheimen Link) ist das schwerste Level für Erwachsene: Tempo 310, Sprung 143 px hoch und etwa 0,66 s lang, Tiere **1,7-fach**. Untergrenze für jedes Fenster: **0,10 s**. Messung wie bei Level 6: Zeit-Sweep, Ränder auf 5 ms genau (Fest-Gefahren in px, Sekunden = px / 310). Bei Ketten stehen die früheren Taps auf ihrem Bot-Abstand, bei einem früheren Igel auch in dessen schlechtester Stellung. Ein Wert mit „≥“ ist eine Untergrenze: der Rand des Messbereichs war noch erfolgreich. Das Messrauschen liegt bei etwa ±0,015 s (gleiche Stelle, zwei Messungen: 0,095 und 0,145 s, weil eine grobe 50-ms-Suche einen Treffer übersehen hat).
+Level 7 (Budapest, nur mit dem geheimen Link) ist für Erwachsene: Tempo 310, Sprung 143 px hoch und etwa 0,66 s lang, Tiere **1,7-fach**. Untergrenze für jedes Fenster: **0,10 s**. Messung wie bei Level 6: Zeit-Sweep, Ränder auf 5 ms genau (Fest-Gefahren in px, Sekunden = px / 310). Bei Ketten stehen die früheren Taps auf ihrem Bot-Abstand, bei einem früheren Igel auch in dessen schlechtester Stellung. Ein Wert mit „≥“ ist eine Untergrenze: der Rand des Messbereichs war noch erfolgreich. Das Messrauschen liegt bei etwa ±0,015 s (gleiche Stelle, zwei Messungen: 0,095 und 0,145 s, weil eine grobe 50-ms-Suche einen Treffer übersehen hat).
 
 **Hühner und Hasen sind durch Igel ersetzt.** Mit dem Huhn war das Fenster in der ungünstigsten Stellung nur **0,025 s** bei 2-fach, 0,075 s bei 1,7-fach und etwa 0,10 s bei 1,5-fach (es läuft dann gerade mit Höchstgeschwindigkeit weg). Der Hase hat in einer Hüpf-Stellung nur 0,045 s (1,8-fach) bzw. 0,08 s (1,7-fach). Die Trefferflächen bleiben fest, und das Tempo darf nicht unter 1,7 fallen. Darum stehen an den fünf Stellen, wo vorher Huhn oder Hase waren (x 2750, 5780, 7520, 11220, 11800), jetzt Igel. Gefahren bleiben 34, Würstel 20.
 
@@ -156,14 +159,110 @@ Bot-Ergebnis (Tiere 1,7-fach, Igel 80): 20/20 Würstel, kein Unfall, vier Läufe
 
 Knappste Stelle: der Igel bei x 11800 mit 0,117 s. Das sind 17 ms über der Grenze von 0,10 s, innerhalb des Messrauschens. Stellen ≤ 0,15 s: **8**, nämlich die schlechteste Stellung jedes der 8 Igel (x 2200 / 2750 / 5780 / 7250 / 7520 / 10620 / 11220 / 11800: 0,145 / 0,13 / 0,13 / 0,14 / 0,13 / 0,125 / 0,125 / 0,117 s). Alle anderen Stellen liegen bei ≥ 0,16 s (knappste feste Stelle: Stein 3 → 4 mit 0,16 s). Das Level ist damit nicht zu leicht.
 
-## Level 6 und 7 für Erwachsene
+## Sprung-Zeitfenster Level 8 (gemessen am 22.10.)
 
-Wunsch von Marius (12.10.): zwei Zusatz-Level für die Kollegin, ungarisch, „richtig schwer“ und „extrem“. Sie sind nur über den geheimen Link `?paprika` erreichbar (nicht in `README.md`). Das Kinder-Spiel ist unverändert; alt gegen neu verglichen am 13.10. (Startbild in 4 Fällen gleich, Bot Level 1–5 mit den alten Zeiten).
+Level 8 (Balaton, nur mit dem geheimen Link) ist das drittschwerste Level für Erwachsene: Tempo 320, Sprung 143 px hoch und 0,633 s lang (`T.jumpProfile`), Tiere **1,7-fach**, 40 Gefahren, 20 Würstel. Untergrenze für jedes Fenster: **0,10 s**. Gemessen wurde in einer Schritt-Simulation des echten Spiels (Bildabstand fest 1/60 s, Tweens und Physik des Spiels, Tap-Zeit in 2-ms-Schritten gesweept, Ränder fein bestimmt) und an vier Stellen im Echtzeit-Lauf mit `T.windowSeq` nachgeprüft (siehe unten). Jede Zeile zeigt die **strengste** Fassung: die früheren Taps stehen auf ihrem Bot-Abstand, und die Gefahr direkt dahinter wird ebenfalls auf ihrem Bot-Abstand gesprungen (das Fenster eines Paar-Anfangs ist also schon durch den Nachfolger verkürzt). Tiere sind über 16 Stellungen des Laufzyklus gemessen (kleinster und größter Wert). Ein Wert mit „≥“ ist eine Untergrenze (der Rand des Messbereichs ±0,26 s war noch erfolgreich).
 
-- **Sprung pro Level** (`jump` in `src/levels.js`): Level 6 `velocity` -788, `gravity` 2020: ca. 147 px hoch, ca. 0,78 s in der Luft. Level 7 `velocity` -913, `gravity` 2766: ca. 143 px hoch, ca. 0,66 s. Zum Vergleich Level 1–5: echt ca. 164 px bei 60 fps (Theorie 169 px), ca. 1,04 s. Die Werte weichen von der ersten Rechnung ab, weil Arcade-Physik halbimplizit rechnet: echter Scheitel = v²/2g − v·dt/2. Gemessen wurde am echten Sprung (`T.jumpProfile`). Ohne `jump` gilt der Standard aus `src/config.js`.
-- **Tier-Tempo** (`animalSpeed`): Level 6 **1,4-fach**, Level 7 **1,7-fach** (geplant 1,5 und 2). Bei mehr lag das Fenster in der schlechtesten Stellung unter der Grenze (siehe die Messtabellen). In Level 7 laufen nur Igel; Hühner und Hasen sind ersetzt.
-- **Untergrenzen** für das Sprung-Fenster: Level 6 **0,18 s**, Level 7 **0,10 s** (statt 0,35 s). Sie gelten für jede Gefahr, bei Tieren in jeder Phase und für jeden Ketten-Übergang. Unverändert: Trefferflächen, `jumpBufferMs` 180, `coyoteMs` 120.
-- **Bilder nur mit `?paprika`:** `src/art/puszta.js` (Level 6: Puszta) und `src/art/budapest.js` (Level 7: Budapest an der Donau) werden nur dann in `BootScene` geladen. Der normale Link lädt keine ungarischen Bilder (beide Module werden importiert, bauen aber keine Texturen). Dort entstehen nur die Knöpfe `btn-level-puszta` und `btn-level-budapest`, sonst keine neuen Bilder (geprüft: Textur-Schlüssel alt gegen neu, Unterschied genau diese zwei). Hindernisse, Blöcke, Lücken und Boden sind die vorhandenen Bilder (Level 6: Bauernhof, Level 7: Wald-Boden und Bach, Stege vom Strand); neu ist nur der Hintergrund. Budapest nutzt die Zonen-Eigenschaft `landmarks` in `src/backdrop.js` (jedes Wahrzeichen nur einmal pro Zone).
+**Krabben sind durch Igel ersetzt.** Die Krabbe (breite Trefferfläche 30 px) lässt bei 1,7-fach in der ungünstigsten Stellung (sie läuft gerade mit Höchstgeschwindigkeit weg) nur **0,063 s**, in drei weiteren Stellungen 0,069–0,156 s: unter der Untergrenze bzw. kaum darüber. Der Igel hat in jeder Stellung mindestens 0,153 s. Darum laufen in Level 8 nur Igel; Sandburg, Wasserball, Kiste, Ball und Pfütze bleiben. Der Baumstamm kommt nicht vor (die Gefahren-Mischung ist ohne ihn dicht genug).
+
+| Stelle | Zeitfenster |
+|---|---|
+| Einzeln (nichts davor/dahinter): Sandburg / Kiste / Pfütze / Ball / Wasserball | 0,200 / 0,231 / 0,204 / 0,257 / 0,237 s |
+| Gräben einzeln 272 / 274 px | 0,128 / 0,122 s |
+| Igel einzeln (16 Stellungen) | 0,153–0,369 s |
+| Paar Sandburg → Kiste, 176 px Abstand (x 920 / 2581 / 3906 / 9240 / 10888): Sandburg mit Kiste dahinter | 0,132 s (je Stelle) |
+| Paar Sandburg → Pfütze (x 4902 → 5078): Sandburg / Pfütze | 0,119 / 0,177 s |
+| Paar Sandburg → Kiste: Kiste (zweite Gefahr, Sprung gleich nach der Landung) | 0,191 s |
+| Pfütze x 1341 → Ball x 1519 (mit Würstel darüber): Pfütze / Ball | 0,263 / 0,204 s |
+| Pfütze x 9661 → Ball x 9839: Pfütze / Ball | 0,263 / 0,204 s |
+| Pfütze x 3002 (vor dem Graben) | 0,309 s |
+| Pfütze x 8103 → Sandburg x 8281 → Graben: Pfütze / Sandburg | 0,230 / 0,171 s |
+| Kiste x 5780 | 0,231 s |
+| Ball x 6330 → Kiste x 6506: Ball / Kiste | 0,239 / 0,177 s |
+| Ball x 12434 → Kiste x 12610 (Ende): Ball / Kiste | 0,192 / 0,177 s |
+| Graben 272 px (x 1694 / 5273) | 0,128 / 0,128 s |
+| Graben 274 px (x 3172, mit dem Wasserball dahinter / 8476 / 10034) | 0,122 / 0,122 / 0,122 s |
+| Wasserball x 3879 (trifft Frankie 190 px hinter dem Graben, auf festem Boden) | 0,333 s |
+| Igel x 2251 (nach Graben, 16 Stellungen) | 0,153–0,369 s |
+| Igel x 4572 / 6030 (nach Pause bzw. Kiste) | 0,153–0,369 / 0,153–0,396 s |
+| Igel x 7803 (nach Stegen, Sandburg am Ufer) | 0,153–0,404 s |
+| Igel x 10558 / 12149 | 0,153–0,369 / 0,153–0,369 s |
+| Trittsteine: Stein 1 (vom Boden) / 1 → 2 / 2 → 3 / 3 → 4 | 0,447 / 0,516 / 0,198 / 0,164 s |
+| Wasser 640 px unter den Stegen (Abstand der Stein-Taps) | ≥ 0,516 s |
+| Sandburg auf der Landung nach dem letzten Stein (x 7541, Sprung vom Steg) | 0,374 s |
+| Treppe: Etage 1 / Etage 2 | 0,270 / 0,387–0,407 s |
+| Wasser 420 px unter der Treppe | ≥ 0,516 s |
+| Sandburg auf der Landung nach der Treppe (x 11859) | 0,204 s |
+
+Bot-Abstände D8 (px): obstacle 110, high 112, crate 109, ball 108, puddle 109, sandcastle 112, gap −47, tier1 130, tier2 120, hop 200, beachball 140, hedgehog 78. Alle Abstände liegen in den gemessenen Fenstern aller Stellungen (Igel: Fenster in jeder Stellung enthält 78). Der Graben-Abstand −47 passt für alle Breiten 272–274 px (Fenster −66…−25 px).
+
+Bot-Ergebnis (Tiere 1,7-fach): 20/20 Würstel, kein Unfall. Aufwärm-Lauf 41,8 s (minFps 47), danach zwei Läufe nacheinander mit 41,4 s und 41,5 s (minFps 60). Zusätzlich 36 Bot-Läufe in der Simulation mit Anlauf-Verzögerungen von 0 bis 3,5 s in 0,1-s-Schritten (alle Igel-Stellungen): kein Unfall. Kurz-Layout (`?paprika&fast=1`, 3600 px, 8 Gefahren): Aufwärm-Lauf 10,9 s, danach 11,4 s, beide ohne Unfall. Sprungprofil: Scheitel 143 px, 0,633 s in der Luft (bei 30 Bildern pro Sekunde 135 px).
+
+Echtzeit-Nachprüfung mit `T.windowSeq` (ein Browser, 60 fps): Graben x 8476 mit Vorgängern: 0,120 s (Simulation 0,122); Sandburg x 920 mit Kiste dahinter: 0,130 s (0,132); Sandburg x 4902 mit Pfütze dahinter: 0,110 s (0,119); Igel x 4572 allein (Stellung 500 ms): 0,19 / 0,20 s und einmal 0,11 s (ein einzelner Fehlschlag mitten im Fenster, das übliche Messrauschen), mit der Sandburg dahinter 0,08–0,16 s in fünf Stellungen, ebenfalls mit einzelnen Fehlschlägen innerhalb des Fensters (die Ausdehnung von erstem bis letztem Treffer liegt bei 0,15–0,33 s). Die Simulation ist deterministisch und liegt bei den festen Stellen 1–10 ms über dem Echtzeit-Wert.
+
+Knappste Stelle: die Sandburg bei x 4902 mit der Pfütze 176 px dahinter, 0,119 s (Echtzeit 0,110 s). Das sind 14 ms (Simulation) bzw. 5 ms (Echtzeit) über der Grenze von 0,10 s. Stellen ≤ 0,15 s: **11**, nämlich die sechs Sandburg-Paare (0,132 ×5 und 0,119 s) und die fünf Gräben von 272–274 px (0,122–0,128 s). Die Igel liegen in ihrer schlechtesten Stellung knapp darüber bei 0,153 s. Level 7 hatte 8 Stellen ≤ 0,15 s mit der knappsten bei 0,117 s und 34 Gefahren; Level 8 hat 40 Gefahren, höheres Tempo, kürzere Luftzeit und breitere Gräben (bis 274 statt 225 px).
+
+## Sprung-Zeitfenster Level 9 (gemessen am 22.10.)
+
+Level 9 (Tokaj, nur mit dem geheimen Link) ist das zweitschwerste Level für Erwachsene: Tempo 330, Sprung 143 px hoch und 0,617 s lang (`T.jumpProfile`; Scheitel bei 30 Bildern pro Sekunde 134 px), Tiere **1,7-fach**, 42 Gefahren, 20 Würstel. Untergrenze für jedes Fenster: **0,10 s**. Gemessen wurde in einer Schritt-Simulation des echten Spiels (Bildabstand fest 1/60 s, Tweens und Physik des Spiels, Tap-Zeit in 2- bis 3-ms-Schritten gesweept) und an drei Stellen im Echtzeit-Lauf mit `T.windowSeq` nachgeprüft (siehe unten). Jede Zeile zeigt die **strengste** Fassung: die früheren Taps stehen auf ihrem Bot-Abstand, und die Gefahr direkt dahinter wird ebenfalls auf ihrem Bot-Abstand gesprungen (das Fenster einer Gefahr vor einer dicht folgenden ist also schon durch den Nachfolger verkürzt). Igel sind über 16 Stellungen des Laufzyklus gemessen, der Frosch ebenfalls über 16 Stellungen seines Hüpf-Takts (kleinster und größter Wert). Ein Wert mit „≥“ ist eine Untergrenze (der Rand des Messbereichs ±0,26 s war noch erfolgreich).
+
+**Hühner, Hasen und Krabben kommen nicht vor.** Huhn und Hase lassen bei 1,7-fach in der ungünstigsten Stellung unter 0,10 s (Level 7), die Krabbe nur 0,063 s (Level 8). Es laufen nur Igel (Mindestfenster 0,138 s in jeder Stellung), der Frosch hüpft auf der Stelle. Der Igel braucht mindestens 285 px bis zur nächsten Gefahr, sonst verkürzt der Nachfolger sein Fenster stark; das ist an allen 7 Igeln eingehalten.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Einzeln (nichts davor/dahinter): Kiste / Baumstumpf / Baumstamm / Heuballen / Pfütze / Milchkanne / Ball | 0,207 / 0,222 / 0,183 / 0,195 / 0,198 / 0,243 / 0,249 s |
+| Igel einzeln (16 Stellungen) | 0,135–0,342 s |
+| Frosch einzeln (16 Stellungen) | 0,183–0,252 s |
+| Kiste x 783 → Heuballen x 965 (Paar, 182 px Abstand): Kiste / Heuballen | 0,134 / 0,179 s |
+| Milchkanne x 1187 → Ball x 1409 → Baumstumpf x 1631 | 0,261 / 0,306 / 0,312 s |
+| Graben 264 px x 1746 (nach dem Baumstumpf; dahinter der Baumstamm 75 px hinter dem Ufer) | 0,138 s |
+| Baumstamm x 2085 (direkt hinter dem Graben) | 0,213 s |
+| Igel x 2375 (16 Stellungen, nach dem Baumstamm) | 0,138–0,342 s |
+| Ball x 2665 → Graben x 2780 (264 px) → Pfütze x 3114 | 0,305 / 0,141 (mit Nachfolger 0,138) / 0,210 s |
+| Igel x 3404 (16 Stellungen) | 0,138–0,342 s |
+| Baumstumpf x 3694 → Graben x 3809 (264 px) → Frosch x 4153 | 0,285 / 0,138 / 0,207 s |
+| Frosch x 4153 (16 Stellungen, direkt hinter dem Graben) | 0,207–0,275 s |
+| Igel x 4443 (16 Stellungen, nach dem Frosch) | 0,138–0,342 s |
+| Treppe (x 4963): Etage 1 / Etage 2 | 0,372 / 0,482–0,494 s |
+| Wasser 404 px unter der Treppe (Abstand der Taps) | ≥ 0,516 s |
+| Kiste x 5647 auf der Landung nach der Treppe (Sprung von Etage 2) | 0,209 s |
+| Kiste x 5647 → Baumstumpf x 5869 → Heuballen x 6051 | 0,209 / 0,234–0,309 / 0,188 s |
+| Igel x 6341 (16 Stellungen, nach dem Heuballen) | 0,138–0,342 s |
+| Milchkanne x 6631 → Graben x 6746 (264 px) → Kiste x 7080 | 0,305 / 0,138 / 0,222 s |
+| Igel x 7370 (16 Stellungen) | 0,138–0,342 s |
+| Baumstumpf x 7660 → Graben x 7775 (264 px) → Milchkanne x 8114 | 0,285 / 0,138 / 0,255 s |
+| Igel x 8404 (16 Stellungen) | 0,138–0,342 s |
+| Pfütze x 8694 → Baumstamm x 8880 → Kiste x 9102 | 0,209–0,273 / 0,186 / 0,266 s |
+| Terrasse (x 9462): Etage 1 / Etage 2 | 0,396 / 0,477 s |
+| Terrasse: Absprung von Etage 2 auf den dritten Block (Sprung nach unten) | ≥ 0,516 s |
+| Wasser 716 px unter der Terrasse | ≥ 0,474 s |
+| Kiste x 10478 auf der Landung nach der Terrasse | 0,324 s |
+| Milchkanne x 10700 (Etage 1 der Blöcke dahinter, 212 px weiter) | 0,149 s |
+| Etage 1 der Blöcke x 10912 (unter ihnen geht der Igel) | 0,324 s |
+| Igel x 11000 unter den Blöcken, Weg am Boden (16 Stellungen) | 0,138–0,342 s |
+| Ball x 11290 vor dem Doppelgraben | 0,269–0,419 s |
+| Doppelgraben 264 + 264 px (x 11425 / 11839, 150 px Insel dazwischen) | 0,138 / 0,138 s |
+| Kiste x 12173 hinter dem zweiten Graben | 0,222 s |
+| Milchkanne x 12395 → Baumstamm x 12591 (Ende) | 0,231–0,296 / 0,186 s |
+
+Bot-Abstände D9 (px): crate 107, stump 110, log 110, milkcan 100, haybale 108, puddle 110, ball 108, gap −39, hedgehog 78, frog 110, tier1 130, tier2 120, high 114. Alle Abstände liegen in den gemessenen Fenstern aller Stellungen (Igel: das Fenster in jeder der 16 Stellungen enthält 78; Graben: Fenster −61…−17 px).
+
+Bot-Ergebnis (Tiere 1,7-fach): 20/20 Würstel, kein Unfall. Aufwärm-Lauf 40,3 s (minFps 47, der erste Lauf nach dem Laden hat den bekannten Einbruch), danach zwei Läufe nacheinander mit 40,3 s (minFps 57) und 40,3 s (minFps 60). Zusätzlich 9 Bot-Läufe in der Simulation mit Anlauf-Verzögerungen von 0 bis 3,3 s (alle Igel-Stellungen): kein Unfall. Kurz-Layout (`?paprika&fast=1`, 3600 px, 9 Gefahren): Aufwärm-Lauf 10,8 s (minFps 44), danach 11,1 s und 11,2 s (minFps 60), alle ohne Unfall. Sprungprofil: Scheitel 143 px, 0,617 s in der Luft.
+
+Echtzeit-Nachprüfung mit `T.windowSeq` (ein Browser, 53–60 fps, Schritt 10 ms): Kiste x 783 mit dem Heuballen dahinter 0,120 s (Simulation 0,134); Graben x 1746 mit den Vorgängern 0,140 s (0,138); Igel x 2375 in der ungünstigsten Stellung 0,140 s (0,138), in einer Stellung mit weitem Fenster 0,23 s mit einem einzelnen Fehlschlag mittendrin (das übliche Messrauschen). Die Echtzeit-Werte liegen 0 bis 14 ms von der Simulation entfernt.
+
+Knappste Stelle: die Kiste bei x 783 mit dem Heuballen 182 px dahinter, 0,134 s in der Simulation, 0,120 s in Echtzeit. Das sind 15 ms über der Grenze von 0,10 s. Stellen ≤ 0,15 s: **16**, nämlich die 7 Igel in ihrer schlechtesten Stellung (0,138 s; x 2375 / 3404 / 4443 / 6341 / 7370 / 8404 / 11000), die 7 Gräben von 264 px (0,138–0,141 s; x 1746 / 2780 / 3809 / 6746 / 7775 / 11425 / 11839), die Kiste x 783 (0,134 s) und die Milchkanne x 10700 (0,149 s). Alle anderen Stellen liegen bei ≥ 0,183 s. Level 8 hatte 11 Stellen ≤ 0,15 s bei 40 Gefahren, Level 7 hatte 8 bei 34; Level 9 hat 42 Gefahren, höheres Tempo, kürzere Luftzeit und breitere Gräben (264 px, Fenster der Gräben 0,138 s).
+
+LEVEL10_SECTION
+
+## Level 6 bis 10 für Erwachsene
+
+Wunsch von Marius (12.10.): zwei Zusatz-Level für die Kollegin, ungarisch, „richtig schwer“ und „extrem“. Am 22.10. kamen Level 8 bis 10 dazu: „immer schwerer und schwerer, steigend von Level 7“, nur neue Hintergründe, keine neuen Hindernisse (Design: `docs/superpowers/specs/2026-10-22-level-8-10-design.md`). Sie sind nur über den geheimen Link `?paprika` erreichbar (nicht in `README.md`). Das Kinder-Spiel ist unverändert; alt gegen neu verglichen am 13.10. (Startbild in 4 Fällen gleich, Bot Level 1–5 mit den alten Zeiten).
+
+- **Sprung pro Level** (`jump` in `src/levels.js`): Level 6 `velocity` -788, `gravity` 2020: ca. 147 px hoch, ca. 0,78 s in der Luft. Level 7 `velocity` -913, `gravity` 2766: ca. 143 px hoch, ca. 0,66 s. Zum Vergleich Level 1–5: echt ca. 164 px bei 60 fps (Theorie 169 px), ca. 1,04 s. Die Werte weichen von der ersten Rechnung ab, weil Arcade-Physik halbimplizit rechnet: echter Scheitel = v²/2g − v·dt/2. Level 8 -942 / 2943 (143 px, 0,63 s), Level 9 -972 / 3136 (143 px, 0,62 s), Level 10 -1005 / 3349 (LEVEL10_JUMP). Gemessen wurde am echten Sprung (`T.jumpProfile`). Ohne `jump` gilt der Standard aus `src/config.js`. Ab Level 8 bleibt die Höhe bei etwa 143 px, die Luftzeit wird kürzer: Bei 30 Bildern pro Sekunde liegt der Scheitel noch bei 134–135 px, also über Block-Etage 1 (130 px).
+- **Tier-Tempo** (`animalSpeed`): Level 6 **1,4-fach**, Level 7 **1,7-fach** (geplant 1,5 und 2). Bei mehr lag das Fenster in der schlechtesten Stellung unter der Grenze (siehe die Messtabellen). Level 8 bis 10 ebenfalls 1,7-fach. In Level 7 bis 10 laufen nur Igel (Hühner, Hasen und in Level 8 die Krabben sind ersetzt), dazu hüpfen in Level 9 und 10 Frösche auf der Stelle.
+- **Untergrenzen** für das Sprung-Fenster: Level 6 **0,18 s**, Level 7 bis 10 **0,10 s** (statt 0,35 s; gemessen muss jedes Fenster ≥ 0,105 s sein, wegen des Messrauschens). Sie gelten für jede Gefahr, bei Tieren in jeder Phase und für jeden Ketten-Übergang. Unverändert: Trefferflächen, `jumpBufferMs` 180, `coyoteMs` 120.
+- **Bilder nur mit `?paprika`:** `src/art/puszta.js` (Level 6: Puszta) und `src/art/budapest.js` (Level 7: Budapest an der Donau) werden nur dann in `BootScene` geladen. Der normale Link lädt keine ungarischen Bilder (beide Module werden importiert, bauen aber keine Texturen). Dort entstehen nur die Knöpfe `btn-level-puszta` und `btn-level-budapest`, sonst keine neuen Bilder (geprüft: Textur-Schlüssel alt gegen neu, Unterschied genau diese zwei). Hindernisse, Blöcke, Lücken und Boden sind die vorhandenen Bilder (Level 6: Bauernhof, Level 7: Wald-Boden und Bach, Stege vom Strand); neu ist nur der Hintergrund. Budapest nutzt die Zonen-Eigenschaft `landmarks` in `src/backdrop.js` (jedes Wahrzeichen nur einmal pro Zone). Ebenso nur mit `?paprika`: `src/art/balaton.js` (Level 8), `tokaj.js` (Level 9) und `visegrad.js` (Level 10). Neue Welt-Eigenschaft `flip`: weitere Deko-Bilder, die zufällig gespiegelt werden dürfen.
 - **Feinabstimmung** nur über Zahlen in `src/levels.js`: `speed`, `jump`, `animalSpeed`, Abstände. Danach die betroffenen Stellen neu messen, den Bot laufen lassen und die Messtabellen oben aktualisieren.
 
 ## Lesbarkeit: Was ist Hindernis, was ist Hintergrund?
@@ -207,7 +306,8 @@ Per Web Audio erzeugt: Sprung („Boing“), Einsammeln (Glöckchen), Stolpern, 
 - Der allererste Level-Start nach dem Laden der Seite hat einmalig einen Einbruch der Bildrate. In Level 6 und 7 kann das einen Durchlauf kosten; der nächste Versuch klappt.
 - Unter etwa 22 Bildern pro Sekunde sind die Blöcke in Level 7 nicht mehr erreichbar (der Sprung wird bei niedriger Bildrate niedriger). Level 7 braucht also ein halbwegs schnelles Gerät.
 - Der Fortschritt des geheimen Links `?paprika` wird getrennt gespeichert (Schlüssel `frankie-unlocked-paprika`), damit er auf einem gemeinsamen Gerät nie Kinder-Level öffnet.
-- Level 7 hat sehr enge Fenster (ab 0,117 s). Auf langsamen Geräten werden sie noch enger: am besten am PC oder auf einem schnellen Handy spielen.
+- Level 7 bis 10 haben sehr enge Fenster (ab etwa 0,11 s). Auf langsamen Geräten werden sie noch enger: am besten am PC oder auf einem schnellen Handy spielen.
+- In Level 8 bis 10 sind die Blöcke bei 30 Bildern pro Sekunde gerade noch erreichbar (Scheitel 134–135 px, Etage 1 bei 130 px); bei weniger Bildern wird es knapp.
 
 ## Später
 
