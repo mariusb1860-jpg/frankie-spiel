@@ -524,7 +524,7 @@ function torchPost() {
 function tourneyFence() {
   const colors = [HU_RED, '#ffffff', HU_GREEN];
   const flags = [28, 52, 76, 100, 124].map((x, i) => `<path d="M${x} 28 L${x + 10} 28 L${x + 5} 42 Z" fill="${colors[i % 3]}" ${attrs('#8a7a68', 0.7)}/>`);
-  return svgDoc(156, 70, `
+  return svgDoc(160, 70, `
     <path d="M10 64 V16 M146 64 V16" stroke="#a8764a" stroke-width="5" stroke-linecap="round"/>
     <circle cx="10" cy="14" r="3.4" fill="${GOLD}"/><circle cx="146" cy="14" r="3.4" fill="${GOLD}"/>
     <path d="M10 22 Q78 36 146 22 M-2 22 H10 M146 22 H158" fill="none" stroke="#d8c0a0" stroke-width="2.4"/>
@@ -555,7 +555,7 @@ const PIECES = {
   'wild-flowers': [90, 68, wildFlowers],
   'wild-rose': [100, 76, wildRose],
   'torch-post': [54, 140, torchPost],
-  'tourney-fence': [156, 70, tourneyFence],
+  'tourney-fence': [160, 70, tourneyFence],
 };
 
 export function visegradSvgs() {
