@@ -3,7 +3,7 @@ import { loadSvg, svgDoc } from './svg.js';
 import { attrs, ridge, ridgeY } from './scenery.js';
 import { HU_GREEN, HU_RED, cauldron, paprikaPod, paprikaString } from './puszta.js';
 
-// Level 7 (grown-ups, only loaded with ?paprika): Budapest on the Danube. Across the
+// Level 7 (grown-ups, only loaded after the paprika button): Budapest on the Danube. Across the
 // river stand the Parliament, the Chain Bridge, Buda Castle and the Fishermen's Bastion;
 // on Frankie's side the yellow tram and, at the end, the market with paprika and goulash.
 // Everything here is background: soft outlines, never the strong OUTLINE.

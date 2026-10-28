@@ -3,7 +3,7 @@ import { loadSvg, svgDoc } from './svg.js';
 import { attrs, crown, ridge, ridgeY } from './scenery.js';
 import { HU_GREEN, HU_RED } from './puszta.js';
 
-// Level 10, Visegrád castle at the Danube bend at sunset (grown-ups, only loaded with ?paprika).
+// Level 10, Visegrád castle at the Danube bend at sunset (grown-ups, only loaded after the paprika button).
 // The warmest world of the game: golden-pink light from the right, violet hills far away.
 // Everything here is background: soft outlines, never the strong OUTLINE.
 

@@ -2,9 +2,11 @@ import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
 import { getLevel, shownLevels } from '../levels.js';
+import { isGrownUps, setGrownUps } from '../mode.js';
 import { unlockedLevel } from '../progress.js';
 import { addBigButton, addMuteButton, enterFullscreen } from '../ui.js';
 import * as sfx from '../audio/sfx.js';
+import { hasGrownUpArt } from './BootScene.js';
 
 export const TITLE_FONT = '"Arial Rounded MT Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif';
 
@@ -12,9 +14,11 @@ const BUTTON_Y = 305;
 const BUTTON_X0 = 340;
 const BUTTON_GAP = 122;
 const ROW = 5; // the button row is laid out for five buttons
+const MODE_BUTTON_Y = 428;
 
 // Start screen with the level selection: one round button per level, in the
-// colour of its world. Levels not reached yet show a lock.
+// colour of its world. Levels not reached yet show a lock. Below them one button
+// switches between the child's levels (1-5) and the grown-up levels (6-10).
 export class StartScene extends Phaser.Scene {
   constructor() {
     super('StartScene');
@@ -45,7 +49,7 @@ export class StartScene extends Phaser.Scene {
       .setScale(1.05);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
-    // One button per level of the shown group (1-5, or 6-10 with the secret link),
+    // One button per level of the shown group (1-5, or 6-10 after the paprika button),
     // centred where the five buttons of the child's game stand.
     const levels = shownLevels();
     const isOpen = (n) => Boolean(getLevel(n)) && (n === levels[0] || n <= unlockedLevel());
@@ -54,6 +58,10 @@ export class StartScene extends Phaser.Scene {
     const newest = this.playable[this.playable.length - 1];
     const x0 = BUTTON_X0 + ((ROW - levels.length) * BUTTON_GAP) / 2;
     levels.forEach((n, i) => this.addLevelButton(n, x0 + i * BUTTON_GAP, isOpen(n), n === newest));
+
+    // Paprika: on to the grown-up levels. Child: back to the child's levels.
+    const grownUps = isGrownUps();
+    addBigButton(this, 480, MODE_BUTTON_Y, grownUps ? 'btn-kids' : 'btn-paprika', () => this.switchLevels(!grownUps), { pulse: false });
 
     addMuteButton(this);
     // Keyboard: Space/Enter starts the newest open level, a number key that level (0 = level 10).
@@ -83,6 +91,16 @@ export class StartScene extends Phaser.Scene {
 
   update() {
     this.backdrop.update(0, this.time.now);
+  }
+
+  switchLevels(grownUps) {
+    if (this.starting) return;
+    this.starting = true;
+    sfx.unlock();
+    setGrownUps(grownUps);
+    // The grown-up worlds load on the first switch (loading bar), after that it is instant.
+    if (grownUps && !hasGrownUpArt()) this.scene.start('BootScene', { grownUps: true });
+    else this.scene.restart();
   }
 
   startGame(level) {

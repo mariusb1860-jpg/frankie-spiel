@@ -3,7 +3,7 @@ import { loadSvg, svgDoc } from './svg.js';
 import { attrs, crown, ridge, ridgeY, trunk } from './scenery.js';
 import { HU_GREEN, HU_RED } from './puszta.js';
 
-// Level 9 (grown-ups, only loaded with ?paprika): the Tokaj vineyards in autumn.
+// Level 9 (grown-ups, only loaded after the paprika button): the Tokaj vineyards in autumn.
 // Golden and orange leaves, purple grapes, cream-coloured loess cellars and the grape harvest.
 // Everything here is background: soft outlines, never the strong OUTLINE.
 

@@ -256,7 +256,47 @@ export function worldSvgs() {
         <ellipse cx="55" cy="12.5" rx="45" ry="7" fill="#7cc6ff"/>
         <path d="M30 11 Q38 9 46 11 M64 14 Q72 12 80 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>`),
     },
+    // Start screen: the paprika button leads to the grown-up levels 6-10, the child button back to 1-5.
+    'btn-paprika': { w: MODE_BUTTON, h: MODE_BUTTON + 6, svg: modeButton('#477050', paprikaIcon()) },
+    'btn-kids': { w: MODE_BUTTON, h: MODE_BUTTON + 6, svg: modeButton('#f4b63f', childIcon()) },
   };
+}
+
+const MODE_BUTTON = 104;
+
+// Round button like the level buttons, a bit smaller, with a picture instead of a number.
+function modeButton(color, icon) {
+  const c = MODE_BUTTON / 2;
+  return svgDoc(MODE_BUTTON, MODE_BUTTON + 6, `
+    <circle cx="${c}" cy="${c + 6}" r="${c - 6}" fill="#000" opacity="0.2"/>
+    <circle cx="${c}" cy="${c}" r="${c - 6}" fill="${color}"/>
+    <circle cx="${c}" cy="${c}" r="${c - 9}" fill="none" stroke="#fff" stroke-width="6"/>
+    ${icon}`);
+}
+
+// A red bell pepper with a green stem.
+function paprikaIcon() {
+  return `
+    <path d="M52 33 C40 25 26 31 26 46 C26 59 30 70 38 76 C42 79 46 77 52 79 C58 77 62 79 66 76 C74 70 78 59 78 46 C78 31 64 25 52 33 Z" fill="#d7261e" ${line}/>
+    <path d="M44 40 C41 52 42 65 46 75 M60 40 C63 52 62 65 58 75" fill="none" stroke="#9c1a14" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M33 45 C32 53 34 61 38 67" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+    <path d="M41 34 C45 29 59 29 63 34 C58 38 46 38 41 34 Z" fill="#3f7a2e" ${line}/>
+    <path d="M52 31 C52 25 55 21 61 19" fill="none" stroke="${LINE}" stroke-width="8" stroke-linecap="round"/>
+    <path d="M52 31 C52 25 55 21 61 19" fill="none" stroke="#4f9a3a" stroke-width="4" stroke-linecap="round"/>`;
+}
+
+// A smiling child's face.
+function childIcon() {
+  return `
+    <circle cx="31" cy="55" r="5" fill="#f3c19a" ${line}/>
+    <circle cx="73" cy="55" r="5" fill="#f3c19a" ${line}/>
+    <circle cx="52" cy="54" r="22" fill="#f6cfa8" ${line}/>
+    <path d="M29 51 C28 36 39 28 52 28 C65 28 76 36 75 51 C70 44 63 40 56 41 C50 37 41 40 37 45 C34 48 31 49 29 51 Z" fill="#8a5a32" ${line}/>
+    <circle cx="44" cy="55" r="2.8" fill="#3b2a20"/>
+    <circle cx="60" cy="55" r="2.8" fill="#3b2a20"/>
+    <circle cx="40" cy="62" r="3.6" fill="#f08a8a" opacity="0.6"/>
+    <circle cx="64" cy="62" r="3.6" fill="#f08a8a" opacity="0.6"/>
+    <path d="M44 63 Q52 70 60 63" fill="none" stroke="#3b2a20" stroke-width="2.6" stroke-linecap="round"/>`;
 }
 
 // SVG pieces go through the loader, so call this from preload().

@@ -171,7 +171,7 @@ export const WORLDS = {
     ],
   },
 
-  // Level 6, only for grown-ups (secret link ?paprika): the Hungarian Puszta. Ground,
+  // Level 6, only for grown-ups (paprika button): the Hungarian Puszta. Ground,
   // ditches and crates come from the farm; the crates now hold paprika.
   puszta: {
     color: 0xce2939, // red of the Hungarian flag
@@ -206,7 +206,7 @@ export const WORLDS = {
     ],
   },
 
-  // Level 7, only for grown-ups (secret link ?paprika): Budapest on the Danube. Ground and
+  // Level 7, only for grown-ups (paprika button): Budapest on the Danube. Ground and
   // brooks come from the forest, the jetties from the beach.
   budapest: {
     color: 0x477050, // green of the Hungarian flag

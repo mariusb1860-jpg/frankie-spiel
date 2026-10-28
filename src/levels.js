@@ -1,4 +1,5 @@
-import { CONFIG, FAST, PAPRIKA } from './config.js';
+import { CONFIG, FAST } from './config.js';
+import { isGrownUps } from './mode.js';
 
 // The levels. Each layout is a list of what comes where (x in px from the start).
 // Every level has 20 sausages; Frankie stops at the dog house at the end.
@@ -175,7 +176,7 @@ export const LEVELS = [
     },
   },
   {
-    // Level 6, Puszta: only for grown-ups (secret link ?paprika). Faster, a lower and
+    // Level 6, Puszta: only for grown-ups (paprika button). Faster, a lower and
     // shorter jump, animals 1.4 times as fast, chains of obstacles and stepping stones.
     world: 'puszta',
     speed: 290,
@@ -534,13 +535,13 @@ export const LEVELS = [
 ];
 
 // Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups;
-// only the secret link (?paprika) shows them, and then only them.
+// the start screen shows them, and then only them, after the paprika button is pressed.
 const KIDS = [1, 2, 3, 4, 5];
 const GROWN_UPS = [6, 7, 8, 9, 10];
 
 /** Level numbers that get a button on the start screen. */
 export function shownLevels() {
-  return PAPRIKA ? GROWN_UPS : KIDS;
+  return isGrownUps() ? GROWN_UPS : KIDS;
 }
 
 /** True for the last level of its group (5 or 10): the big celebration follows it. */

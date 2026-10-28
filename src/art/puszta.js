@@ -2,7 +2,7 @@ import { GAME_WIDTH } from '../config.js';
 import { loadSvg, svgDoc } from './svg.js';
 import { WOOD, attrs, ridge, ridgeY } from './scenery.js';
 
-// Level 6 (grown-ups, only loaded with ?paprika): the Hungarian Puszta with paprika
+// Level 6 (grown-ups, only loaded after the paprika button): the Hungarian Puszta with paprika
 // fields, whitewashed farmhouses, draw wells, grey cattle, a csikós on his horse and a
 // goulash feast. Everything here is background: soft outlines, never the strong OUTLINE,
 // because Frankie cannot touch any of it.

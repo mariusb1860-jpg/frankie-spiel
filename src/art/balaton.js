@@ -3,7 +3,7 @@ import { loadSvg, svgDoc } from './svg.js';
 import { attrs, ridge, ridgeY } from './scenery.js';
 import { HU_GREEN, HU_RED } from './puszta.js';
 
-// Level 8 (grown-ups, only loaded with ?paprika): Lake Balaton in high summer. A turquoise
+// Level 8 (grown-ups, only loaded after the paprika button): Lake Balaton in high summer. A turquoise
 // lake with the hazy hills of the north shore; the beach resort with its striped cabins and
 // lángos stand, the peninsula of Tihany with its abbey and lavender, and the Badacsony table
 // mountain with the white paddle steamer and the sailing harbour.
