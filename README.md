@@ -7,6 +7,7 @@ Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Franky, die Französische Bulldo
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
 - Wer an ein Hindernis stößt oder ins Wasser fällt, fängt das Level von vorn an.
 - Im Startbild wählt man das Level; geschaffte Level schalten das nächste frei.
+- Der Paprika-Knopf unten führt zu fünf sehr schweren Leveln für Erwachsene, der Kind-Knopf wieder zurück.
 - Läuft im Browser auf Handy, Tablet und PC. Handy bitte quer halten.
 
 ## Lokal starten
