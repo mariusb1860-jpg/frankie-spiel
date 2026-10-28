@@ -8,6 +8,7 @@
 //   T.jumpProfile(level)                    apex (px) and time in the air (s) of one jump
 //   T.flipTimes(index, ms)                  how long a walking animal walks per direction (ms)
 //   T.startButtons() / T.stars()            start screen buttons / stars in the celebration
+//   T.grownUps(on)                          paprika button (levels 6-10) or child button (1-5)
 //   T.textures(keys)                        textures that are missing or empty
 (function () {
   const GROUND_Y = 460;
@@ -29,6 +30,20 @@
     active.scene.start('GameScene', { level });
     await sleep(450);
     return scene();
+  }
+
+  // Like pressing the paprika button (on = true) or the child button (on = false) on the start
+  // screen; waits until the start screen shows the other levels. Needed before levels 6-10:
+  // their worlds only load on the first switch.
+  async function grownUps(on = true) {
+    const first = on ? '6' : '1';
+    window.game.scene.getScene('StartScene').switchLevels(on);
+    const ok = await waitFor(() => {
+      const s = window.game.scene.getScene('StartScene');
+      return window.game.scene.isActive('StartScene') && s.children.list.some((o) => o.type === 'Text' && o.text === first);
+    }, 30000);
+    await sleep(400);
+    return ok;
   }
 
   // Jump distances (d = target x minus Frankie x when the bot taps), tuned for levels 1-5.
@@ -266,6 +281,6 @@
 
   window.T = {
     bot, run, windowSeq, dWindow, window: window_, trial, trialTime, jumpProfile, flipTimes,
-    startButtons, stars, textures, startLevel, waitFor, sleep,
+    startButtons, stars, textures, startLevel, grownUps, waitFor, sleep,
   };
 })();
