@@ -33,7 +33,7 @@ export class EatScene extends Phaser.Scene {
 
     this.add.image(800, GROUND_Y + 4, 'house').setOrigin(0.5, 1);
     this.add
-      .text(800, GROUND_Y + 4 - 180 + 85, 'FRANKIE', { fontFamily: TITLE_FONT, fontSize: '17px', fontStyle: 'bold', color: '#6b3e1f' })
+      .text(800, GROUND_Y + 4 - 180 + 85, 'FRANKY', { fontFamily: TITLE_FONT, fontSize: '17px', fontStyle: 'bold', color: '#6b3e1f' })
       .setOrigin(0.5);
     this.add.image(BOWL_X, GROUND_Y + 4, 'bowl').setOrigin(0.5, 1).setDepth(5);
 

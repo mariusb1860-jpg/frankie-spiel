@@ -25,7 +25,7 @@ export class StartScene extends Phaser.Scene {
     this.backdrop = createBackdrop(this, { zone: 'garden' });
 
     this.add
-      .text(480, 105, 'Frankie', {
+      .text(480, 105, 'Franky', {
         fontFamily: TITLE_FONT,
         fontSize: '104px',
         fontStyle: 'bold',

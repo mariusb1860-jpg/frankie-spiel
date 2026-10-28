@@ -77,7 +77,7 @@ export class GameScene extends Phaser.Scene {
     const { houseX } = this.level;
     this.add.image(houseX, GROUND_Y + 4, 'house').setOrigin(0.5, 1);
     this.add
-      .text(houseX, GROUND_Y + 4 - 180 + 85, 'FRANKIE', { fontFamily: TITLE_FONT, fontSize: '17px', fontStyle: 'bold', color: '#6b3e1f' })
+      .text(houseX, GROUND_Y + 4 - 180 + 85, 'FRANKY', { fontFamily: TITLE_FONT, fontSize: '17px', fontStyle: 'bold', color: '#6b3e1f' })
       .setOrigin(0.5);
     this.bowl = this.add.image(houseX - 115, GROUND_Y + 4, 'bowl').setOrigin(0.5, 1);
   }
