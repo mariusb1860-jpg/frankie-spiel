@@ -1,8 +1,8 @@
-# Frankie sammelt Würstel
+# Franky sammelt Würstel
 
-Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Frankie, die Französische Bulldogge, läuft durch Garten, Wald, Strand, Bauernhof und Winter, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf. Nach dem fünften Level gibt es eine große Siegesfeier.
+Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Franky, die Französische Bulldogge, läuft durch Garten, Wald, Strand, Bauernhof und Winter, sammelt Würstel und frisst sie am Ende vor ihrer Hütte auf. Nach dem fünften Level gibt es eine große Siegesfeier.
 
-**Spielen:** https://mariusb1860-jpg.github.io/frankie-spiel/
+**Spielen:** https://mariusb1860-jpg.github.io/franky/
 
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
 - Wer an ein Hindernis stößt oder ins Wasser fällt, fängt das Level von vorn an.
@@ -38,7 +38,7 @@ Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 | `src/level.js`, `src/course.js` | Machen aus dem Level-Ablauf Boden, Bäche, Blöcke, Würstel und Hindernisse |
 | `src/backdrop.js` | Baut die Landschaft mit Dunstschleier und Parallax |
 | `src/progress.js` | Merkt sich freigeschaltete Level |
-| `src/art/` | Frankie, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics); `puszta.js`, `budapest.js`, `balaton.js`, `tokaj.js` und `visegrad.js` sind Zusatz-Welten, die nur in besonderen Fällen geladen werden |
+| `src/art/` | Franky, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics); `puszta.js`, `budapest.js`, `balaton.js`, `tokaj.js` und `visegrad.js` sind Zusatz-Welten, die nur in besonderen Fällen geladen werden |
 | `tools/` | Hilfen zum Testen: Browser-Helfer `test-helpers.js` und Server ohne Cache `nocache_server.py` |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |

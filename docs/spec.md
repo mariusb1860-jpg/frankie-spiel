@@ -1,33 +1,33 @@
-# Spezifikation: Frankie sammelt Würstel
+# Spezifikation: Franky sammelt Würstel
 
 Stand: 2026-10-23 (Version 5: Level 6 bis 10 für Erwachsene, nur über den geheimen Link; Level 1–5 und Siegesfeier für das Kind unverändert)
 
 ## Ziel
 
-Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. Held ist Frankie, eine Französische Bulldogge (anfangs für eine Englische gehalten; die Fotos vom 08.10. zeigen eine Französische). Sie sammelt Würstel und frisst sie am Ende.
+Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. Held ist Franky, eine Französische Bulldogge (anfangs für eine Englische gehalten; die Fotos vom 08.10. zeigen eine Französische). Sie sammelt Würstel und frisst sie am Ende.
 
 ## Rahmen
 
 - Kind ist 3–5 Jahre alt: kann nicht lesen → keine Texte nötig, sehr einfache Steuerung.
 - Geräte: Tablet/Handy (Touch) und PC (Tastatur).
-- Verteilung: Link im Internet (GitHub Pages): https://mariusb1860-jpg.github.io/frankie-spiel/. Schickt man den Link per WhatsApp, erscheint ein Vorschaubild.
+- Verteilung: Link im Internet (GitHub Pages): https://mariusb1860-jpg.github.io/franky/. Schickt man den Link per WhatsApp, erscheint ein Vorschaubild. Bis 28.10.2026 hieß das Spiel „Frankie“ und lag unter …/frankie-spiel/; diese Adresse gibt es seitdem nicht mehr (auf Wunsch von Marius ohne Weiterleitung). Der Spielstand bleibt, weil die Domain gleich ist.
 - Grafik und Sound komplett per Code, keine Dateien (einzige Ausnahme: das Vorschaubild `share.jpg` für Messenger).
 
 ## Ablauf
 
 Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Nochmal“ oder „Weiter“.
 
-1. **Startbild:** Titel „Frankie“, Frankie hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Der geheime Link `?paprika` (nur für Erwachsene) zeigt statt dessen die Knöpfe 6 bis 10 an den Plätzen der Kinder-Knöpfe: Level 6 ist dann immer offen, jedes weitere öffnet sich, sobald das vorige geschafft ist. Tastatur: Ziffern 6 bis 9, die Taste 0 startet Level 10. Der normale Link zeigt weiter nur 1–5, auch auf Geräten mit altem Fortschritt.
+1. **Startbild:** Titel „Franky“, Franky hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Der geheime Link `?paprika` (nur für Erwachsene) zeigt statt dessen die Knöpfe 6 bis 10 an den Plätzen der Kinder-Knöpfe: Level 6 ist dann immer offen, jedes weitere öffnet sich, sobald das vorige geschafft ist. Tastatur: Ziffern 6 bis 9, die Taste 0 startet Level 10. Der normale Link zeigt weiter nur 1–5, auch auf Geräten mit altem Fortschritt.
 2. **Level:**
-   - Frankie läuft automatisch nach rechts. Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
-   - Jedes Level hat 20 Würstel: am Boden (sammelt Frankie im Laufen), in der Luft (Sprung nötig), als Bogen (ein Sprung holt alle drei) und ab Level 2 auf schwebenden Blöcken.
+   - Franky läuft automatisch nach rechts. Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
+   - Jedes Level hat 20 Würstel: am Boden (sammelt Franky im Laufen), in der Luft (Sprung nötig), als Bogen (ein Sprung holt alle drei) und ab Level 2 auf schwebenden Blöcken.
    - Gesammelte Würstel fliegen in die Leiste oben (Symbole statt Zahl).
-   - Hindernis berührt oder in eine Lücke gefallen: Frankie ist kurz benommen (Sternchen) bzw. es platscht, dann startet **dieses** Level von vorn. (Version 1: nur kurzes Stolpern. Geändert auf Wunsch von Marius am 08.10.)
+   - Hindernis berührt oder in eine Lücke gefallen: Franky ist kurz benommen (Sternchen) bzw. es platscht, dann startet **dieses** Level von vorn. (Version 1: nur kurzes Stolpern. Geändert auf Wunsch von Marius am 08.10.)
    - Springen ist bewusst leicht: ca. 170 px hoch, ca. 1 Sekunde in der Luft, Trefferflächen der Hindernisse kleiner als die Bilder.
-   - Nach einem Unfall wartet Frankie kurz (0,7 s), bevor er wieder losläuft. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft er sofort los (so abgenommen, siehe „Bekannte kleine Fehler“).
-3. **Ziel:** Hundehütte „FRANKIE“ mit Napf. Frankie bleibt stehen und freut sich. Das nächste Level ist damit freigeschaltet.
-4. **Futterszene (am Ende der jeweiligen Welt):** Frankie macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Frankie mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (mit `?paprika` nach Level 10) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
-5. **Siegesfeier (nach Level 5, mit `?paprika` nach Level 10):** im Garten von Frankie, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Frankie springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 10 sind es zehn Sterne in den Farben der zehn Welten (ab 9 Sternen rücken sie enger zusammen, bei 10 Sternen 84 statt 100 px Abstand), und der Haus-Knopf führt zum Startbild mit 6 bis 10.
+   - Nach einem Unfall wartet Franky kurz (0,7 s), bevor er wieder losläuft. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft er sofort los (so abgenommen, siehe „Bekannte kleine Fehler“).
+3. **Ziel:** Hundehütte „FRANKY“ mit Napf. Franky bleibt stehen und freut sich. Das nächste Level ist damit freigeschaltet.
+4. **Futterszene (am Ende der jeweiligen Welt):** Franky macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Franky mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (mit `?paprika` nach Level 10) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
+5. **Siegesfeier (nach Level 5, mit `?paprika` nach Level 10):** im Garten von Franky, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Franky springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 10 sind es zehn Sterne in den Farben der zehn Welten (ab 9 Sternen rücken sie enger zusammen, bei 10 Sternen 84 statt 100 px Abstand), und der Haus-Knopf führt zum Startbild mit 6 bis 10.
 
 Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf langsamen Handys ein paar Sekunden).
 
@@ -37,9 +37,9 @@ Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf
 |---|---|---|---|
 | 1 | Garten → Wiese → Dorf | 220 px/s | Pfützen, Bälle, Kisten. **Fertig, nicht mehr ändern** (Marius, 08.10.). |
 | 2 | Wald: Waldrand → tiefer Wald → Lichtung | 232 px/s | Baumstümpfe, Holzstämme, eine Pfütze, 2 laufende Igel, 2 Bäche (Lücken), Blöcke in 1 und 2 Höhen, eine Block-Brücke über den zweiten Bach. |
-| 3 | Strand (wie auf den Fotos von Frankie an der Nordsee): Dünen mit Strandkörben → offener Strand mit Booten auf dem Meer → kleiner Hafen mit Leuchtturm | 244 px/s | 3 Sandburgen, 3 Krabben (laufen seitwärts), 2 Wasserbälle (rollen Frankie entgegen), 3 Wasserrinnen, die breiteste (400 px) nur über den Holzsteg zu schaffen, Blöcke in 2 Höhen. Seesterne und Muscheln nur als Deko (orange Seesterne wie Frankies Spielzeug). |
+| 3 | Strand (wie auf den Fotos von Franky an der Nordsee): Dünen mit Strandkörben → offener Strand mit Booten auf dem Meer → kleiner Hafen mit Leuchtturm | 244 px/s | 3 Sandburgen, 3 Krabben (laufen seitwärts), 2 Wasserbälle (rollen Franky entgegen), 3 Wasserrinnen, die breiteste (400 px) nur über den Holzsteg zu schaffen, Blöcke in 2 Höhen. Seesterne und Muscheln nur als Deko (orange Seesterne wie Frankys Spielzeug). |
 | 4 | Bauernhof: Felder (Traktor, Vogelscheuche, Kornfeld) → Hof (Scheune, Silo, Fachwerkhaus, Hühnerstall, Kühe und Schafe in der Ferne) → Weide (Pferdestall, Koppelzaun) | 256 px/s | 3 Heuballen, 1 Milchkanne, 2 Hühner (laufen etwas schneller), 2 hüpfende Frösche, 4 Gräben mit Matschwasser, 2 lange Kisten-Wege (einer mit zweiter Etage). |
-| 5 | Winter: verschneiter Wald (Holzhütte) → zugefrorener See → Dorf im Schnee (Weihnachtsbaum, Laternen); fallender Schnee, blassblauer Winterhimmel | 268 px/s | 3 Schneemänner, 2 rollende Schneebälle, 3 Hasen (hüpfen ein Stück auf Frankie zu und zurück), 5 Eislöcher, zwei davon (420 px) nur über Eisblock-Brücken, Blöcke in 2 Höhen. Danach Siegesfeier. |
+| 5 | Winter: verschneiter Wald (Holzhütte) → zugefrorener See → Dorf im Schnee (Weihnachtsbaum, Laternen); fallender Schnee, blassblauer Winterhimmel | 268 px/s | 3 Schneemänner, 2 rollende Schneebälle, 3 Hasen (hüpfen ein Stück auf Franky zu und zurück), 5 Eislöcher, zwei davon (420 px) nur über Eisblock-Brücken, Blöcke in 2 Höhen. Danach Siegesfeier. |
 | 6 | Puszta (nur über `?paprika`): ungarische Steppe mit Paprika-Feldern, Gehöften und Ziehbrunnen; Boden, Gräben und Kisten wie auf dem Bauernhof | 290 px/s | 25 Gefahren: Heuballen, Milchkanne, Kisten, Baumstumpf, Baumstamm, Pfütze, Igel, Hühner, Frösche, Hasen (Tiere 1,4-fach), Gräben bis 220 px, Kisten-Trittsteine über einen breiten Graben, Treppe in 2 Etagen, Ketten. Für Erwachsene. |
 | 7 | Budapest (nur über `?paprika`): Donau mit Parlament, Kettenbrücke und Burg, gelbe Straßenbahn, am Ende der Markt mit Paprika; Boden und Bach wie im Wald, Stege wie am Strand | 310 px/s | 34 Gefahren: Kisten, Wasserbälle (rollen entgegen), Pfützen, Baumstämme, 8 Igel (1,7-fach), Bäche bis 225 px, einzelne Stege als Trittsteine, Treppe in 2 Etagen, lange Ketten. |
 | 8 | Plattensee (nur über `?paprika`): Strandbad mit Badehäuschen und Wasserrutsche → Halbinsel Tihany mit Abtei und Lavendel → Tafelberg Badacsony mit Segelhafen; Boden, Rinnen und Stege wie am Strand | 320 px/s | 40 Gefahren: Sandburgen, Kisten, Pfützen, Bälle, Wasserbälle, 6 Igel (1,7-fach; Krabben ersetzt), Gräben bis 274 px, Hindernis-Paare mit nur 176 px Abstand, ein Wasserball direkt hinter einem Graben, Steg-Trittsteine und eine Treppe mit Sandburg auf der Landung. |
@@ -60,13 +60,13 @@ Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Temp
 
 ## Sprung-Zeitfenster (gemessen am 08.10.)
 
-Wie lange man zum Springen Zeit hat, damit Frankie sicher darüber kommt. Ziel: mindestens 0,35 s für jedes Hindernis, bei bewegten Hindernissen in **jeder** Phase ihrer Bewegung.
+Wie lange man zum Springen Zeit hat, damit Franky sicher darüber kommt. Ziel: mindestens 0,35 s für jedes Hindernis, bei bewegten Hindernissen in **jeder** Phase ihrer Bewegung.
 
 | Level | Hindernis | Zeitfenster |
 |---|---|---|
-| 2 | Igel (9 Phasen; am knappsten, wenn er von Frankie weg läuft) | 0,36–0,56 s (vorher im ungünstigsten Fall 0,28 s) |
+| 2 | Igel (9 Phasen; am knappsten, wenn er von Franky weg läuft) | 0,36–0,56 s (vorher im ungünstigsten Fall 0,28 s) |
 | 3 | Sandburg | 0,43 s |
-| 3 | Krabbe (ungünstigste Phase: läuft von Frankie weg) | 0,36–0,40 s, sonst ≥ 0,5 s |
+| 3 | Krabbe (ungünstigste Phase: läuft von Franky weg) | 0,36–0,40 s, sonst ≥ 0,5 s |
 | 3 | Wasserball (rollt entgegen) | 0,60 s |
 | 3 | Wasserrinnen 140 / 160 px | ≥ 0,74 / ≥ 0,66 s |
 | 3 | Rinne 400 px über den Steg | ≥ 1,5 s (direkt: 0 von 10 Versuchen) |
@@ -123,7 +123,7 @@ Level 7 (Budapest, nur mit dem geheimen Link) ist für Erwachsene: Tempo 310, Sp
 
 **Hühner und Hasen sind durch Igel ersetzt.** Mit dem Huhn war das Fenster in der ungünstigsten Stellung nur **0,025 s** bei 2-fach, 0,075 s bei 1,7-fach und etwa 0,10 s bei 1,5-fach (es läuft dann gerade mit Höchstgeschwindigkeit weg). Der Hase hat in einer Hüpf-Stellung nur 0,045 s (1,8-fach) bzw. 0,08 s (1,7-fach). Die Trefferflächen bleiben fest, und das Tempo darf nicht unter 1,7 fallen. Darum stehen an den fünf Stellen, wo vorher Huhn oder Hase waren (x 2750, 5780, 7520, 11220, 11800), jetzt Igel. Gefahren bleiben 34, Würstel 20.
 
-**Tier-Tempo 1,7.** Der Igel in seiner schlechtesten Stellung (er läuft gerade mit Höchstgeschwindigkeit weg) lässt bei 2,0 nur 0,095 s, bei 1,9 0,100 s und bei 1,8 an einer Stelle (Igel x 7520) 0,095 s (eine einzelne grobe Messung, die Nachbar-Stellungen lagen bei 0,12–0,165 s). Das ist jeweils unter 0,105 s (Grenze 0,10 s plus 5 ms Messrauschen). 1,8 wurde also nach einer einzelnen groben Messung verworfen und könnte bei einer feinen Nachmessung durchaus bestehen. Bei 1,7 ist das kleinste Fenster 0,117 s. Rollende Wasserbälle sind bei 1,7 unkritisch (Fenster 0,345–0,36 s). Beide Bälle treffen Frankie auf festem Boden (Treffpunkt x 3850 bzw. 8700; der erste liegt 120 px hinter dem Bach, `stopped` bleibt `false`, bis Frankie bei 3850 bzw. 8700 ist).
+**Tier-Tempo 1,7.** Der Igel in seiner schlechtesten Stellung (er läuft gerade mit Höchstgeschwindigkeit weg) lässt bei 2,0 nur 0,095 s, bei 1,9 0,100 s und bei 1,8 an einer Stelle (Igel x 7520) 0,095 s (eine einzelne grobe Messung, die Nachbar-Stellungen lagen bei 0,12–0,165 s). Das ist jeweils unter 0,105 s (Grenze 0,10 s plus 5 ms Messrauschen). 1,8 wurde also nach einer einzelnen groben Messung verworfen und könnte bei einer feinen Nachmessung durchaus bestehen. Bei 1,7 ist das kleinste Fenster 0,117 s. Rollende Wasserbälle sind bei 1,7 unkritisch (Fenster 0,345–0,36 s). Beide Bälle treffen Franky auf festem Boden (Treffpunkt x 3850 bzw. 8700; der erste liegt 120 px hinter dem Bach, `stopped` bleibt `false`, bis Franky bei 3850 bzw. 8700 ist).
 
 | Stelle | Zeitfenster |
 |---|---|
@@ -182,7 +182,7 @@ Level 8 (Balaton, nur mit dem geheimen Link) ist das drittschwerste Level für E
 | Ball x 12434 → Kiste x 12610 (Ende): Ball / Kiste | 0,192 / 0,177 s |
 | Graben 272 px (x 1694 / 5273) | 0,128 / 0,128 s |
 | Graben 274 px (x 3172, mit dem Wasserball dahinter / 8476 / 10034) | 0,122 / 0,122 / 0,122 s |
-| Wasserball x 3879 (trifft Frankie 190 px hinter dem Graben, auf festem Boden) | 0,333 s |
+| Wasserball x 3879 (trifft Franky 190 px hinter dem Graben, auf festem Boden) | 0,333 s |
 | Igel x 2251 (nach Graben, 16 Stellungen) | 0,153–0,369 s |
 | Igel x 4572 / 6030 (nach Pause bzw. Kiste) | 0,153–0,369 / 0,153–0,396 s |
 | Igel x 7803 (nach Stegen, Sandburg am Ufer) | 0,153–0,404 s |
@@ -315,7 +315,7 @@ Wunsch von Marius (12.10.): zwei Zusatz-Level für die Kollegin, ungarisch, „r
 
 Wunsch von Marius (08.10.): Man soll sofort sehen, was man berühren kann.
 
-- Alles im Spielbereich (Würstel, Hindernisse, Blöcke, Lücken) hat einen kräftigen dunklen Umriss. Was auf dem Boden steht, wirft einen weichen Schatten. Auch Frankie hat einen Schatten, der beim Springen kleiner und heller wird.
+- Alles im Spielbereich (Würstel, Hindernisse, Blöcke, Lücken) hat einen kräftigen dunklen Umriss. Was auf dem Boden steht, wirft einen weichen Schatten. Auch Franky hat einen Schatten, der beim Springen kleiner und heller wird.
 - Der ganze Hintergrund liegt hinter einem leichten Dunstschleier, der zum Boden hin stärker wird. Dadurch wirkt er weiter weg.
 - Hintergrund-Pflanzen stehen hinter der Bodenkante (ihr Fuß ist verdeckt), Hindernisse stehen sichtbar auf dem Boden.
 - Schmetterlinge sind kleiner und liegen hinter dem Dunst.
@@ -329,9 +329,9 @@ Wunsch von Marius (08.10.): Man soll sofort sehen, was man berühren kann.
 - Handy hochkant: animierter Hinweis „Handy drehen“.
 - Auf Handy/Tablet startet das Spiel im Vollbild (wo der Browser es erlaubt; iPhone-Safari kann das nicht).
 
-## Frankie
+## Franky
 
-Nach Fotos des echten Frankie (08.10.): rehbraune Französische Bulldogge. Körper von der Seite, Kopf leicht zum Betrachter gedreht (beide Augen sichtbar), Blick nach rechts. Große aufrechte Fledermausohren (innen dunkel), eckiger Kopf mit Stirnfalten und dunkleren Augenpartien, kurze schwarze Schnauze (Maske), große dunkelbraune Augen, kompakter muskulöser Körper mit hellerer Brust, Stummelschwanz. Dunkles Lederhalsband und hellblau kariertes Halstuch. Farben einstellbar in `src/config.js`.
+Nach Fotos des echten Franky (08.10.): rehbraune Französische Bulldogge. Körper von der Seite, Kopf leicht zum Betrachter gedreht (beide Augen sichtbar), Blick nach rechts. Große aufrechte Fledermausohren (innen dunkel), eckiger Kopf mit Stirnfalten und dunkleren Augenpartien, kurze schwarze Schnauze (Maske), große dunkelbraune Augen, kompakter muskulöser Körper mit hellerer Brust, Stummelschwanz. Dunkles Lederhalsband und hellblau kariertes Halstuch. Farben einstellbar in `src/config.js`.
 Versionen: 1.0 grobe Formen, 1.1 als SVG neu (noch als Englische Bulldogge, weiß-braun), 1.2 nach Fotos.
 
 Posen: Laufen (4 Bilder), Springen, Benommen, Glücklich, Fressen (2 Bilder).
@@ -343,11 +343,11 @@ Per Web Audio erzeugt: Sprung („Boing“), Einsammeln (Glöckchen), Stolpern, 
 ## Technik-Notizen
 
 - Physik mit variablem Zeitschritt (`fixedStep: false`): Marius' Bildschirm läuft mit 59 Hz; ein fester 60-Hz-Schritt ruckelte alle paar Sekunden.
-- Der Boden ist zwischen den Lücken in dicke Blöcke geteilt, damit Frankie auch bei einem Hänger auf einem langsamen Tablet nicht durch den Boden fällt.
+- Der Boden ist zwischen den Lücken in dicke Blöcke geteilt, damit Franky auch bei einem Hänger auf einem langsamen Tablet nicht durch den Boden fällt.
 
 ## Bekannte kleine Fehler
 
-- Die kurze Pause vor dem Loslaufen (0,7 s, siehe Ablauf) gibt es nur nach einem Unfall-Neustart. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft Frankie sofort los (gemessen 08.10.). Grund: die Spiel-Uhr der Level-Szene läuft nur, solange die Szene läuft; beim Neueintritt ist sie noch auf dem Stand vom letzten Mal (Phaser 3.90 setzt `time.now` erst im ersten Update). Betrifft alle Level, auch Level 1. **Bleibt bewusst so** (Marius, 08.10.): So hat er Level 1 getestet und abgenommen. Falls die Pause später doch bei jedem Start kommen soll: in `GameScene.create()` `this.game.loop.time` statt `this.time.now` nehmen und alle Level neu prüfen.
+- Die kurze Pause vor dem Loslaufen (0,7 s, siehe Ablauf) gibt es nur nach einem Unfall-Neustart. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft Franky sofort los (gemessen 08.10.). Grund: die Spiel-Uhr der Level-Szene läuft nur, solange die Szene läuft; beim Neueintritt ist sie noch auf dem Stand vom letzten Mal (Phaser 3.90 setzt `time.now` erst im ersten Update). Betrifft alle Level, auch Level 1. **Bleibt bewusst so** (Marius, 08.10.): So hat er Level 1 getestet und abgenommen. Falls die Pause später doch bei jedem Start kommen soll: in `GameScene.create()` `this.game.loop.time` statt `this.time.now` nehmen und alle Level neu prüfen.
 - Ein Würstel, das in der Luft eingesammelt wird, zählt für die 120 ms Coyote-Zeit als Boden. Ein Tippen genau dann kann einen neuen Sprung starten (alle Level). **Bleibt so.**
 - Der allererste Level-Start nach dem Laden der Seite hat einmalig einen Einbruch der Bildrate. In Level 6 und 7 kann das einen Durchlauf kosten; der nächste Versuch klappt.
 - Unter etwa 22 Bildern pro Sekunde sind die Blöcke in Level 7 nicht mehr erreichbar (der Sprung wird bei niedriger Bildrate niedriger). Level 7 braucht also ein halbwegs schnelles Gerät.
