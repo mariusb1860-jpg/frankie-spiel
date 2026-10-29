@@ -850,9 +850,14 @@ export function isFinale(n) {
   return Object.values(GROUPS).some((group) => n === group[group.length - 1]);
 }
 
+/** The part of the game ('kids', 'paprika' or 'bayern') that level n belongs to. */
+export function groupOf(n) {
+  return Object.keys(GROUPS).find((mode) => GROUPS[mode].includes(n));
+}
+
 /** True for the Bavarian levels 11 to 15. */
 export function isBavarian(n) {
-  return GROUPS.bayern.includes(n);
+  return groupOf(n) === 'bayern';
 }
 
 /** Levels whose worlds get a star in the celebration after level n: every world up to n, in Bavaria only the Bavarian ones. */

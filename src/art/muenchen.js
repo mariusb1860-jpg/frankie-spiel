@@ -691,7 +691,8 @@ function fruitStand() {
     ${groundShadow(110, H - 1, 96)}`);
 }
 
-// A beer garden table under a white and blue parasol, with benches, mugs and a pretzel.
+// A beer garden table under a white and blue parasol, with benches and pretzels on plates (no mugs:
+// the beer mug is an obstacle in level 11).
 function beerTable() {
   const W = 250;
   const H = 210;
@@ -706,8 +707,9 @@ function beerTable() {
     <path d="M48 128 L40 ${H - 8} M202 128 L210 ${H - 8}" stroke="${WOOD_DARK}" stroke-width="5" stroke-linecap="round"/>
     <path d="M30 156 H220 V164 H30 Z" fill="${WOOD}" ${soft(WOOD_LINE, 1.3)}/>
     <path d="M36 164 V${H - 6} M214 164 V${H - 6}" stroke="${WOOD_DARK}" stroke-width="4.4" stroke-linecap="round"/>
-    ${[[70, 118], [150, 118], [182, 118]].map(([x, y]) => `<path d="M${x - 8} ${y - 24} H${x + 8} V${y} H${x - 8} Z" fill="#ffd05a" ${soft('#a8801c', 1)}/><path d="M${x + 8} ${y - 19} q8 0 8 9 q0 6 -8 6" fill="none" stroke="#e8e4d8" stroke-width="2.6"/><path d="M${x - 9} ${y - 24} q2 -8 9 -5 q7 -3 9 5 Z" fill="#ffffff" ${soft('#d8d0b8', 0.8)}/><path d="M${x - 4} ${y - 18} V${y - 4}" stroke="#fff3c4" stroke-width="2" stroke-linecap="round"/>`).join('')}
-    <path d="M98 ${118 - 6} C94 ${118 - 18} 106 ${118 - 20} 108 ${118 - 12} C110 ${118 - 20} 122 ${118 - 18} 118 ${118 - 6} C114 ${118 - 2} 102 ${118 - 2} 98 ${118 - 6} Z" fill="none" stroke="#a8641e" stroke-width="3.2" stroke-linecap="round"/>
+    ${[64, 108, 168].map((x) => `
+      <ellipse cx="${x + 10}" cy="116" rx="17" ry="3.4" fill="#f4f1ea" ${soft('#b8b0a0', 0.8)}/>
+      <path d="M${x} 112 C${x - 4} 100 ${x + 8} 98 ${x + 10} 106 C${x + 12} 98 ${x + 24} 100 ${x + 20} 112 C${x + 16} 116 ${x + 4} 116 ${x} 112 Z" fill="none" stroke="#a8641e" stroke-width="3.2" stroke-linecap="round"/>`).join('')}
     ${groundShadow(125, H - 2, 112)}`);
 }
 

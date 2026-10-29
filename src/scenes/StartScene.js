@@ -15,7 +15,7 @@ const BUTTON_X0 = 340;
 const BUTTON_GAP = 122;
 const ROW = 5; // the button row is laid out for five buttons
 const MODE_BUTTON_Y = 428;
-const MODE_BUTTON_X = [418, 542];
+const MODE_BUTTON_GAP = 124; // the buttons below the level row stand side by side, centred
 const MODE_BUTTONS = { kids: 'btn-kids', paprika: 'btn-paprika', bayern: 'btn-bayern' };
 
 // Start screen with the level selection: one round button per level, in the
@@ -62,8 +62,10 @@ export class StartScene extends Phaser.Scene {
     levels.forEach((n, i) => this.addLevelButton(n, x0 + i * BUTTON_GAP, isOpen(n), n === newest));
 
     // Buttons to the other two parts, always in the order child, paprika, pretzel.
-    MODES.filter((m) => m !== getMode()).forEach((m, i) => {
-      addBigButton(this, MODE_BUTTON_X[i], MODE_BUTTON_Y, MODE_BUTTONS[m], () => this.switchLevels(m), { pulse: false });
+    const others = MODES.filter((m) => m !== getMode());
+    others.forEach((m, i) => {
+      const x = 480 + (i - (others.length - 1) / 2) * MODE_BUTTON_GAP;
+      addBigButton(this, x, MODE_BUTTON_Y, MODE_BUTTONS[m], () => this.switchLevels(m), { pulse: false });
     });
 
     addMuteButton(this);
