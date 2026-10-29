@@ -2,11 +2,11 @@ import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { createBackdrop } from '../backdrop.js';
 import { getLevel, shownLevels } from '../levels.js';
-import { isGrownUps, setGrownUps } from '../mode.js';
+import { MODES, getMode, setMode } from '../mode.js';
 import { unlockedLevel } from '../progress.js';
 import { addBigButton, addMuteButton, enterFullscreen } from '../ui.js';
 import * as sfx from '../audio/sfx.js';
-import { hasGrownUpArt } from './BootScene.js';
+import { hasArt } from './BootScene.js';
 
 export const TITLE_FONT = '"Arial Rounded MT Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif';
 
@@ -15,10 +15,12 @@ const BUTTON_X0 = 340;
 const BUTTON_GAP = 122;
 const ROW = 5; // the button row is laid out for five buttons
 const MODE_BUTTON_Y = 428;
+const MODE_BUTTON_X = [418, 542];
+const MODE_BUTTONS = { kids: 'btn-kids', paprika: 'btn-paprika', bayern: 'btn-bayern' };
 
 // Start screen with the level selection: one round button per level, in the
-// colour of its world. Levels not reached yet show a lock. Below them one button
-// switches between the child's levels (1-5) and the grown-up levels (6-10).
+// colour of its world. Levels not reached yet show a lock. Below them two buttons lead to the
+// other two parts of the game: child (levels 1-5), paprika (6-10) and pretzel (Bavaria, 11-15).
 export class StartScene extends Phaser.Scene {
   constructor() {
     super('StartScene');
@@ -49,7 +51,7 @@ export class StartScene extends Phaser.Scene {
       .setScale(1.05);
     this.tweens.add({ targets: frankie, y: GROUND_Y - 18, duration: 420, yoyo: true, repeat: -1, ease: 'Quad.easeOut' });
 
-    // One button per level of the shown group (1-5, or 6-10 after the paprika button),
+    // One button per level of the shown group (1-5, 6-10 after the paprika button, 11-15 after the pretzel),
     // centred where the five buttons of the child's game stand.
     const levels = shownLevels();
     const isOpen = (n) => Boolean(getLevel(n)) && (n === levels[0] || n <= unlockedLevel());
@@ -59,16 +61,19 @@ export class StartScene extends Phaser.Scene {
     const x0 = BUTTON_X0 + ((ROW - levels.length) * BUTTON_GAP) / 2;
     levels.forEach((n, i) => this.addLevelButton(n, x0 + i * BUTTON_GAP, isOpen(n), n === newest));
 
-    // Paprika: on to the grown-up levels. Child: back to the child's levels.
-    const grownUps = isGrownUps();
-    addBigButton(this, 480, MODE_BUTTON_Y, grownUps ? 'btn-kids' : 'btn-paprika', () => this.switchLevels(!grownUps), { pulse: false });
+    // Buttons to the other two parts, always in the order child, paprika, pretzel.
+    MODES.filter((m) => m !== getMode()).forEach((m, i) => {
+      addBigButton(this, MODE_BUTTON_X[i], MODE_BUTTON_Y, MODE_BUTTONS[m], () => this.switchLevels(m), { pulse: false });
+    });
 
     addMuteButton(this);
-    // Keyboard: Space/Enter starts the newest open level, a number key that level (0 = level 10).
+    // Keyboard: Space/Enter starts the newest open level, a number key the level that ends in
+    // that digit (0 = level 10, in Bavaria 1-5 = levels 11-15).
     this.input.keyboard.on('keydown-SPACE', () => this.startGame(newest));
     this.input.keyboard.on('keydown-ENTER', () => this.startGame(newest));
     this.input.keyboard.on('keydown', (event) => {
-      const n = event.key === '0' ? 10 : Number(event.key);
+      if (!/^\d$/.test(event.key)) return;
+      const n = levels.find((l) => l % 10 === Number(event.key));
       if (this.playable.includes(n)) this.startGame(n);
     });
 
@@ -93,13 +98,13 @@ export class StartScene extends Phaser.Scene {
     this.backdrop.update(0, this.time.now);
   }
 
-  switchLevels(grownUps) {
+  switchLevels(mode) {
     if (this.starting) return;
     this.starting = true;
     sfx.unlock();
-    setGrownUps(grownUps);
-    // The grown-up worlds load on the first switch (loading bar), after that it is instant.
-    if (grownUps && !hasGrownUpArt()) this.scene.start('BootScene', { grownUps: true });
+    setMode(mode);
+    // The grown-up worlds load on the first switch to their part (loading bar), after that it is instant.
+    if (!hasArt(mode)) this.scene.start('BootScene', { artOnly: true });
     else this.scene.restart();
   }
 

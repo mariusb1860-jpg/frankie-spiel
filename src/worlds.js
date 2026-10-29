@@ -359,4 +359,42 @@ export const WORLDS = {
       },
     ],
   },
+
+  // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
+  // PLACEHOLDER scenery from the child's worlds: each world gets its own drawings later.
+  muenchen: {
+    color: 0xe6a817, // Munich yellow
+    tiles: { hillsFar: 'hills-far', hillsNear: 'hills-near', ground: 'ground' },
+    gap: 'gap-forest',
+    block: 'block-crate',
+    zones: [{ key: 'muenchen', until: 1, far: ['church', 'house-b'], mid: ['tree-oak', 'house-a', 'tree-birch'], near: ['lamp', 'bush', 'daisies'] }],
+  },
+  alm: {
+    color: 0x5b9e3a, // alpine meadow green
+    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-farm', ground: 'ground' },
+    gap: 'gap-forest',
+    block: 'block-wood',
+    zones: [{ key: 'alm', until: 1, far: ['tree-fir', 'tree-pine'], mid: ['cow', 'tree-fir', 'cow'], near: ['daisies', 'grass-tuft', 'rock'] }],
+  },
+  koenigssee: {
+    color: 0x1f8a8a, // emerald green of the lake
+    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
+    gap: 'gap-forest',
+    block: 'block-pier',
+    zones: [{ key: 'koenigssee', until: 1, far: ['tree-fir', 'tree-pine'], mid: ['tree-fir', 'tree-beech'], near: ['fern', 'mossy-rock'] }],
+  },
+  neuschwanstein: {
+    color: 0x7b4fb3, // royal purple of the fairy-tale king
+    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
+    gap: 'gap-forest',
+    block: 'block-wood',
+    zones: [{ key: 'neuschwanstein', until: 1, far: ['tree-fir', 'church'], mid: ['tree-fir', 'tree-beech'], near: ['fern', 'berry-bush'] }],
+  },
+  wiesn: {
+    color: 0x2f7fc9, // Bavarian blue
+    tiles: { hillsFar: 'hills-far', hillsNear: 'hills-near', ground: 'ground-farm' },
+    gap: 'gap-farm',
+    block: 'block-crate',
+    zones: [{ key: 'wiesn', until: 1, far: ['church', 'tree-pine'], mid: ['house-a', 'tree-apple'], near: ['lamp', 'bush'] }],
+  },
 };

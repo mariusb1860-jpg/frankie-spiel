@@ -1,13 +1,14 @@
 import { UNLOCK_ALL } from './config.js';
-import { isGrownUps } from './mode.js';
+import { getMode } from './mode.js';
 
 // Remembers on this device how far the child got (highest level that is open).
 // If the browser blocks storage (private mode), progress lasts until the page is closed.
 
-// The grown-up levels keep their own progress, so grown-up progress never opens the child's levels on a shared device.
+// Each part of the game keeps its own progress, so grown-up progress never opens the child's levels on a shared device.
 // The names stay "frankie-...": renaming them would lose the progress saved before.
-const key = () => (isGrownUps() ? 'frankie-unlocked-paprika' : 'frankie-unlocked');
-const inMemory = { 'frankie-unlocked': 1, 'frankie-unlocked-paprika': 1 };
+const KEYS = { kids: 'frankie-unlocked', paprika: 'frankie-unlocked-paprika', bayern: 'frankie-unlocked-bayern' };
+const key = () => KEYS[getMode()];
+const inMemory = Object.fromEntries(Object.values(KEYS).map((k) => [k, 1]));
 
 function stored() {
   try {

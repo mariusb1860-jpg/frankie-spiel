@@ -1,5 +1,5 @@
 import { CONFIG, FAST } from './config.js';
-import { isGrownUps } from './mode.js';
+import { getMode } from './mode.js';
 
 // The levels. Each layout is a list of what comes where (x in px from the start).
 // Every level has 20 sausages; Frankie stops at the dog house at the end.
@@ -532,21 +532,54 @@ export const LEVELS = [
       layout: [row(560), crate(800), high(800), haybale(984), puddle(1208), stream(1448, 268), arc(1448), log(1654), hedgehog(1944), stump(2234), puddle(2430), stream(2670, 268), crate(2876), high(2876)],
     },
   },
+
+  // ---- Levels 11 to 15 (grown-ups, Bavaria) ----
+  // Behind the pretzel button. Harder than level 6, easier than level 7, rising gently.
+  // PLACEHOLDER layouts: replaced level by level once the worlds and the new obstacles exist.
+  ...[
+    ['muenchen', 290, { velocity: -788, gravity: 2020 }, 1.4],
+    ['alm', 293, { velocity: -804, gravity: 2116 }, 1.4],
+    ['koenigssee', 296, { velocity: -826, gravity: 2233 }, 1.45],
+    ['neuschwanstein', 300, { velocity: -845, gravity: 2347 }, 1.5],
+    ['wiesn', 303, { velocity: -870, gravity: 2486 }, 1.5],
+  ].map(([world, speed, jump, animalSpeed]) => ({
+    world,
+    speed,
+    jump,
+    animalSpeed,
+    layout: [row(700), haybale(1300), high(1900), stream(2500, 180), hedgehog(3100), arc(3700), crate(4300), row(5000), log(5700), high(6400), puddle(7100), row(7800), stump(8500), arc(9200), milkcan(9900), high(10600), row(11300)],
+    fast: { length: 3600, layout: [row(600), haybale(1000), stream(1400, 180), hedgehog(1900), arc(2400), crate(2900), high(3200)] },
+  })),
 ];
 
-// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups;
-// the start screen shows them, and then only them, after the paprika button is pressed.
-const KIDS = [1, 2, 3, 4, 5];
-const GROWN_UPS = [6, 7, 8, 9, 10];
+// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups (paprika
+// button), levels 11 to 15 Bavarian levels for grown-ups (pretzel button). The start screen shows
+// one of these groups at a time.
+const GROUPS = {
+  kids: [1, 2, 3, 4, 5],
+  paprika: [6, 7, 8, 9, 10],
+  bayern: [11, 12, 13, 14, 15],
+};
 
 /** Level numbers that get a button on the start screen. */
 export function shownLevels() {
-  return isGrownUps() ? GROWN_UPS : KIDS;
+  return GROUPS[getMode()];
 }
 
-/** True for the last level of its group (5 or 10): the big celebration follows it. */
+/** True for the last level of its group (5, 10 or 15): the big celebration follows it. */
 export function isFinale(n) {
-  return n === KIDS[KIDS.length - 1] || n === GROWN_UPS[GROWN_UPS.length - 1];
+  return Object.values(GROUPS).some((group) => n === group[group.length - 1]);
+}
+
+/** True for the Bavarian levels 11 to 15. */
+export function isBavarian(n) {
+  return GROUPS.bayern.includes(n);
+}
+
+/** Levels whose worlds get a star in the celebration after level n: every world up to n, in Bavaria only the Bavarian ones. */
+export function starLevels(n) {
+  const first = isBavarian(n) ? GROUPS.bayern[0] : 1;
+  return Array.from({ length: n - first + 1 }, (_, i) => first + i);
 }
 
 /** Level definition for level number n (1-based), with its length; null if not built yet. */
