@@ -56,8 +56,8 @@ const SHINGLE_LINE = '#5e4c3a';
 const GLASS = '#8fb1cf';
 const GOLD = '#f2b83c';
 const GOLD_LINE = '#9a6e1c';
-const FIR = { line: '#1f4a36', base: '#2c6648', shade: '#235538', light: '#4a8a60' };
-const FIR_PALE = { line: '#3d6b58', base: '#4f8566', shade: '#427558', light: '#6ea683' };
+export const FIR = { line: '#1f4a36', base: '#2c6648', shade: '#235538', light: '#4a8a60' };
+export const FIR_PALE = { line: '#3d6b58', base: '#4f8566', shade: '#427558', light: '#6ea683' };
 const BEECH = { line: '#3a6a2e', base: '#6fb04a', shade: '#58983a', light: '#93cc62', dots: '#bde88a' };
 const BEECH_DARK = { line: '#2f5a2c', base: '#5a9a42', shade: '#47843a', light: '#7cba58', dots: '#a6dc7a' };
 const BEECH_PALE = { line: '#5a8a4e', base: '#86bd66', shade: '#72a858', light: '#a8d482', dots: '#c8ec9c' };
@@ -77,7 +77,7 @@ const arch = (x, y, w, h) => `M${f1(x)} ${f1(y + h)} V${f1(y + w / 2)} A${f1(w /
 
 // A spruce standing on (cx, base): h high, w wide, drawn from the bottom tier up. The left half of
 // every tier is lighter, a darker wedge sits on the right.
-function fir(cx, base, h, w, c = FIR, tiers = 5) {
+export function fir(cx, base, h, w, c = FIR, tiers = 5) {
   const trunkH = h * 0.07;
   const top = base - h;
   const usable = h - trunkH;

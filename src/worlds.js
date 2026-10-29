@@ -361,8 +361,8 @@ export const WORLDS = {
   },
 
   // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
-  // Levels 11 to 13 (src/art/muenchen.js, alm.js, koenigssee.js) have their own drawings; the other
-  // two (neuschwanstein, wiesn) are still PLACEHOLDERS built from the child's worlds.
+  // Levels 11 to 14 (src/art/muenchen.js, alm.js, koenigssee.js, neuschwanstein.js) have their own
+  // drawings; the last one (wiesn) is still a PLACEHOLDER built from the child's worlds.
   // Level 11, Munich on a sunny late-summer day: English Garden, Marienplatz, Viktualienmarkt.
   muenchen: {
     color: 0xe6a817, // Munich yellow
@@ -478,12 +478,45 @@ export const WORLDS = {
       },
     ],
   },
+  // Level 14, a golden autumn afternoon in the Allgäu below the fairy-tale castle: the mountain forest of
+  // the Pöllat gorge with Hohenschwangau, the view from the Marienbrücke with Neuschwanstein, then the
+  // Alpsee and Schwansee with lanterns and a royal banner. Own drawings in src/art/neuschwanstein.js;
+  // the water lies in far pieces only, the ground, gorge gaps and wooden blocks come from the forest.
   neuschwanstein: {
     color: 0x7b4fb3, // royal purple of the fairy-tale king
-    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
-    gap: 'gap-forest',
+    tiles: { hillsFar: 'hills-far-neuschwanstein', hillsNear: 'hills-near-neuschwanstein', ground: 'ground-forest' },
+    gap: 'gap-forest', // the gorge
     block: 'block-wood',
-    zones: [{ key: 'neuschwanstein', until: 1, far: ['tree-fir', 'church'], mid: ['tree-fir', 'tree-beech'], near: ['fern', 'berry-bush'] }],
+    // Landmarks, the bridge, the lantern and the banner are not mirrored; trees, rocks, animals and plants look natural either way.
+    flip: ['ns-larch', 'ns-forest-group', 'ns-rocks-far', 'ns-waterfall', 'ns-swan-pond', 'ns-horses-far', 'ns-spruce-big', 'ns-maple', 'ns-beech-gold', 'ns-gorge-wall', 'ns-ferns-gold', 'ns-crocus', 'ns-leaves'],
+    zones: [
+      {
+        key: 'bergwald',
+        until: 1 / 3,
+        landmarks: ['ns-hohenschwangau'],
+        far: ['ns-larch', 'ns-forest-group', 'ns-rocks-far', 'ns-waterfall', 'ns-carriage-far', null, 'ns-forest-group', 'ns-larch', 'ns-rocks-far', 'ns-forest-group', 'ns-waterfall', null],
+        mid: ['ns-spruce-big', 'ns-maple', 'ns-beech-gold', 'ns-spruce-big', 'ns-maple', null, 'ns-beech-gold', 'ns-spruce-big'],
+        near: ['ns-ferns-gold', 'ns-leaves', 'ns-crocus', 'grass-tuft', 'ns-ferns-gold'],
+        strip: 'ns-strip-fence',
+      },
+      {
+        key: 'marienbruecke',
+        until: 2 / 3,
+        landmarks: ['ns-neuschwanstein'],
+        far: ['ns-bridge-far', 'ns-larch', 'ns-forest-group', 'ns-waterfall', null, 'ns-rocks-far', 'ns-larch'],
+        mid: ['ns-gorge-wall', 'ns-spruce-big', 'ns-maple', 'ns-beech-gold', null, 'ns-spruce-big', 'ns-gorge-wall', 'ns-maple', 'ns-beech-gold', null],
+        near: ['ns-ferns-gold', 'ns-leaves', 'ns-ferns-gold', 'ns-crocus'],
+      },
+      {
+        key: 'alpsee',
+        until: 1,
+        landmarks: ['ns-alpsee-castle'],
+        far: ['ns-swan-pond', 'ns-horses-far', 'ns-larch', 'ns-forest-group', null, 'ns-swan-pond', 'ns-horses-far'],
+        mid: ['ns-lantern', 'ns-banner', 'ns-maple', 'ns-lantern', 'ns-beech-gold', 'ns-banner', null, 'ns-lantern'],
+        near: ['ns-crocus', 'ns-leaves', 'ns-ferns-gold', 'grass-tuft'],
+        strip: 'ns-strip-rail',
+      },
+    ],
   },
   wiesn: {
     color: 0x2f7fc9, // Bavarian blue
