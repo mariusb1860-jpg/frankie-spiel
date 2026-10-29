@@ -34,6 +34,11 @@ export const OBSTACLE_TYPES = {
   snowman: { y: GROUND_Y - 37, box: [30, 44, 13, 31] },
   snowball: { y: GROUND_Y - 21, circle: [16, 7, 7], roll: 100 },
   rabbit: { y: GROUND_Y - 22, box: [26, 24, 14, 22], hop: { height: 38, ms: 420, pause: 380, air: 'rabbit-jump', steps: 3, step: 40 } },
+  // Bavaria (levels 11-15)
+  masskrug: { y: GROUND_Y - 25, box: [22, 34, 7, 18] },
+  barrel: { y: GROUND_Y - 23, circle: [17, 8, 8], roll: 85 },
+  dachshund: { y: GROUND_Y - 20, box: [26, 18, 22, 19], patrol: 50, anim: 'dachshund-walk' },
+  marmot: { y: GROUND_Y - 24, box: [22, 26, 11, 22], hop: { height: 40, ms: 500, pause: 1000, air: 'marmot-jump' } },
 };
 const PATROL_SPEED = 40; // px per second, unless the type sets its own
 const ROLL_START = GAME_WIDTH + 50; // rolling starts once this close to the left screen edge

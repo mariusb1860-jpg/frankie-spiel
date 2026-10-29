@@ -1,5 +1,5 @@
 import { CONFIG, FAST } from './config.js';
-import { isGrownUps } from './mode.js';
+import { getMode } from './mode.js';
 
 // The levels. Each layout is a list of what comes where (x in px from the start).
 // Every level has 20 sausages; Frankie stops at the dog house at the end.
@@ -24,6 +24,10 @@ const frog = thing('frog'); // hops up and down
 const snowman = thing('snowman');
 const snowball = thing('snowball'); // rolls towards Frankie
 const rabbit = thing('rabbit'); // hops a little way to the left and back
+const masskrug = thing('masskrug'); // beer mug
+const barrel = thing('barrel'); // rolls towards Frankie
+const dachshund = thing('dachshund'); // walks back and forth
+const marmot = thing('marmot'); // hops up and down
 // A gap in the ground with water; x is its middle. Falling in = start again.
 const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
@@ -532,21 +536,334 @@ export const LEVELS = [
       layout: [row(560), crate(800), high(800), haybale(984), puddle(1208), stream(1448, 268), arc(1448), log(1654), hedgehog(1944), stump(2234), puddle(2430), stream(2670, 268), crate(2876), high(2876)],
     },
   },
+
+  // ---- Levels 11 to 15 (grown-ups, Bavaria) ----
+  // Behind the pretzel button. Marius wants them between level 6 and level 7, not harder:
+  // level 11 plays like level 6, then they rise gently to just below level 7.
+  {
+    // Level 11, Munich: speed, jump and animals of level 6. The Bavarian obstacles come in: beer
+    // mugs, a rolling beer barrel and walking dachshunds, plus crates, balls and puddles. The
+    // Eisbach-like brooks, crate stepping stones over a wide brook and a staircase over another.
+    world: 'muenchen',
+    speed: 290,
+    jump: { velocity: -788, gravity: 2020 }, // ~147 px high, ~0.78 s in the air
+    animalSpeed: 1.4,
+    layout: [
+      row(650),
+      masskrug(1100),
+      ball(1400),
+      high(1750),
+      stream(2100, 190),
+      dachshund(2500),
+      arc(2900),
+      stump(3250),
+      stream(3600, 200),
+      puddle(3950), // right behind the brook
+      dachshund(4350),
+      puddle(4650),
+      crate(5150),
+      masskrug(5450),
+      // Stepping stones: crates over a brook far too wide to jump, one hop per crate.
+      blocks(5750, 2, { sausages: 1 }),
+      blocks(5950, 2),
+      blocks(6150, 2, { sausages: 1 }),
+      blocks(6350, 2),
+      stream(6100, 560),
+      log(6800),
+      ball(7100),
+      row(7450),
+      crate(7800),
+      stream(8150, 210),
+      masskrug(8500), // right behind the brook
+      high(8750),
+      barrel(9200), // rolls out of the beer garden towards Frankie
+      dachshund(9650),
+      // A staircase over a wide brook: up to the second floor, then down on the far side.
+      blocks(9950, 4, { sausages: 1 }),
+      blocks(10100, 4, { tier: 2, sausages: 2 }),
+      stream(10200, 420),
+      hedgehog(10750),
+      crate(11050),
+      puddle(11350),
+      stump(11650),
+      arc(11650), // the jump over the stump collects the arc
+      stream(12000, 220),
+      masskrug(12350),
+      high(12600),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), masskrug(1000), stream(1400, 190), dachshund(1800), arc(2200), barrel(2900), high(3150)],
+    },
+  },
+  {
+    // Level 12, the Alps: a little faster, a little shorter jump. Marmots hop on the spot, frogs in
+    // the alpine pond, a dachshund on the hiking path, hay bales, milk cans, stumps and logs. Mountain
+    // brooks get wider (240-275 px), pairs only 200 px apart, single wooden blocks 220 px apart as
+    // stepping stones (one hop per block) and a staircase.
+    world: 'alm',
+    speed: 293,
+    jump: { velocity: -804, gravity: 2116 }, // ~146 px high, ~0.76 s in the air
+    animalSpeed: 1.4,
+    layout: [
+      row(650),
+      haybale(1050),
+      milkcan(1250), // pair 200 px apart
+      high(1250),
+      stream(1750, 240),
+      marmot(2150),
+      arc(2500),
+      frog(2850),
+      stump(3150),
+      stream(3500, 270),
+      log(3840),
+      row(4200),
+      marmot(4600),
+      // Stepping stones: single blocks over a brook far too wide to jump, one hop per block.
+      blocks(4900, 1),
+      blocks(5120, 1, { sausages: 1 }),
+      blocks(5340, 1),
+      blocks(5560, 1, { sausages: 1 }),
+      stream(5295, 730),
+      haybale(5900),
+      puddle(6200),
+      milkcan(6480),
+      high(6800),
+      dachshund(7150),
+      stream(7560, 260),
+      frog(7950),
+      haybale(8200),
+      // A staircase over a wide brook.
+      blocks(8500, 4, { sausages: 1 }),
+      blocks(8650, 4, { tier: 2, sausages: 2 }),
+      stream(8750, 420),
+      marmot(9300),
+      stump(9600),
+      log(9800), // pair 200 px apart
+      arc(10200),
+      stream(10560, 260),
+      milkcan(10900),
+      marmot(11250),
+      puddle(11480),
+      stream(11910, 275),
+      haybale(12290),
+      high(12560),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), marmot(1000), stream(1400, 240), haybale(1800), arc(2200), frog(2700), high(3150)],
+    },
+  },
+  {
+    // Level 13, Lake Königssee: shore and mountain forest. Logs, stumps, hedgehogs, frogs, marmots
+    // and puddles; inlets of 250-270 px, pairs, a hazard right behind an inlet, single jetty boards
+    // as stepping stones and a staircase of jetty boards.
+    world: 'koenigssee',
+    speed: 296,
+    jump: { velocity: -826, gravity: 2233 }, // ~146 px high, ~0.74 s in the air
+    animalSpeed: 1.45,
+    layout: [
+      row(650),
+      log(1000),
+      stump(1200), // pair 200 px apart
+      high(1200),
+      stream(1650, 250),
+      hedgehog(2050),
+      arc(2400),
+      marmot(2750),
+      log(2960),
+      stream(3400, 260),
+      frog(3800),
+      row(4100),
+      hedgehog(4750),
+      // Stepping stones: single jetty boards over a wide inlet.
+      blocks(5060, 1),
+      blocks(5280, 1, { sausages: 1 }),
+      blocks(5500, 1),
+      blocks(5720, 1, { sausages: 1 }),
+      stream(5455, 730),
+      stump(6140),
+      frog(6430),
+      stream(6800, 265),
+      log(7090), // right behind the inlet
+      high(7300),
+      marmot(7600),
+      puddle(7880),
+      stream(8250, 275),
+      hedgehog(8680),
+      stump(8950),
+      // A staircase of jetty boards over a wide inlet.
+      blocks(9250, 3, { sausages: 1 }),
+      blocks(9410, 3, { tier: 2, sausages: 2 }),
+      stream(9490, 420),
+      log(10000),
+      frog(10300),
+      arc(10600),
+      stream(10950, 265),
+      marmot(11300),
+      puddle(11580),
+      stump(11850),
+      stream(12180, 275),
+      log(12560),
+      high(12560),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), log(1000), stream(1400, 250), hedgehog(1850), arc(2250), frog(2700), high(3150)],
+    },
+  },
+  {
+    // Level 14, Neuschwanstein: faster again, animals 1.5 times as fast. Dachshunds, hedgehogs,
+    // marmots and two rolling beer barrels between logs, stumps, crates and balls. The Marienbrücke:
+    // a long bridge of blocks over a gorge far too wide to jump; an island between two gorges,
+    // gaps up to 275 px and a staircase.
+    world: 'neuschwanstein',
+    speed: 300,
+    jump: { velocity: -845, gravity: 2347 }, // ~145 px high, ~0.72 s in the air
+    animalSpeed: 1.5,
+    layout: [
+      row(650),
+      log(1000),
+      stump(1210), // pair 210 px apart
+      stream(1600, 260),
+      dachshund(2000),
+      arc(2350),
+      crate(2650),
+      ball(2860), // pair 210 px apart
+      high(2860),
+      stream(3250, 270),
+      marmot(3600),
+      hedgehog(3950),
+      puddle(4250),
+      row(4520),
+      barrel(4950), // rolls towards Frankie, he meets it just after the sausages
+      log(5150),
+      // The Marienbrücke: a long bridge of blocks over the gorge.
+      blocks(5450, 12, { sausages: 3 }),
+      stream(5740, 480),
+      stump(6350),
+      marmot(6650),
+      crate(6890),
+      stream(7250, 270),
+      dachshund(7650),
+      // An island between two gorges.
+      stream(8050, 260),
+      crate(8400),
+      stream(8740, 260),
+      barrel(9400),
+      hedgehog(9800),
+      // A staircase over a wide gorge.
+      blocks(10100, 3, { sausages: 1 }),
+      blocks(10260, 3, { tier: 2, sausages: 2 }),
+      stream(10340, 420),
+      marmot(10900),
+      log(11150),
+      high(11150),
+      arc(11450),
+      stream(11800, 275),
+      ball(12110),
+      stump(12330),
+      log(12550),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), dachshund(1000), stream(1400, 260), marmot(1800), blocks(2100, 8, { sausages: 2 }), stream(2290, 380), arc(2900), log(3250)],
+    },
+  },
+  {
+    // Level 15, the Oktoberfest: the finale of the Bavarian levels, a little below level 7. Beer mugs
+    // (one chain of three 210 px apart), three rolling barrels, dachshunds, crates, puddles and balls.
+    // Muddy ditches up to 278 px, an island between two ditches and a staircase of benches.
+    world: 'wiesn',
+    speed: 303,
+    jump: { velocity: -870, gravity: 2486 }, // ~145 px high, ~0.70 s in the air
+    animalSpeed: 1.5,
+    layout: [
+      row(650),
+      masskrug(1000),
+      masskrug(1200), // pair 200 px apart
+      high(1200),
+      stream(1600, 270),
+      dachshund(2000),
+      arc(2350),
+      crate(2650),
+      puddle(2850),
+      stream(3200, 270),
+      masskrug(3500),
+      high(3500),
+      barrel(4150),
+      crate(4450),
+      puddle(4750),
+      masskrug(5100), // three mugs in a row, 210 px apart
+      masskrug(5310),
+      high(5310),
+      masskrug(5520),
+      stream(5900, 275),
+      crate(6150),
+      // A staircase over a wide ditch.
+      blocks(6450, 3, { sausages: 1 }),
+      blocks(6610, 3, { tier: 2, sausages: 2 }),
+      stream(6690, 420),
+      dachshund(7250),
+      puddle(7550),
+      high(7800),
+      // An island between two ditches.
+      stream(8100, 265),
+      crate(8330),
+      stream(8680, 265),
+      row(9100),
+      barrel(9400),
+      hedgehog(9850),
+      ball(10120),
+      arc(10450),
+      stream(10800, 275),
+      puddle(11040),
+      ball(11270),
+      stream(11620, 278),
+      barrel(12350),
+      masskrug(12600),
+      high(12600),
+    ],
+    fast: {
+      length: 3600,
+      layout: [row(600), masskrug(1000), masskrug(1210), stream(1550, 270), dachshund(1950), arc(2350), barrel(3050), high(3250)],
+    },
+  },
 ];
 
-// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups;
-// the start screen shows them, and then only them, after the paprika button is pressed.
-const KIDS = [1, 2, 3, 4, 5];
-const GROWN_UPS = [6, 7, 8, 9, 10];
+// Levels 1-5 are the child's game. Levels 6 to 10 are very hard levels for grown-ups (paprika
+// button), levels 11 to 15 Bavarian levels for grown-ups (pretzel button). The start screen shows
+// one of these groups at a time.
+const GROUPS = {
+  kids: [1, 2, 3, 4, 5],
+  paprika: [6, 7, 8, 9, 10],
+  bayern: [11, 12, 13, 14, 15],
+};
 
 /** Level numbers that get a button on the start screen. */
 export function shownLevels() {
-  return isGrownUps() ? GROWN_UPS : KIDS;
+  return GROUPS[getMode()];
 }
 
-/** True for the last level of its group (5 or 10): the big celebration follows it. */
+/** True for the last level of its group (5, 10 or 15): the big celebration follows it. */
 export function isFinale(n) {
-  return n === KIDS[KIDS.length - 1] || n === GROWN_UPS[GROWN_UPS.length - 1];
+  return Object.values(GROUPS).some((group) => n === group[group.length - 1]);
+}
+
+/** The part of the game ('kids', 'paprika' or 'bayern') that level n belongs to. */
+export function groupOf(n) {
+  return Object.keys(GROUPS).find((mode) => GROUPS[mode].includes(n));
+}
+
+/** True for the Bavarian levels 11 to 15. */
+export function isBavarian(n) {
+  return groupOf(n) === 'bayern';
+}
+
+/** Levels whose worlds get a star in the celebration after level n: every world up to n, in Bavaria only the Bavarian ones. */
+export function starLevels(n) {
+  const first = isBavarian(n) ? GROUPS.bayern[0] : 1;
+  return Array.from({ length: n - first + 1 }, (_, i) => first + i);
 }
 
 /** Level definition for level number n (1-based), with its length; null if not built yet. */

@@ -2,7 +2,7 @@ import { GROUND_Y } from '../config.js';
 import { FRANKIE_FEET_Y, FRANKIE_H } from '../art/frankie.js';
 import { BALLOONS } from '../art/party.js';
 import { createBackdrop } from '../backdrop.js';
-import { LEVELS } from '../levels.js';
+import { LEVELS, isBavarian, starLevels } from '../levels.js';
 import { WORLDS } from '../worlds.js';
 import { addBigButton, addMuteButton } from '../ui.js';
 import * as sfx from '../audio/sfx.js';
@@ -17,6 +17,7 @@ const STAR_ROW = 760; // widest the row of stars may get (10 stars stand closer 
 const HOME_X = 790;
 const HOME_Y = 255;
 const HOME_Y_MANY_STARS = 280; // from 7 stars on, a star stands right above the button
+const MANY_STARS = 7;
 const COLORS = [0xe53935, 0xffd23f, 0x43b047, 0x3b7fc4, 0xff8a3d, 0xa259d9, 0xff6b9a];
 
 // The big celebration after the last level: one star for every world played so far flies in,
@@ -28,14 +29,14 @@ export class VictoryScene extends Phaser.Scene {
   }
 
   init(data) {
-    // The level just finished: 5 for the child's game, 10 for the grown-ups.
+    // The level just finished: 5 for the child's game, 10 or 15 for the grown-ups.
     this.lastLevel = data?.level ?? 5;
   }
 
   create() {
     this.leaving = false;
     this.backdrop = createBackdrop(this, { zone: 'garden' });
-    this.add.image(0, 0, 'bunting').setOrigin(0).setDepth(30);
+    this.add.image(0, 0, isBavarian(this.lastLevel) ? 'bunting-bayern' : 'bunting').setOrigin(0).setDepth(30);
     this.add.image(FRANKIE_X, GROUND_Y + 2, 'shadow').setDisplaySize(130, 22).setDepth(9);
     this.frankie = this.add.sprite(FRANKIE_X, FRANKIE_Y, 'frankie-happy').setScale(FRANKIE_SCALE).setDepth(10);
     addMuteButton(this);
@@ -57,9 +58,11 @@ export class VictoryScene extends Phaser.Scene {
     this.backdrop.update(0, this.time.now);
   }
 
-  // One star in the colour of every world played so far (levels 1 up to the one just finished).
+  // One star in the colour of every world played so far (levels 1 up to the one just finished;
+  // after level 15 only the five Bavarian worlds).
   flyInStars() {
-    const colors = LEVELS.slice(0, this.lastLevel).map((l) => WORLDS[l.world].color);
+    const colors = starLevels(this.lastLevel).map((n) => WORLDS[LEVELS[n - 1].world].color);
+    this.starCount = colors.length;
     const gap = Math.min(STAR_GAP, STAR_ROW / Math.max(1, colors.length - 1));
     const x0 = 480 - ((colors.length - 1) * gap) / 2;
     colors.forEach((color, i) => {
@@ -219,7 +222,7 @@ export class VictoryScene extends Phaser.Scene {
 
   showHomeButton() {
     const home = () => this.goHome();
-    addBigButton(this, HOME_X, this.lastLevel > 5 ? HOME_Y_MANY_STARS : HOME_Y, 'btn-home', home);
+    addBigButton(this, HOME_X, this.starCount >= MANY_STARS ? HOME_Y_MANY_STARS : HOME_Y, 'btn-home', home);
     this.input.keyboard.once('keydown-SPACE', home);
     this.input.keyboard.once('keydown-ENTER', home);
   }

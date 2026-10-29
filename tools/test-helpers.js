@@ -8,6 +8,7 @@
 //   T.jumpProfile(level)                    apex (px) and time in the air (s) of one jump
 //   T.flipTimes(index, ms)                  how long a walking animal walks per direction (ms)
 //   T.startButtons() / T.stars()            start screen buttons / stars in the celebration
+//   T.mode(m)                               button to 'kids' (1-5), 'paprika' (6-10) or 'bayern' (11-15)
 //   T.grownUps(on)                          paprika button (levels 6-10) or child button (1-5)
 //   T.textures(keys)                        textures that are missing or empty
 (function () {
@@ -32,12 +33,11 @@
     return scene();
   }
 
-  // Like pressing the paprika button (on = true) or the child button (on = false) on the start
-  // screen; waits until the start screen shows the other levels. Needed before levels 6-10:
-  // their worlds only load on the first switch.
-  async function grownUps(on = true) {
-    const first = on ? '6' : '1';
-    window.game.scene.getScene('StartScene').switchLevels(on);
+  // Like pressing the child, paprika or pretzel button on the start screen; waits until the start
+  // screen shows that part's levels. Needed before levels 6-15: their worlds only load on the first switch.
+  async function mode(m) {
+    const first = { kids: '1', paprika: '6', bayern: '11' }[m];
+    window.game.scene.getScene('StartScene').switchLevels(m);
     const ok = await waitFor(() => {
       const s = window.game.scene.getScene('StartScene');
       return window.game.scene.isActive('StartScene') && s.children.list.some((o) => o.type === 'Text' && o.text === first);
@@ -45,6 +45,7 @@
     await sleep(400);
     return ok;
   }
+  const grownUps = (on = true) => mode(on ? 'paprika' : 'kids');
 
   // Jump distances (d = target x minus Frankie x when the bot taps), tuned for levels 1-5.
   // hop: from one block to the next block of the same floor (stepping stones).
@@ -281,6 +282,6 @@
 
   window.T = {
     bot, run, windowSeq, dWindow, window: window_, trial, trialTime, jumpProfile, flipTimes,
-    startButtons, stars, textures, startLevel, grownUps, waitFor, sleep,
+    startButtons, stars, textures, startLevel, mode, grownUps, waitFor, sleep,
   };
 })();

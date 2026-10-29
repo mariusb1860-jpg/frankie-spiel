@@ -1,12 +1,15 @@
-// Which half of the game is shown: the child's levels 1-5 or, behind the paprika button on
-// the start screen, the hard levels 6-10 for grown-ups. Kept in memory only: every visit of
-// the link starts with the child's levels.
-let grownUps = false;
+// Which part of the game the start screen shows: the child's levels 1-5 ('kids'), behind the
+// paprika button the hard levels 6-10 for grown-ups ('paprika'), behind the pretzel button the
+// Bavarian levels 11-15 for grown-ups ('bayern'). Kept in memory only: every visit of the link
+// starts with the child's levels.
+export const MODES = ['kids', 'paprika', 'bayern'];
 
-export function isGrownUps() {
-  return grownUps;
+let mode = 'kids';
+
+export function getMode() {
+  return mode;
 }
 
-export function setGrownUps(on) {
-  grownUps = on;
+export function setMode(m) {
+  mode = m;
 }

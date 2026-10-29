@@ -256,8 +256,10 @@ export function worldSvgs() {
         <ellipse cx="55" cy="12.5" rx="45" ry="7" fill="#7cc6ff"/>
         <path d="M30 11 Q38 9 46 11 M64 14 Q72 12 80 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>`),
     },
-    // Start screen: the paprika button leads to the grown-up levels 6-10, the child button back to 1-5.
+    // Start screen: the paprika button leads to the grown-up levels 6-10, the pretzel button to the
+    // Bavarian levels 11-15, the child button back to 1-5.
     'btn-paprika': { w: MODE_BUTTON, h: MODE_BUTTON + 6, svg: modeButton('#477050', paprikaIcon()) },
+    'btn-bayern': { w: MODE_BUTTON, h: MODE_BUTTON + 6, svg: modeButton('#2f7fc9', pretzelIcon()) },
     'btn-kids': { w: MODE_BUTTON, h: MODE_BUTTON + 6, svg: modeButton('#f4b63f', childIcon()) },
   };
 }
@@ -283,6 +285,20 @@ function paprikaIcon() {
     <path d="M41 34 C45 29 59 29 63 34 C58 38 46 38 41 34 Z" fill="#3f7a2e" ${line}/>
     <path d="M52 31 C52 25 55 21 61 19" fill="none" stroke="${LINE}" stroke-width="8" stroke-linecap="round"/>
     <path d="M52 31 C52 25 55 21 61 19" fill="none" stroke="#4f9a3a" stroke-width="4" stroke-linecap="round"/>`;
+}
+
+// A Bavarian pretzel: thick belly at the bottom, thin arms crossing in the middle, coarse salt.
+function pretzelIcon() {
+  const arms = 'M40 70 C48 58 58 46 62 36 C66 26 80 30 78 44 M26 44 C24 30 38 26 42 36 C46 46 56 58 64 70';
+  const belly = 'M78 44 C77 60 64 74 52 74 C40 74 27 60 26 44';
+  const salt = [[34, 64], [44, 71], [57, 72], [68, 65], [74, 54], [30, 54]];
+  return `
+    <path d="${arms}" fill="none" stroke="${LINE}" stroke-width="13" stroke-linecap="round"/>
+    <path d="${belly}" fill="none" stroke="${LINE}" stroke-width="17" stroke-linecap="round"/>
+    <path d="${belly}" fill="none" stroke="#b5652b" stroke-width="12" stroke-linecap="round"/>
+    <path d="${arms}" fill="none" stroke="#b5652b" stroke-width="8" stroke-linecap="round"/>
+    <path d="M30 46 C30 56 38 66 48 69 M44 38 C48 46 54 54 58 60" fill="none" stroke="#e0a062" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+    ${salt.map(([x, y]) => `<rect x="${x - 2}" y="${y - 1.6}" width="4" height="3.2" rx="1" fill="#ffffff"/>`).join('')}`;
 }
 
 // A smiling child's face.
