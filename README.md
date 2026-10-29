@@ -7,7 +7,7 @@ Ein kleines Jump'n'Run für Kinder ab 3 Jahren. Franky, die Französische Bulldo
 - Steuerung: irgendwo tippen, Leertaste oder Pfeil hoch = springen.
 - Wer an ein Hindernis stößt oder ins Wasser fällt, fängt das Level von vorn an.
 - Im Startbild wählt man das Level; geschaffte Level schalten das nächste frei.
-- Der Paprika-Knopf unten führt zu fünf sehr schweren Leveln für Erwachsene, der Kind-Knopf wieder zurück.
+- Unten führen zwei Knöpfe zu den anderen Teilen des Spiels: der Paprika-Knopf zu fünf sehr schweren Leveln für Erwachsene (Ungarn), der Breze-Knopf zu fünf bayerischen Leveln für Erwachsene, der Kind-Knopf wieder zurück.
 - Läuft im Browser auf Handy, Tablet und PC. Handy bitte quer halten.
 
 ## Lokal starten
@@ -39,7 +39,7 @@ Alle Level zum Ausprobieren freischalten: `http://localhost:8137/?alle=1`.
 | `src/level.js`, `src/course.js` | Machen aus dem Level-Ablauf Boden, Bäche, Blöcke, Würstel und Hindernisse |
 | `src/backdrop.js` | Baut die Landschaft mit Dunstschleier und Parallax |
 | `src/progress.js` | Merkt sich freigeschaltete Level |
-| `src/art/` | Franky, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics); `puszta.js`, `budapest.js`, `balaton.js`, `tokaj.js` und `visegrad.js` sind Zusatz-Welten, die nur in besonderen Fällen geladen werden |
+| `src/art/` | Franky, Würstel, Hindernisse und Landschaft, mit Code gezeichnet (SVG und Phaser-Graphics); `puszta.js`, `budapest.js`, `balaton.js`, `tokaj.js` und `visegrad.js` (Paprika-Knopf) sowie `bavaria.js`, `muenchen.js`, `alm.js`, `koenigssee.js`, `neuschwanstein.js` und `wiesn.js` (Breze-Knopf) sind Zusatz-Welten, die erst nach dem Knopf geladen werden |
 | `tools/` | Hilfen zum Testen: Browser-Helfer `test-helpers.js` und Server ohne Cache `nocache_server.py` |
 | `preview.html` | Zeigt alle Zeichnungen groß, zum Begutachten |
 | `src/audio/sfx.js` | Töne, mit Code erzeugt |

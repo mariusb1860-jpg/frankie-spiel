@@ -1,6 +1,6 @@
 # Spezifikation: Franky sammelt Würstel
 
-Stand: 2026-10-28 (Version 6: nur noch ein Link; Level 6 bis 10 für Erwachsene über den Paprika-Knopf auf dem Startbild, zurück über den Kind-Knopf; Level 1–5 und Siegesfeier für das Kind unverändert)
+Stand: 2026-10-29 (Version 7: dritter Teil Bayern mit Level 11 bis 15 hinter dem Breze-Knopf; unten auf dem Startbild jetzt zwei Knöpfe; Level 1–10 unverändert)
 
 ## Ziel
 
@@ -17,7 +17,7 @@ Ein einfaches 2D-Jump'n'Run als Geschenk für das Kind einer Arbeitskollegin. He
 
 Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Nochmal“ oder „Weiter“.
 
-1. **Startbild:** Titel „Franky“, Franky hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Unten in der Mitte sitzt ein runder Paprika-Knopf (pulsiert nicht). Er zeigt statt dessen die Knöpfe 6 bis 10 (nur für Erwachsene) an den Plätzen der Kinder-Knöpfe: Level 6 ist dann immer offen, jedes weitere öffnet sich, sobald das vorige geschafft ist. Beim ersten Mal lädt kurz der Ladebalken (ungarische Welten). Auf diesem Startbild sitzt an derselben Stelle ein Kind-Knopf, der zurück zu 1–5 führt. Tastatur: Ziffern 6 bis 9, die Taste 0 startet Level 10. Der Link öffnet immer die Kinder-Hälfte, auch auf Geräten mit altem Fortschritt. Seit 28.10.2026 gibt es nur noch diesen einen Link: Der frühere geheime Link `?paprika` zeigt jetzt ganz normal das Kinder-Startbild.
+1. **Startbild:** Titel „Franky“, Franky hüpft fröhlich. Darunter 5 runde Level-Knöpfe in der Farbe ihrer Welt, mit großer Zahl. Noch nicht erreichte (oder noch nicht gebaute) Level sind grau mit Schloss. Der neueste offene Level-Knopf pulsiert. Das Gerät merkt sich, wie weit das Kind gekommen ist; `?alle=1` an der Adresse öffnet alle gebauten Level zum Testen. Unten in der Mitte sitzen zwei runde Knöpfe nebeneinander (pulsieren nicht), immer für die beiden anderen Teile des Spiels, in der Reihenfolge Kind, Paprika, Breze: im Kinder-Startbild Paprika und Breze, im Paprika-Startbild Kind und Breze, im Bayern-Startbild Kind und Paprika. Der Paprika-Knopf zeigt statt der Kinder-Knöpfe die Knöpfe 6 bis 10 (ungarische Level für Erwachsene), der Breze-Knopf (bayerisch blau, braune Breze mit Salz, seit 29.10.2026) die Knöpfe 11 bis 15 (bayerische Level für Erwachsene). Das erste Level des Teils ist immer offen, jedes weitere öffnet sich, sobald das vorige geschafft ist; jeder Teil merkt sich seinen Fortschritt getrennt. Beim ersten Wechsel in einen Teil lädt kurz der Ladebalken (seine Welten). Tastatur: die Ziffer, auf die das Level endet (6 bis 9 und 0 = Level 10; im Bayern-Startbild 1 bis 5 = Level 11 bis 15). Der Link öffnet immer den Kinder-Teil, auch auf Geräten mit altem Fortschritt. Seit 28.10.2026 gibt es nur noch diesen einen Link: Der frühere geheime Link `?paprika` zeigt jetzt ganz normal das Kinder-Startbild.
 2. **Level:**
    - Franky läuft automatisch nach rechts. Tippen irgendwo / Leertaste / Pfeil hoch = Springen.
    - Jedes Level hat 20 Würstel: am Boden (sammelt Franky im Laufen), in der Luft (Sprung nötig), als Bogen (ein Sprung holt alle drei) und ab Level 2 auf schwebenden Blöcken.
@@ -26,8 +26,8 @@ Startbild mit Level-Auswahl → Level (ca. 1 Minute) → Futterszene → „Noch
    - Springen ist bewusst leicht: ca. 170 px hoch, ca. 1 Sekunde in der Luft, Trefferflächen der Hindernisse kleiner als die Bilder.
    - Nach einem Unfall wartet Franky kurz (0,7 s), bevor er wieder losläuft. Beim Start aus der Level-Auswahl, mit „Nochmal“ und mit „Weiter“ läuft er sofort los (so abgenommen, siehe „Bekannte kleine Fehler“).
 3. **Ziel:** Hundehütte „FRANKY“ mit Napf. Franky bleibt stehen und freut sich. Das nächste Level ist damit freigeschaltet.
-4. **Futterszene (am Ende der jeweiligen Welt):** Franky macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Franky mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (in der Erwachsenen-Hälfte nach Level 10) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
-5. **Siegesfeier (nach Level 5, in der Erwachsenen-Hälfte nach Level 10):** im Garten von Franky, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Franky springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 10 sind es zehn Sterne in den Farben der zehn Welten (ab 9 Sternen rücken sie enger zusammen, bei 10 Sternen 84 statt 100 px Abstand), und der Haus-Knopf führt zum Startbild mit 6 bis 10.
+4. **Futterszene (am Ende der jeweiligen Welt):** Franky macht zuerst einen Freudentanz, jedes Mal ein anderer als beim letzten Mal: drei Hüpfer mit Umschauen, Salto mit Herzchen, oder Wackeltanz mit Musiknoten. Dann fliegen die Würstel schnell hintereinander in den Napf, Franky mampft durchgehend und wird dabei etwas runder (ganze Szene ca. 9 Sekunden bei 20 Würsteln). Wer nichts gesammelt hat, bekommt trotzdem ein Würstel. Danach zwei Knöpfe: Nochmal (orange) und Weiter (grün, nächstes Level). Nach Level 5 (bei Paprika nach Level 10, bei der Breze nach Level 15) gibt es keine Knöpfe: die Siegesfeier beginnt von selbst.
+5. **Siegesfeier (nach Level 5, bei Paprika nach Level 10, bei der Breze nach Level 15):** im Garten von Franky, mit Wimpelkette. Fanfare, fünf Sterne in den Farben der fünf Welten fliegen nacheinander ein, ein goldener Pokal (Pfotenabdruck, Würstel auf dem Schild) erscheint mit Strahlen. Dann Konfetti, aufsteigende Luftballons und Feuerwerk; Franky springt dreimal (mit Salto), wackelt zu Musik und hüpft danach fröhlich weiter. Nach ca. 8 Sekunden erscheint der Haus-Knopf zurück zur Level-Auswahl. Nach Level 10 sind es zehn Sterne in den Farben der zehn Welten (ab 9 Sternen rücken sie enger zusammen, bei 10 Sternen 84 statt 100 px Abstand), und der Haus-Knopf führt zum Startbild mit 6 bis 10. Nach Level 15 fliegen nur die fünf Sterne der bayerischen Welten ein, die Wimpelkette ist weiß-blau mit Rauten, und der Haus-Knopf führt zum Startbild mit 11 bis 15.
 
 Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf langsamen Handys ein paar Sekunden).
 
@@ -45,8 +45,13 @@ Beim Laden zeigt ein Balken den Fortschritt (die vielen Zeichnungen brauchen auf
 | 8 | Plattensee (nur über den Paprika-Knopf): Strandbad mit Badehäuschen und Wasserrutsche → Halbinsel Tihany mit Abtei und Lavendel → Tafelberg Badacsony mit Segelhafen; Boden, Rinnen und Stege wie am Strand | 320 px/s | 40 Gefahren: Sandburgen, Kisten, Pfützen, Bälle, Wasserbälle, 6 Igel (1,7-fach; Krabben ersetzt), Gräben bis 274 px, Hindernis-Paare mit nur 176 px Abstand, ein Wasserball direkt hinter einem Graben, Steg-Trittsteine und eine Treppe mit Sandburg auf der Landung. |
 | 9 | Tokaj (nur über den Paprika-Knopf): Weinberg am Hang mit Presshaus → Kellergasse → Weinlesefest; Boden und Gräben wie auf dem Bauernhof, Blöcke aus Holz | 330 px/s | 42 Gefahren: Kisten, Baumstümpfe, Baumstämme, Milchkannen, Heuballen, Pfützen, Bälle, 7 Igel, ein Frosch, 7 Gräben von 264 px, eine lange Terrasse in 2 Etagen über einem 716-px-Graben, eine Treppe in eine Kette, ein Igel unter einer Blockreihe, zwei Gräben mit kurzer Insel. |
 | 10 | Visegrád (nur über den Paprika-Knopf): Donauknie bei Sonnenuntergang → Burgberg mit Hochburg und Salomonturm → Ritterfest; Boden und Bach wie im Wald, Blöcke aus Holz | 340 px/s | 46 Gefahren: Kisten, Heuballen, Baumstümpfe, Baumstämme, Milchkannen, Pfützen, Bälle, 2 Wasserbälle, 6 Igel (zwei direkt hintereinander), ein Frosch, 9 Gräben von 268 px, drei Inseln (Graben, Kiste, Graben), Gräben direkt hinter Pfützen, vier Paare mit 184 px Abstand, eine Vierer-Kette mit 198 px, eine Treppe über einen 404-px-Graben. Das schwerste Level. Danach Siegesfeier mit 10 Sternen. |
+| 11 | München (nur über den Breze-Knopf): Englischer Garten mit Chinesischem Turm und Monopteros → Marienplatz mit Rathaus, Mariensäule und Frauenkirche → Viktualienmarkt mit Maibaum und Altem Peter; Wiese als Boden, Bach wie im Wald, Blöcke aus Obstkisten | 290 px/s | 26 Gefahren, so schwer wie Level 6 (gleiches Tempo, gleicher Sprung, Tiere 1,4-fach): 4 Maßkrüge, ein rollendes Bierfass, 3 Dackel, ein Igel, Kisten, Bälle, Pfützen, Baumstümpfe, ein Baumstamm, Bäche 190–220 px, Kisten-Trittsteine über einen 560-px-Bach, eine Treppe. |
+| 12 | Alm (nur über den Breze-Knopf): Almwiese mit Kühen, Heu-Reitern und Kapelle → Almhütte und Gipfelkreuz → Zugspitze mit Seilbahn; Wiese als Boden, Gebirgsbach, Holzblöcke | 293 px/s | 27 Gefahren: 4 Murmeltiere, 2 Frösche, ein Dackel, Heuballen, Milchkannen, Baumstümpfe, Baumstämme, Pfützen, Bäche 240–275 px, zwei Paare mit 200 px Abstand, einzelne Holzblöcke 220 px auseinander als Trittsteine, eine Treppe. |
+| 13 | Königssee (nur über den Breze-Knopf): Bergwald mit Watzmann → St. Bartholomä vor der Watzmann-Ostwand mit Ausflugsbooten → Bootssteg mit Bootshäusern und Jenner; Waldboden und Bach wie im Wald, Stege wie am Strand | 296 px/s | 28 Gefahren: Baumstämme, Baumstümpfe, 3 Igel, 3 Frösche, 3 Murmeltiere (Tiere 1,45-fach), Pfützen, Zuläufe 250–275 px, ein Baumstamm direkt hinter einem Zulauf, einzelne Steg-Bretter als Trittsteine, eine Treppe aus Stegen. |
+| 14 | Neuschwanstein (nur über den Breze-Knopf): Herbstwald mit Hohenschwangau → Marienbrücke mit dem Schloss → Alpsee; Waldboden und Bach wie im Wald, Holzblöcke | 300 px/s | 30 Gefahren: 2 Dackel, 2 Igel, 3 Murmeltiere, 2 rollende Bierfässer (Tiere 1,5-fach), Baumstämme, Baumstümpfe, Kisten, Bälle, eine Pfütze, Schluchten bis 275 px, die Marienbrücke (12 Blöcke über eine 480-px-Schlucht), eine Insel zwischen zwei Schluchten, eine Treppe. |
+| 15 | Oktoberfest (nur über den Breze-Knopf): Eingang mit Bavaria und Ruhmeshalle → Bierzelte und Paulskirche → Fahrgeschäfte mit Riesenrad und Achterbahn; Boden und Matschgräben wie auf dem Bauernhof, Obstkisten | 303 px/s | 31 Gefahren: 7 Maßkrüge (drei davon als Kette mit 210 px Abstand), 3 rollende Bierfässer, 2 Dackel, ein Igel, Kisten, Pfützen, Bälle, Matschgräben bis 278 px, eine Insel zwischen zwei Gräben, eine Treppe aus Bänken. Das schwerste bayerische Level, knapp leichter als Level 7. Danach Siegesfeier mit den 5 bayerischen Sternen. |
 
-Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level (Hindernisse und Lücken): 6, 9, 11, 12, 13, 25, 34, 40, 42, 46. Bot-Durchlauf Level 6: 45 s, Level 7: 42 s, Level 8: 41 s, Level 9: 40 s, Level 10: 39 s (Messungen unten).
+Jedes Level ist 13 200 px lang und hat genau 20 Würstel. Durch das höhere Tempo dauert ein Level etwas kürzer (Bot-Durchlauf 08.10.: Level 1 59 s, 2 56 s, 3 53 s, 4 51 s, 5 49 s). Gefahren pro Level (Hindernisse und Lücken): 6, 9, 11, 12, 13, 25, 34, 40, 42, 46, 26, 27, 28, 30, 31. Bot-Durchlauf Level 6: 45 s, Level 7: 42 s, Level 8: 41 s, Level 9: 40 s, Level 10: 39 s, Level 11 bis 15: 45,5 / 45,1 / 44,7 / 44,0 / 43,7 s (Messungen unten).
 
 **Blöcke:** Von unten springt man durch, oben landet man (Einweg-Plattformen). Stufe 1 liegt 130 px über dem Boden (vom Boden erreichbar), Stufe 2 noch 105 px höher (nur von Stufe 1 erreichbar). Wer am Ende herunterläuft, landet wieder unten. Aussehen pro Welt: Holz mit Moos (Wald), Steg-Bretter (Strand), Obstkisten (Bauernhof), Eisblöcke (Winter).
 
@@ -310,6 +315,244 @@ Wunsch von Marius (12.10.): zwei Zusatz-Level für die Kollegin, ungarisch, „r
 - **Untergrenzen** für das Sprung-Fenster: Level 6 **0,18 s**, Level 7 bis 10 **0,10 s** (statt 0,35 s; gemessen muss jedes Fenster ≥ 0,105 s sein, wegen des Messrauschens). Sie gelten für jede Gefahr, bei Tieren in jeder Phase und für jeden Ketten-Übergang. Unverändert: Trefferflächen, `jumpBufferMs` 180, `coyoteMs` 120.
 - **Bilder erst nach dem Paprika-Knopf:** `src/art/puszta.js` (Level 6: Puszta) und `src/art/budapest.js` (Level 7: Budapest an der Donau) werden erst beim ersten Druck auf den Paprika-Knopf in `BootScene` geladen (bis 27.10.: nur mit `?paprika`). Das Kinder-Startbild lädt keine ungarischen Bilder (beide Module werden importiert, bauen aber keine Texturen). Dort entstehen nur die Knöpfe `btn-level-puszta` und `btn-level-budapest`, sonst keine neuen Bilder (geprüft am 13.10.: Textur-Schlüssel alt gegen neu, Unterschied genau diese zwei). Seit Level 8–10 kommen die Knöpfe `btn-level-balaton`, `btn-level-tokaj` und `btn-level-visegrad` dazu, ebenfalls ohne weitere Bilder (geprüft am 23.10.: außer den Knöpfen keine ungarische Textur auf dem Kinder-Link). Hindernisse, Blöcke, Lücken und Boden sind die vorhandenen Bilder (Level 6: Bauernhof, Level 7: Wald-Boden und Bach, Stege vom Strand); neu ist nur der Hintergrund. Budapest nutzt die Zonen-Eigenschaft `landmarks` in `src/backdrop.js` (jedes Wahrzeichen nur einmal pro Zone). Ebenso erst nach dem Paprika-Knopf: `src/art/balaton.js` (Level 8), `tokaj.js` (Level 9) und `visegrad.js` (Level 10). Neue Welt-Eigenschaft `flip`: weitere Deko-Bilder, die zufällig gespiegelt werden dürfen.
 - **Feinabstimmung** nur über Zahlen in `src/levels.js`: `speed`, `jump`, `animalSpeed`, Abstände. Danach die betroffenen Stellen neu messen, den Bot laufen lassen und die Messtabellen oben aktualisieren.
+
+## Level 11 bis 15: Bayern
+
+Wunsch von Marius (29.10.2026): eine Bayern-Erweiterung auf demselben Link. Neben den Paprika- bzw. Kind-Knopf kommt ein Breze-Knopf. Fünf Level, in der Schwierigkeit **zwischen Level 6 und Level 7, nicht darüber** („8, 9, 10 ist schon sehr schwer“). Bayerische Welten und „eventuell einige neue Hindernisse“ hat er Claude überlassen. Die Würstel bleiben die normalen (Weißwürste wären auf hellem Hintergrund schlecht zu sehen). Design: `docs/superpowers/specs/2026-10-29-bayern-design.md`.
+
+- **Ablauf:** Breze-Knopf → Startbild mit 11 bis 15, Level 11 immer offen, jedes weitere nach dem vorigen. Eigener Spielstand (`frankie-unlocked-bayern`). Nach Level 15 Siegesfeier mit den fünf bayerischen Sternen und weiß-blauer Rauten-Wimpelkette. Bilder (`src/art/bavaria.js` und die fünf Welten) laden erst beim ersten Breze-Druck (`MODE_ART` in `BootScene`).
+- **Sprung, Tempo, Tiere** (Level 11 = Werte von Level 6, dann sanft steigend):
+
+| Level | Tempo | Sprung `velocity` / `gravity` | gemessen (`T.jumpProfile`) | Tiere |
+|---|---|---|---|---|
+| 11 | 290 | −788 / 2020 | 147 px, 0,767 s | 1,4-fach |
+| 12 | 293 | −804 / 2116 | 146 px, 0,750 s | 1,4-fach |
+| 13 | 296 | −826 / 2233 | 146 px, 0,733 s | 1,45-fach |
+| 14 | 300 | −845 / 2347 | 145 px, 0,717 s | 1,5-fach |
+| 15 | 303 | −870 / 2486 | 145 px, 0,683 s | 1,5-fach |
+
+- **Untergrenzen** für das Sprung-Fenster (jede Gefahr, Tiere in jeder Stellung, jeder Ketten-Übergang): 0,18 / 0,16 / 0,15 / 0,14 / 0,13 s für Level 11 bis 15, gemessen jeweils mindestens 5 ms darüber. Tatsächlich knappste Stelle: 0,192 / 0,177 / 0,165 / 0,159 / 0,138 s (zum Vergleich Level 6: 0,185 s, Level 7: 0,117 s). Stellen ≤ 0,20 s: 3 / 3 / 5 / 7 / 10.
+- **Neue Hindernisse** (nur in Bayern, `src/art/bavaria.js`, Trefferflächen in `OBSTACLE_TYPES`): Maßkrug (steht, Trefferfläche 22 × 34 wie die Milchkanne), Bierfass (rollt Franky entgegen, 85 px/s mal Tier-Tempo, Kreis Radius 17 wie der Wasserball), Dackel (läuft 50 px hin und her wie der Igel, 26 × 18), Murmeltier (hüpft auf der Stelle, 40 px hoch, 0,5 s Luft, 1 s Pause, 22 × 26). Einzeln gemessen (Schritt-Simulation, 16 Stellungen) bei Level 11 / 13 / 15: Maßkrug 0,354 / 0,324 / 0,300 s, Bierfass 0,249 / 0,237 / 0,225 s, Dackel 0,234–0,450 / 0,207–0,423 / 0,183–0,396 s, Murmeltier 0,300–0,369 / 0,276–0,342 / 0,249–0,300 s.
+- **Nicht dabei:** Hase (bei Level 11 in einer Stellung nur 0,147 s), Krabbe (Level 15: 0,165 s, passt auch nicht nach Bayern) und Huhn (Level 15: 0,126 s; in Level 12 und 13 durch Frösche ersetzt).
+- **Messung** wie bei Level 8 bis 10: Schritt-Simulation des echten Spiels (Bildabstand fest 1/60 s), Tap-Zeit gesweept, jede Zeile in der strengsten Fassung (frühere Taps auf Bot-Abstand, die Gefahr dahinter ebenfalls); Tiere über 16 Stellungen. Der Bot läuft in der Simulation mit 7 Anlauf-Verzögerungen (0 bis 3,3 s, andere Tier-Stellungen) und in Echtzeit. Die Mess-Werkzeuge liegen außerhalb des Repos.
+- **Breite Gräben:** Der Bot springt sie 30 px nach der Kante (Bot-Abstand `gap` −30). Ab etwa 260 px reicht das Fenster nur noch von 63 px nach der Kante bis kurz vor die Kante (bei 270 px bis 7 px nach der Kante); der Wert −4 von Level 6 läge dort am Rand.
+
+### Level 11 (München): Sprung-Fenster
+
+Untergrenze 0,18 s, knappste Stelle **0,192 s**; Stellen ≤ 0,15 / 0,18 / 0,20 s: 0 / 0 / 3. Bot in der Simulation (7 Anlauf-Verzögerungen): 42,8 s, 43,7 s, 44,1 s, 44,7 s, 45,3 s, 46,1 s, 46,8 s, jedes Mal 20/20 ohne Unfall. Echtzeit (ein Browser, 29.10.): zwei Läufe nacheinander je 45,5 s, 20/20, minFps 60.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Maßkrug x 1100 → Ball | 0,354 s |
+| Ball x 1400 | 0,348 s |
+| Graben 190 px (x 2005) → Dackel | 0,480 s |
+| Dackel x 2500 | 0,192–0,441 s |
+| Baumstumpf x 3250 → Graben | 0,327 s |
+| Graben 200 px (x 3500) → Pfütze | 0,462 s |
+| Pfütze x 3950 | 0,291 s |
+| Dackel x 4350 | 0,192–0,441 s |
+| Pfütze x 4650 | 0,288 s |
+| Kiste x 5150 → Maßkrug | 0,327 s |
+| Maßkrug x 5450 → Etage 1 | 0,354 s |
+| Etage 1 x 5750 → Trittstein | 0,507 s |
+| Trittstein x 5950 → Graben | 0,372 s |
+| Graben 560 px (x 5820) → Trittstein | 0,516 s |
+| Trittstein x 6150 → Trittstein | 0,294 s |
+| Trittstein x 6350 | 0,216 s |
+| Baumstamm x 6800 → Ball | 0,297 s |
+| Ball x 7100 | 0,348 s |
+| Kiste x 7800 → Graben | 0,327 s |
+| Graben 210 px (x 8045) → Maßkrug | 0,426 s |
+| Maßkrug x 8500 | 0,354 s |
+| Bierfass x 9200 | 0,357 s |
+| Dackel x 9650 | 0,192–0,441 s |
+| Etage 1 x 9950 → Graben | 0,438 s |
+| Graben 420 px (x 9990) → Etage 2 | 0,516 s |
+| Etage 2 x 10100 | 0,516 s |
+| Igel x 10750 | 0,201–0,465 s |
+| Kiste x 11050 → Pfütze | 0,312 s |
+| Pfütze x 11350 → Baumstumpf | 0,291 s |
+| Baumstumpf x 11650 → Graben | 0,327 s |
+| Graben 220 px (x 11890) → Maßkrug | 0,393 s |
+| Maßkrug x 12350 | 0,354 s |
+
+Bot-Abstände D11 (px): sonst 118, Maßkrug 118, Ball 118, Kiste 118, Baumstumpf 118, Baumstamm 122, Pfütze 118, Bierfass 112, Dackel 87, Igel 89, Graben −4, Etage 1 100, Etage 2 85, Trittstein 155, hohe Würstel 118.
+
+### Level 12 (Alm): Sprung-Fenster
+
+Untergrenze 0,16 s, knappste Stelle **0,177 s**; Stellen ≤ 0,15 / 0,18 / 0,20 s: 0 / 1 / 3. Bot in der Simulation (7 Anlauf-Verzögerungen): 42,3 s, 43,2 s, 43,7 s, 44,2 s, 44,8 s, 45,6 s, 46,4 s, jedes Mal 20/20 ohne Unfall. Echtzeit (ein Browser, 29.10.): zwei Läufe nacheinander je 45,1 s, 20/20, minFps 60.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Heuballen x 1050 → Milchkanne | 0,231 s |
+| Milchkanne x 1250 | 0,240 s |
+| Graben 240 px (x 1630) → Murmeltier | 0,294 s |
+| Murmeltier x 2150 | 0,288–0,354 s |
+| Frosch x 2850 | 0,261–0,345 s |
+| Baumstumpf x 3150 → Graben | 0,312 s |
+| Graben 270 px (x 3365) → Baumstamm | 0,192 s |
+| Baumstamm x 3840 | 0,288 s |
+| Murmeltier x 4600 | 0,288–0,354 s |
+| Etage 1 x 4900 → Trittstein | 0,504 s |
+| Trittstein x 5120 → Graben | 0,297 s |
+| Graben 730 px (x 4930) → Trittstein | 0,516 s |
+| Trittstein x 5340 → Trittstein | 0,297 s |
+| Trittstein x 5560 | 0,300 s |
+| Heuballen x 5900 → Pfütze | 0,285 s |
+| Pfütze x 6200 → Milchkanne | 0,279 s |
+| Milchkanne x 6480 | 0,324 s |
+| Dackel x 7150 | 0,189–0,432 s |
+| Graben 260 px (x 7430) → Frosch | 0,228 s |
+| Frosch x 7950 | 0,261–0,345 s |
+| Heuballen x 8200 → Etage 1 | 0,396 s |
+| Etage 1 x 8500 → Etage 2 | 0,504 s |
+| Etage 2 x 8650 → Graben | 0,450 s |
+| Graben 420 px (x 8540) | 0,516 s |
+| Murmeltier x 9300 | 0,288–0,354 s |
+| Baumstumpf x 9600 → Baumstamm | 0,219 s |
+| Baumstamm x 9800 | 0,210 s |
+| Graben 260 px (x 10430) → Milchkanne | 0,228 s |
+| Milchkanne x 10900 → Murmeltier | 0,324 s |
+| Murmeltier x 11250 | 0,285–0,354 s |
+| Pfütze x 11480 | 0,318 s |
+| Graben 275 px (x 11772) → Heuballen | 0,177 s |
+| Heuballen x 12290 | 0,285 s |
+
+Bot-Abstände D12 (px): sonst 116, Heuballen 116, Milchkanne 116, Baumstumpf 117, Baumstamm 120, Pfütze 117, Murmeltier 116, Frosch 116, Dackel 86, Graben −30, Etage 1 100, Etage 2 85, Trittstein 200, hohe Würstel 116.
+
+### Level 13 (Königssee): Sprung-Fenster
+
+Untergrenze 0,15 s, knappste Stelle **0,165 s**; Stellen ≤ 0,15 / 0,18 / 0,20 s: 0 / 2 / 5. Bot in der Simulation (7 Anlauf-Verzögerungen): 41,9 s, 42,8 s, 43,2 s, 43,8 s, 44,4 s, 45,2 s, 46 s, jedes Mal 20/20 ohne Unfall. Echtzeit (ein Browser, 29.10.): zwei Läufe nacheinander je 44,7 s, 20/20, minFps 60.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Baumstamm x 1000 → Baumstumpf | 0,228 s |
+| Baumstumpf x 1200 | 0,249 s |
+| Graben 250 px (x 1525) → Igel | 0,252 s |
+| Igel x 2050 | 0,189–0,426 s |
+| Murmeltier x 2750 | 0,204–0,342 s |
+| Baumstamm x 2960 | 0,240 s |
+| Graben 260 px (x 3270) → Frosch | 0,216 s |
+| Frosch x 3800 | 0,264–0,333 s |
+| Igel x 4750 | 0,189–0,426 s |
+| Etage 1 x 5060 → Trittstein | 0,456 s |
+| Trittstein x 5280 → Graben | 0,345 s |
+| Graben 730 px (x 5090) → Trittstein | 0,516 s |
+| Trittstein x 5500 → Trittstein | 0,354 s |
+| Trittstein x 5720 | 0,363 s |
+| Baumstumpf x 6140 → Frosch | 0,303 s |
+| Frosch x 6430 | 0,264–0,333 s |
+| Graben 265 px (x 6668) → Baumstamm | 0,201 s |
+| Baumstamm x 7090 | 0,258 s |
+| Murmeltier x 7600 | 0,276–0,342 s |
+| Pfütze x 7880 → Graben | 0,267 s |
+| Graben 275 px (x 8112) | 0,165 s |
+| Igel x 8680 | 0,189–0,426 s |
+| Baumstumpf x 8950 → Etage 1 | 0,213 s |
+| Etage 1 x 9250 → Graben | 0,516 s |
+| Graben 420 px (x 9280) → Etage 2 | 0,480 s |
+| Etage 2 x 9410 | 0,516 s |
+| Baumstamm x 10000 → Frosch | 0,258 s |
+| Frosch x 10300 | 0,264–0,333 s |
+| Graben 265 px (x 10818) → Murmeltier | 0,201 s |
+| Murmeltier x 11300 | 0,276–0,342 s |
+| Pfütze x 11580 → Baumstumpf | 0,267 s |
+| Baumstumpf x 11850 → Graben | 0,303 s |
+| Graben 275 px (x 12042) → Baumstamm | 0,165 s |
+| Baumstamm x 12560 | 0,258 s |
+
+Bot-Abstände D13 (px): sonst 115, Baumstamm 118, Baumstumpf 116, Pfütze 115, Murmeltier 113, Igel 85, Frosch 113, Graben −30, Etage 1 110, Etage 2 100, Trittstein 200, hohe Würstel 115.
+
+### Level 14 (Neuschwanstein): Sprung-Fenster
+
+Untergrenze 0,14 s, knappste Stelle **0,159 s**; Stellen ≤ 0,15 / 0,18 / 0,20 s: 0 / 3 / 7. Bot in der Simulation (7 Anlauf-Verzögerungen): 41,3 s, 42,2 s, 42,6 s, 43,2 s, 43,8 s, 44,6 s, 45,4 s, jedes Mal 20/20 ohne Unfall. Echtzeit (ein Browser, 29.10.): zwei Läufe nacheinander je 44,0 s, 20/20, minFps 60.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Baumstamm x 1000 → Baumstumpf | 0,246 s |
+| Baumstumpf x 1210 → Graben | 0,279 s |
+| Graben 260 px (x 1470) → Dackel | 0,210 s |
+| Dackel x 2000 | 0,183–0,411 s |
+| Kiste x 2650 → Ball | 0,270 s |
+| Ball x 2860 → Graben | 0,288 s |
+| Graben 270 px (x 3115) → Murmeltier | 0,174 s |
+| Murmeltier x 3600 | 0,264–0,330 s |
+| Igel x 3950 | 0,186–0,414 s |
+| Pfütze x 4250 | 0,297 s |
+| Bierfass x 4950 → Baumstamm | 0,348 s |
+| Baumstamm x 5150 → Etage 1 | 0,246 s |
+| Etage 1 x 5450 → Graben | 0,501 s |
+| Graben 480 px (x 5500) | 0,516 s |
+| Baumstumpf x 6350 → Murmeltier | 0,273 s |
+| Murmeltier x 6650 | 0,264–0,330 s |
+| Kiste x 6890 → Graben | 0,366 s |
+| Graben 270 px (x 7115) | 0,174 s |
+| Dackel x 7650 | 0,183–0,411 s |
+| Graben 260 px (x 7920) → Kiste | 0,210 s |
+| Kiste x 8400 → Graben | 0,273 s |
+| Graben 260 px (x 8610) | 0,210 s |
+| Bierfass x 9400 | 0,348 s |
+| Igel x 9800 | 0,186–0,414 s |
+| Etage 1 x 10100 → Graben | 0,426 s |
+| Graben 420 px (x 10130) → Etage 2 | 0,489 s |
+| Etage 2 x 10260 | 0,516 s |
+| Murmeltier x 10900 | 0,264–0,330 s |
+| Baumstamm x 11150 | 0,375 s |
+| Graben 275 px (x 11662) → Ball | 0,159 s |
+| Ball x 12110 → Baumstumpf | 0,306 s |
+| Baumstumpf x 12330 → Baumstamm | 0,294 s |
+| Baumstamm x 12550 | 0,282 s |
+
+Bot-Abstände D14 (px): sonst 114, Baumstamm 116, Baumstumpf 114, Kiste 114, Ball 113, Pfütze 114, Murmeltier 112, Igel 84, Dackel 84, Bierfass 110, Graben −30, Etage 1 110, Etage 2 100, hohe Würstel 114.
+
+### Level 15 (Oktoberfest): Sprung-Fenster
+
+Untergrenze 0,13 s, knappste Stelle **0,138 s**; Stellen ≤ 0,15 / 0,18 / 0,20 s: 3 / 7 / 10. Bot in der Simulation (7 Anlauf-Verzögerungen): 40,9 s, 41,8 s, 42,2 s, 42,8 s, 43,4 s, 44,2 s, 45 s, jedes Mal 20/20 ohne Unfall. Echtzeit (ein Browser, 29.10.): zwei Läufe nacheinander je 43,7 s, 20/20, minFps 60.
+
+| Stelle | Zeitfenster |
+|---|---|
+| Maßkrug x 1000 → Maßkrug | 0,276 s |
+| Maßkrug x 1200 → Graben | 0,276 s |
+| Graben 270 px (x 1465) | 0,165 s |
+| Dackel x 2000 | 0,180–0,396 s |
+| Kiste x 2650 → Pfütze | 0,219 s |
+| Pfütze x 2850 → Graben | 0,240 s |
+| Graben 270 px (x 3065) → Maßkrug | 0,165 s |
+| Maßkrug x 3500 | 0,300 s |
+| Bierfass x 4150 | 0,348 s |
+| Kiste x 4450 → Pfütze | 0,258 s |
+| Pfütze x 4750 → Maßkrug | 0,228 s |
+| Maßkrug x 5100 → Maßkrug | 0,300 s |
+| Maßkrug x 5310 → Maßkrug | 0,309 s |
+| Maßkrug x 5520 → Graben | 0,309 s |
+| Graben 275 px (x 5762) → Kiste | 0,150 s |
+| Kiste x 6150 → Etage 1 | 0,405 s |
+| Etage 1 x 6450 → Graben | 0,486 s |
+| Graben 420 px (x 6480) → Etage 2 | 0,483 s |
+| Etage 2 x 6610 | 0,516 s |
+| Dackel x 7250 | 0,180–0,396 s |
+| Pfütze x 7550 | 0,318 s |
+| Graben 265 px (x 7968) → Kiste | 0,183 s |
+| Kiste x 8330 → Graben | 0,324 s |
+| Graben 265 px (x 8548) | 0,183 s |
+| Bierfass x 9400 | 0,348 s |
+| Igel x 9850 | 0,183–0,402 s |
+| Ball x 10120 | 0,249 s |
+| Graben 275 px (x 10662) → Pfütze | 0,150 s |
+| Pfütze x 11040 → Ball | 0,360 s |
+| Ball x 11270 → Graben | 0,369 s |
+| Graben 278 px (x 11481) | 0,138 s |
+| Bierfass x 12350 | 0,348 s |
+| Maßkrug x 12600 | 0,300 s |
+
+Bot-Abstände D15 (px): sonst 113, Maßkrug 113, Kiste 111, Pfütze 111, Ball 110, Igel 83, Dackel 83, Bierfass 109, Graben −30, Etage 1 110, Etage 2 100, hohe Würstel 113.
+
+### Bayern: Echtzeit-Prüfung (29.10.2026, ein Browser)
+
+- `T.jumpProfile`: siehe Tabelle oben. Bei 30 Bildern pro Sekunde liegt der Scheitel rechnerisch bei 138–141 px, also über Block-Etage 1 (130 px).
+- Bot Level 11 bis 15: Aufwärm-Lauf 45,6 s (minFps 58), danach zweimal hintereinander alle fünf Level, je 20/20 ohne Unfall, minFps 60. Siegesfeier mit 5 Sternen und weiß-blauen Wimpeln.
+- Kurz-Layout (`?fast=1`, frischer Speicher): Breze-Knopf → nur 11 offen → 11 bis 15 mit „Weiter“ (12,2 / 12,1 / 12,0 / 11,8 / 11,7 s, alle Würstel) → Siegesfeier (5 Sterne) → Haus → Bayern-Startbild mit 11 bis 15 offen. Gespeichert nur `frankie-unlocked-bayern` = 16; Kinder- und Paprika-Spielstand unberührt, Kinder-Startbild danach nur mit Level 1.
+- Gegencheck: Kinder-Link ohne bayerische oder ungarische Bilder (außer den Level-Knöpfen), Knöpfe unten Paprika (x 418) und Breze (x 542), Bot Level 1 bis 5 mit den alten Zeiten (59,4 / 56,4 / 53,7 / 51,3 / 49,1 s), Siegesfeier mit 5 Sternen. Paprika-Teil: Bot Level 6 bis 10 je 20/20 (45,5 / 42,8 / 41,4 / 40,2 / 39,2 s), Siegesfeier mit 10 Sternen. Keine Konsolenfehler.
 
 ## Lesbarkeit: Was ist Hindernis, was ist Hintergrund?
 
