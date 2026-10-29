@@ -361,8 +361,7 @@ export const WORLDS = {
   },
 
   // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
-  // Levels 11 to 14 (src/art/muenchen.js, alm.js, koenigssee.js, neuschwanstein.js) have their own
-  // drawings; the last one (wiesn) is still a PLACEHOLDER built from the child's worlds.
+  // Each of them has its own drawings (src/art/muenchen.js, alm.js, koenigssee.js, neuschwanstein.js, wiesn.js).
   // Level 11, Munich on a sunny late-summer day: English Garden, Marienplatz, Viktualienmarkt.
   muenchen: {
     color: 0xe6a817, // Munich yellow
@@ -518,11 +517,43 @@ export const WORLDS = {
       },
     ],
   },
+  // Level 15, the Oktoberfest on a sunny late-September day: the entrance with the Bavaria statue, the beer
+  // tents with the church of St. Paul behind them, then the fairground with the Ferris wheel. Own drawings in
+  // src/art/wiesn.js; the ground, mud ditches and crates come from the farm and the market.
   wiesn: {
     color: 0x2f7fc9, // Bavarian blue
-    tiles: { hillsFar: 'hills-far', hillsNear: 'hills-near', ground: 'ground-farm' },
-    gap: 'gap-farm',
+    tiles: { hillsFar: 'hills-far-wiesn', hillsNear: 'hills-near-wiesn', ground: 'ground-farm' },
+    gap: 'gap-farm', // muddy ditches
     block: 'block-crate',
-    zones: [{ key: 'wiesn', until: 1, far: ['church', 'tree-pine'], mid: ['house-a', 'tree-apple'], near: ['lamp', 'bush'] }],
+    // Landmarks are not mirrored; trees, tents, stalls, rides and plants look natural either way.
+    flip: ['wi-tree', 'wi-visitors-far', 'wi-band-stage', 'wi-dray', 'wi-chestnut', 'wi-tent-a', 'wi-tent-b', 'wi-tent-c', 'wi-chain-swing', 'wi-carousel', 'wi-heart-stall', 'wi-candy-stall', 'wi-balloons', 'wi-flowers'],
+    zones: [
+      {
+        key: 'bavaria',
+        until: 1 / 3,
+        landmarks: ['wi-gate', 'wi-bavaria'],
+        far: ['wi-tree', 'wi-visitors-far', 'wi-band-stage', null, 'wi-tree', 'wi-visitors-far'],
+        mid: ['wi-chestnut', 'wi-heart-stall', 'wi-chestnut', 'wi-balloons', 'wi-candy-stall', 'wi-chestnut', null],
+        near: ['wi-flowers', 'wi-sign', 'wi-garland-pole', 'wi-flowers', 'grass-tuft'],
+        strip: 'wi-strip-bunting',
+      },
+      {
+        key: 'bierzelte',
+        until: 2 / 3,
+        landmarks: ['wi-paulskirche'],
+        far: ['wi-dray', 'wi-tree', 'wi-visitors-far', null, 'wi-tree', 'wi-band-stage', null],
+        mid: ['wi-tent-a', 'wi-tent-b', 'wi-tent-c', null, 'wi-heart-stall', 'wi-chestnut', null, 'wi-tent-a', 'wi-tent-b', 'wi-tent-c'],
+        near: ['wi-garland-pole', 'wi-flowers', 'wi-sign', 'wi-garland-pole', 'wi-flowers'],
+        strip: 'wi-strip-bunting',
+      },
+      {
+        key: 'fahrgeschaefte',
+        until: 1,
+        landmarks: ['wi-coaster', 'wi-riesenrad'],
+        far: ['wi-tree', 'wi-visitors-far', null, 'wi-band-stage', 'wi-tree', null],
+        mid: ['wi-chain-swing', 'wi-carousel', 'wi-candy-stall', 'wi-balloons', 'wi-chain-swing', 'wi-carousel', 'wi-candy-stall', null],
+        near: ['wi-flowers', 'wi-garland-pole', 'wi-sign', 'wi-flowers'],
+      },
+    ],
   },
 };

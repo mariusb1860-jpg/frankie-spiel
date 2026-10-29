@@ -17,12 +17,13 @@ import { preloadMuenchen } from '../art/muenchen.js';
 import { preloadAlm } from '../art/alm.js';
 import { preloadKoenigssee } from '../art/koenigssee.js';
 import { preloadNeuschwanstein } from '../art/neuschwanstein.js';
+import { preloadWiesn } from '../art/wiesn.js';
 
 // The worlds of the grown-up parts load only when their button is pressed for the first time
 // (most visitors are children): paprika = levels 6-10, pretzel = levels 11-15.
 const MODE_ART = {
   paprika: { preload: [preloadPuszta, preloadBudapest, preloadBalaton, preloadTokaj, preloadVisegrad] },
-  bayern: { preload: [preloadBavaria, preloadMuenchen, preloadAlm, preloadKoenigssee, preloadNeuschwanstein], anims: createBavariaAnims },
+  bayern: { preload: [preloadBavaria, preloadMuenchen, preloadAlm, preloadKoenigssee, preloadNeuschwanstein, preloadWiesn], anims: createBavariaAnims },
 };
 const loadedArt = new Set();
 

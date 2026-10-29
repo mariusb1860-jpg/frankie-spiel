@@ -6,8 +6,8 @@ import { attrs, crown, ridge, ridgeY } from './scenery.js';
 // in the English Garden, on Marienplatz and at the Viktualienmarkt.
 // Everything here is background: soft outlines, never the strong OUTLINE.
 
-const f1 = (n) => n.toFixed(1);
-const polygon = (pts, w, h) => `M0 ${h} ${pts.map(([x, y]) => `L${f1(x)} ${f1(y)}`).join(' ')} L${w} ${h} Z`;
+export const f1 = (n) => n.toFixed(1);
+export const polygon = (pts, w, h) => `M0 ${h} ${pts.map(([x, y]) => `L${f1(x)} ${f1(y)}`).join(' ')} L${w} ${h} Z`;
 
 // Landmarks stand on the horizon of hills-far-muenchen: far pictures sit at GROUND_Y - 45 with
 // scale ~0.56, so this much empty space below their foot puts the foot on the meadow line (y 128).
@@ -52,17 +52,17 @@ const GREEN_ROOF = '#4d8a5a';
 const soft = (color, w = 1.5) => attrs(color, w);
 
 // Soft ground shadow under a piece.
-const groundShadow = (cx, y, rx, o = 0.2) => `<ellipse cx="${cx}" cy="${y}" rx="${rx}" ry="${f1(Math.min(rx * 0.1, 6))}" fill="#4a5a30" opacity="${o}"/>`;
+export const groundShadow = (cx, y, rx, o = 0.2) => `<ellipse cx="${cx}" cy="${y}" rx="${rx}" ry="${f1(Math.min(rx * 0.1, 6))}" fill="#4a5a30" opacity="${o}"/>`;
 
 // A pointed (Gothic) window w wide, from its tip at y down to y + h.
-const gothic = (x, y, w, h) =>
+export const gothic = (x, y, w, h) =>
   `M${f1(x)} ${f1(y + h)} V${f1(y + w * 0.9)} Q${f1(x)} ${f1(y + w * 0.2)} ${f1(x + w / 2)} ${f1(y)} Q${f1(x + w)} ${f1(y + w * 0.2)} ${f1(x + w)} ${f1(y + w * 0.9)} V${f1(y + h)} Z`;
 
 // A round-arched window or door w wide, from its top at y down to y + h.
-const arch = (x, y, w, h) => `M${f1(x)} ${f1(y + h)} V${f1(y + w / 2)} A${f1(w / 2)} ${f1(w / 2)} 0 0 1 ${f1(x + w)} ${f1(y + w / 2)} V${f1(y + h)} Z`;
+export const arch = (x, y, w, h) => `M${f1(x)} ${f1(y + h)} V${f1(y + w / 2)} A${f1(w / 2)} ${f1(w / 2)} 0 0 1 ${f1(x + w)} ${f1(y + w / 2)} V${f1(y + h)} Z`;
 
 // A slim spire standing on (x, y), w wide at its foot and h high.
-const spire = (x, y, w, h) => `M${f1(x - w / 2)} ${f1(y)} L${f1(x)} ${f1(y - h)} L${f1(x + w / 2)} ${f1(y)} Z`;
+export const spire = (x, y, w, h) => `M${f1(x - w / 2)} ${f1(y)} L${f1(x)} ${f1(y - h)} L${f1(x + w / 2)} ${f1(y)} Z`;
 
 // A pagoda roof with up-turned eaves: w wide at the eaves (y), h high, tw wide at the top.
 function pagodaRoof(cx, y, w, h, tw, fill, light, lineColor) {
@@ -98,7 +98,7 @@ function windowRect(x, y, w, h, { shutters = null, box = false } = {}) {
 }
 
 // Bavarian white and blue lozenges over a rectangle clip, x/y = top left.
-function lozenges(x, y, w, h, size = 12) {
+export function lozenges(x, y, w, h, size = 12) {
   const out = [];
   for (let j = 0; j * size < h + size; j++) {
     for (let i = 0; i * size < w + size; i++) {
@@ -109,7 +109,7 @@ function lozenges(x, y, w, h, size = 12) {
 }
 
 // Small round trees along a ridge: n evenly spaced trees per tile width, so the tile repeats cleanly.
-function treeRow(w, pts, n, dy, r0, colors) {
+export function treeRow(w, pts, n, dy, r0, colors) {
   const out = [];
   const step = w / n;
   for (let i = -1; i <= n; i++) {
