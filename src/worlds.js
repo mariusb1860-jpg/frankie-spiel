@@ -361,13 +361,44 @@ export const WORLDS = {
   },
 
   // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
-  // PLACEHOLDER scenery from the child's worlds: each world gets its own drawings later.
+  // Level 11 has its own drawings (src/art/muenchen.js); the other four are still PLACEHOLDERS
+  // built from the child's worlds: each gets its own drawings later.
+  // Level 11, Munich on a sunny late-summer day: English Garden, Marienplatz, Viktualienmarkt.
   muenchen: {
     color: 0xe6a817, // Munich yellow
-    tiles: { hillsFar: 'hills-far', hillsNear: 'hills-near', ground: 'ground' },
-    gap: 'gap-forest',
-    block: 'block-crate',
-    zones: [{ key: 'muenchen', until: 1, far: ['church', 'house-b'], mid: ['tree-oak', 'house-a', 'tree-birch'], near: ['lamp', 'bush', 'daisies'] }],
+    tiles: { hillsFar: 'hills-far-muenchen', hillsNear: 'hills-near-muenchen', ground: 'ground' },
+    gap: 'gap-forest', // the Eisbach
+    block: 'block-crate', // market crates
+    // Landmarks and buildings with signs or asymmetric details are not mirrored.
+    flip: ['mu-big-tree', 'mu-chestnut', 'mu-linden', 'mu-row-far', 'mu-surfer', 'mu-market-stall', 'mu-fruit-stand', 'mu-beer-table', 'mu-meadow-flowers', 'mu-bench', 'mu-geraniums', 'mu-flower-buckets'],
+    zones: [
+      {
+        key: 'englischer-garten',
+        until: 1 / 3,
+        landmarks: ['mu-chinese-tower', 'mu-monopteros'],
+        far: ['mu-linden', 'mu-surfer', 'mu-linden', null, 'mu-linden', null],
+        mid: ['mu-big-tree', 'mu-beer-table', 'mu-chestnut', 'mu-beer-table', null, 'mu-big-tree'],
+        near: ['mu-meadow-flowers', 'mu-bench', 'mu-meadow-flowers', 'daisies', 'grass-tuft'],
+        strip: 'mu-strip-hedge',
+      },
+      {
+        key: 'marienplatz',
+        until: 2 / 3,
+        landmarks: ['mu-rathaus', 'mu-mariensaeule', 'mu-frauenkirche'],
+        far: ['mu-row-far', null, 'mu-linden', 'mu-row-far', null],
+        mid: ['mu-townhouse-a', 'mu-townhouse-b', 'mu-townhouse-b', 'mu-townhouse-a', null],
+        near: ['mu-lamp', 'mu-geraniums', 'mu-lamp', 'mu-geraniums', 'mu-meadow-flowers'],
+      },
+      {
+        key: 'viktualienmarkt',
+        until: 1,
+        landmarks: ['mu-alter-peter', 'mu-maibaum'],
+        far: ['mu-row-far', 'mu-linden', null, 'mu-row-far', null],
+        mid: ['mu-market-stall', 'mu-fruit-stand', 'mu-beer-table', null, 'mu-market-stall', 'mu-fruit-stand'],
+        near: ['mu-flower-buckets', 'mu-lamp', 'mu-meadow-flowers', 'mu-geraniums', 'mu-lamp'],
+        strip: 'mu-strip-bunting',
+      },
+    ],
   },
   alm: {
     color: 0x5b9e3a, // alpine meadow green
