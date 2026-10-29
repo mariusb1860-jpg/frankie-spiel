@@ -4,8 +4,8 @@ import { attrs, crown, ridge, ridgeY } from './scenery.js';
 
 // Level 12, the Bavarian Alps (grown-ups, only loaded after the pretzel button): high summer on an
 // alpine pasture, then the alpine hut, then the rocky foot of the Zugspitze.
-// Everything here is background: soft outlines, never the strong OUTLINE. Cows, boulders, fences
-// and woodpiles sit in the far and mid layers, are pale and soft and never look like something to jump over.
+// Everything here is background: soft outlines, never the strong OUTLINE. Cows, fences and woodpiles
+// sit in the far and mid layers, rocks only far and small; nothing flat, oval or blue (a puddle) lies on the ground line.
 
 const f1 = (n) => n.toFixed(1);
 const polygon = (pts, w, h) => `M0 ${h} ${pts.map(([x, y]) => `L${f1(x)} ${f1(y)}`).join(' ')} L${w} ${h} Z`;
@@ -546,7 +546,7 @@ function hikers() {
     ${groundShadow(75, 96, 66, 0.15)}`);
 }
 
-// ---- Mid: cows, spruce, hay rack, shrine, trough, woodpile, boulders, mountain pines ----
+// ---- Mid: cows, spruce, hay rack, shrine, trough, woodpile, mountain pines ----
 
 // A brown cow with a big bell, grazing. Soft outline, stands a little off the ground line.
 function cowGrazing() {
@@ -663,8 +663,8 @@ function woodpile() {
     ${groundShadow(W / 2, H - 3, 86, 0.18)}`);
 }
 
-// A big weathered boulder with moss, a little snow in the cracks, flowers in the grass at its foot.
-// It is large and rises like a slope, so nobody takes it for something to jump over.
+// A weathered rock outcrop with moss and a little snow in the cracks, flowers in the grass at its foot.
+// Far layer only and drawn small, so it never stands at the ground line next to Frankie.
 function boulders() {
   const W = 280;
   const H = 200;
@@ -741,15 +741,6 @@ function alpenrose() {
     <path d="M44 70 q4 -6 10 0 M88 72 q4 -6 10 0" fill="none" stroke="#6aa650" stroke-width="2.4" stroke-linecap="round"/>`);
 }
 
-// A low patch of old snow in the grass with a few stones.
-function snowPatch() {
-  return svgDoc(150, 46, `
-    <path d="M4 44 C10 30 34 24 58 28 C80 20 112 24 130 32 C144 36 148 42 148 44 Z" fill="${SNOW}" ${soft('#aab8d0', 1.3)}/>
-    <path d="M18 42 C26 34 48 32 70 36 C90 32 112 34 128 42 Z" fill="${SNOW_SHADE}" opacity="0.9"/>
-    <ellipse cx="46" cy="38" rx="7" ry="3.6" fill="${ROCK}" ${soft(ROCK_LINE, 0.9)}/><ellipse cx="108" cy="36" rx="6" ry="3" fill="${ROCK}" ${soft(ROCK_LINE, 0.9)}/>
-    <path d="M10 44 q4 -6 10 -2 M132 44 q6 -6 12 -2" fill="none" stroke="#6aa650" stroke-width="2.6" stroke-linecap="round"/>`);
-}
-
 // ---- Strip: a split-rail pasture fence ----
 
 // Two rails and posts; the rails run to both edges at the same height, so the strip joins without a seam.
@@ -785,12 +776,11 @@ const PIECES = {
   'alm-shrine': [90, 210, shrine],
   'alm-trough': [230, 180, trough],
   'alm-woodpile': [190, 190, woodpile],
-  'alm-boulders': [280, 200, boulders],
+  'alm-boulders': [168, 120, boulders], // small, far layer only
   'alm-pine': [220, 150, mountainPine],
   'alm-gentian': [110, 72, gentian],
   'alm-edelweiss': [100, 70, edelweiss],
   'alm-alpenrose': [130, 78, alpenrose],
-  'alm-snow-patch': [150, 46, snowPatch],
   'alm-strip-fence': [156, 70, fenceStrip],
 };
 

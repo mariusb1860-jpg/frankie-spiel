@@ -408,7 +408,7 @@ export const WORLDS = {
     gap: 'gap-forest', // a mountain brook
     block: 'block-wood',
     // Landmarks are not mirrored; animals, trees and plants look natural either way.
-    flip: ['alm-fir', 'alm-firs', 'alm-cows-far', 'alm-hikers', 'alm-cow', 'alm-cow-bell', 'alm-fir-big', 'alm-hay-rack', 'alm-shrine', 'alm-trough', 'alm-woodpile', 'alm-boulders', 'alm-pine', 'alm-gentian', 'alm-edelweiss', 'alm-alpenrose', 'alm-snow-patch'],
+    flip: ['alm-fir', 'alm-firs', 'alm-cows-far', 'alm-hikers', 'alm-cow', 'alm-cow-bell', 'alm-fir-big', 'alm-hay-rack', 'alm-shrine', 'alm-trough', 'alm-woodpile', 'alm-boulders', 'alm-pine', 'alm-gentian', 'alm-edelweiss', 'alm-alpenrose'],
     zones: [
       {
         key: 'almwiese',
@@ -432,9 +432,9 @@ export const WORLDS = {
         key: 'zugspitze',
         until: 1,
         landmarks: ['alm-gondola', 'alm-zugspitze'],
-        far: ['alm-fir', null, 'alm-hikers', null, 'alm-firs'],
-        mid: ['alm-boulders', 'alm-pine', 'alm-fir-big', 'alm-pine', null, 'alm-pine', 'alm-fir-big', 'alm-boulders', null],
-        near: ['alm-snow-patch', 'alm-edelweiss', 'alm-snow-patch', 'alm-gentian'],
+        far: ['alm-fir', 'alm-boulders', 'alm-hikers', null, 'alm-firs', 'alm-boulders'],
+        mid: ['alm-pine', 'alm-fir-big', 'alm-pine', null, 'alm-pine', 'alm-fir-big', null],
+        near: ['alm-edelweiss', 'alm-gentian', 'alm-alpenrose', 'grass-tuft', 'alm-gentian'],
       },
     ],
   },
