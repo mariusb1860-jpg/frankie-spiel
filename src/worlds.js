@@ -361,8 +361,8 @@ export const WORLDS = {
   },
 
   // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
-  // Level 11 (src/art/muenchen.js) and level 12 (src/art/alm.js) have their own drawings; the other
-  // three (koenigssee, neuschwanstein, wiesn) are still PLACEHOLDERS built from the child's worlds.
+  // Levels 11 to 13 (src/art/muenchen.js, alm.js, koenigssee.js) have their own drawings; the other
+  // two (neuschwanstein, wiesn) are still PLACEHOLDERS built from the child's worlds.
   // Level 11, Munich on a sunny late-summer day: English Garden, Marienplatz, Viktualienmarkt.
   muenchen: {
     color: 0xe6a817, // Munich yellow
@@ -438,12 +438,45 @@ export const WORLDS = {
       },
     ],
   },
+  // Level 13, Lake Königssee on a clear morning: mountain forest on the way down (Watzmann peeking
+  // through), the lake with St. Bartholomä and the tour boats, then the boat landing at Schönau with
+  // the Jenner. Own drawings in src/art/koenigssee.js; the lake lies in the far tile and in far pieces
+  // only, the ground, inlets and jetty boards come from the forest and the beach.
   koenigssee: {
     color: 0x1f8a8a, // emerald green of the lake
-    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-forest', ground: 'ground-forest' },
-    gap: 'gap-forest',
-    block: 'block-pier',
-    zones: [{ key: 'koenigssee', until: 1, far: ['tree-fir', 'tree-pine'], mid: ['tree-fir', 'tree-beech'], near: ['fern', 'mossy-rock'] }],
+    tiles: { hillsFar: 'hills-far-koenigssee', hillsNear: 'hills-near-koenigssee', ground: 'ground-forest' },
+    gap: 'gap-forest', // water inlets
+    block: 'block-pier', // jetty boards
+    // Landmarks, the signpost and the kiosk are not mirrored; trees, boats, reeds and plants look natural either way.
+    flip: ['ks-spruce', 'ks-spruces', 'ks-deer-far', 'ks-boat-far', 'ks-jetty-far', 'ks-islet', 'ks-spruce-big', 'ks-beech', 'ks-bridge', 'ks-boathouse', 'ks-boathouse-row', 'ks-viewpoint', 'ks-reeds-big', 'ks-ferns', 'ks-harebell', 'ks-reed-tuft'],
+    zones: [
+      {
+        key: 'bergwald',
+        until: 1 / 3,
+        landmarks: ['ks-watzmann'],
+        far: ['ks-spruce', 'ks-spruces', 'ks-deer-far', null, 'ks-spruce', 'ks-spruces'],
+        mid: ['ks-spruce-big', 'ks-beech', 'ks-signpost', 'ks-spruce-big', 'ks-bridge', 'ks-beech', null, 'ks-spruce-big'],
+        near: ['ks-ferns', 'ks-harebell', 'grass-tuft', 'ks-ferns', 'ks-harebell'],
+      },
+      {
+        key: 'bartholomae',
+        until: 2 / 3,
+        landmarks: ['ks-bartholomae'],
+        far: ['ks-boat-far', 'ks-islet', null, 'ks-boat-far', 'ks-islet', null],
+        mid: ['ks-reeds-big', 'ks-beech', 'ks-spruce-big', null, 'ks-beech', null, 'ks-spruce-big', null],
+        near: ['ks-harebell', 'ks-reed-tuft', 'grass-tuft', 'ks-harebell'],
+        strip: 'ks-strip-reeds',
+      },
+      {
+        key: 'bootssteg',
+        until: 1,
+        landmarks: ['ks-jenner'],
+        far: ['ks-jetty-far', 'ks-boat-far', null, 'ks-boat-far', 'ks-spruces', null],
+        mid: ['ks-boathouse', 'ks-kiosk', 'ks-boathouse-row', 'ks-viewpoint', 'ks-beech', 'ks-boathouse', 'ks-spruce-big', null],
+        near: ['ks-ferns', 'ks-harebell', 'ks-reed-tuft', 'grass-tuft'],
+        strip: 'ks-strip-rail',
+      },
+    ],
   },
   neuschwanstein: {
     color: 0x7b4fb3, // royal purple of the fairy-tale king
