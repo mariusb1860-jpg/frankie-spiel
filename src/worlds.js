@@ -361,8 +361,8 @@ export const WORLDS = {
   },
 
   // ---- Worlds of levels 11 to 15 (grown-ups, Bavaria, only loaded after the pretzel button) ----
-  // Level 11 has its own drawings (src/art/muenchen.js); the other four are still PLACEHOLDERS
-  // built from the child's worlds: each gets its own drawings later.
+  // Level 11 (src/art/muenchen.js) and level 12 (src/art/alm.js) have their own drawings; the other
+  // three (koenigssee, neuschwanstein, wiesn) are still PLACEHOLDERS built from the child's worlds.
   // Level 11, Munich on a sunny late-summer day: English Garden, Marienplatz, Viktualienmarkt.
   muenchen: {
     color: 0xe6a817, // Munich yellow
@@ -400,12 +400,43 @@ export const WORLDS = {
       },
     ],
   },
+  // Level 12, the Bavarian Alps in high summer: alpine pasture with cows and a chapel, the alpine
+  // hut with a summit cross, then the rocky foot of the Zugspitze. Own drawings in src/art/alm.js.
   alm: {
     color: 0x5b9e3a, // alpine meadow green
-    tiles: { hillsFar: 'hills-far-forest', hillsNear: 'hills-near-farm', ground: 'ground' },
-    gap: 'gap-forest',
+    tiles: { hillsFar: 'hills-far-alm', hillsNear: 'hills-near-alm', ground: 'ground' },
+    gap: 'gap-forest', // a mountain brook
     block: 'block-wood',
-    zones: [{ key: 'alm', until: 1, far: ['tree-fir', 'tree-pine'], mid: ['cow', 'tree-fir', 'cow'], near: ['daisies', 'grass-tuft', 'rock'] }],
+    // Landmarks are not mirrored; animals, trees and plants look natural either way.
+    flip: ['alm-fir', 'alm-firs', 'alm-cows-far', 'alm-hikers', 'alm-cow', 'alm-cow-bell', 'alm-fir-big', 'alm-hay-rack', 'alm-shrine', 'alm-trough', 'alm-woodpile', 'alm-boulders', 'alm-pine', 'alm-gentian', 'alm-edelweiss', 'alm-alpenrose', 'alm-snow-patch'],
+    zones: [
+      {
+        key: 'almwiese',
+        until: 1 / 3,
+        landmarks: ['alm-chapel'],
+        far: ['alm-fir', 'alm-cows-far', null, 'alm-firs', 'alm-cows-far', null],
+        mid: ['alm-cow', 'alm-hay-rack', 'alm-fir-big', 'alm-cow-bell', 'alm-cow', null, 'alm-hay-rack', 'alm-shrine', 'alm-cow-bell', null],
+        near: ['alm-gentian', 'alm-edelweiss', 'alm-alpenrose', 'grass-tuft', 'alm-gentian'],
+        strip: 'alm-strip-fence',
+      },
+      {
+        key: 'almhuette',
+        until: 2 / 3,
+        landmarks: ['alm-hut', 'alm-summit'],
+        far: ['alm-firs', 'alm-hikers', null, 'alm-fir', null],
+        mid: ['alm-trough', 'alm-woodpile', 'alm-fir-big', 'alm-cow', null, 'alm-hay-rack', 'alm-trough', null],
+        near: ['alm-alpenrose', 'alm-edelweiss', 'alm-gentian'],
+        strip: 'alm-strip-fence',
+      },
+      {
+        key: 'zugspitze',
+        until: 1,
+        landmarks: ['alm-gondola', 'alm-zugspitze'],
+        far: ['alm-fir', null, 'alm-hikers', null, 'alm-firs'],
+        mid: ['alm-boulders', 'alm-pine', 'alm-fir-big', 'alm-pine', null, 'alm-pine', 'alm-fir-big', 'alm-boulders', null],
+        near: ['alm-snow-patch', 'alm-edelweiss', 'alm-snow-patch', 'alm-gentian'],
+      },
+    ],
   },
   koenigssee: {
     color: 0x1f8a8a, // emerald green of the lake

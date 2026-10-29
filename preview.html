@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- Developer page: shows every drawing large, to judge the art without playing.
-         ?zoom=3 shows them bigger, ?set=beach only one group (frankie, world, scenery, forest, beach, farm, winter, party, puszta, budapest, balaton, tokaj, visegrad, bavaria, muenchen). -->
+         ?zoom=3 shows them bigger, ?set=beach only one group (frankie, world, scenery, forest, beach, farm, winter, party, puszta, budapest, balaton, tokaj, visegrad, bavaria, muenchen, alm). -->
     <div class="grid" id="grid"></div>
     <script type="module">
       import { frankieSvg, FRANKIE_W, FRANKIE_H } from './src/art/frankie.js';
@@ -32,6 +32,7 @@
       import { visegradSvgs } from './src/art/visegrad.js';
       import { bavariaSvgs } from './src/art/bavaria.js';
       import { muenchenSvgs } from './src/art/muenchen.js';
+      import { almSvgs } from './src/art/alm.js';
 
       const grid = document.getElementById('grid');
       const params = new URLSearchParams(location.search);
@@ -46,7 +47,7 @@
           add(name, frankieSvg(name), FRANKIE_W, FRANKIE_H);
         }
       }
-      const sets = { world: worldSvgs, scenery: scenerySvgs, forest: forestSvgs, beach: beachSvgs, farm: farmSvgs, winter: winterSvgs, party: partySvgs, puszta: pusztaSvgs, budapest: budapestSvgs, balaton: balatonSvgs, tokaj: tokajSvgs, visegrad: visegradSvgs, bavaria: bavariaSvgs, muenchen: muenchenSvgs };
+      const sets = { world: worldSvgs, scenery: scenerySvgs, forest: forestSvgs, beach: beachSvgs, farm: farmSvgs, winter: winterSvgs, party: partySvgs, puszta: pusztaSvgs, budapest: budapestSvgs, balaton: balatonSvgs, tokaj: tokajSvgs, visegrad: visegradSvgs, bavaria: bavariaSvgs, muenchen: muenchenSvgs, alm: almSvgs };
       for (const [set, svgs] of Object.entries(sets)) {
         if (only && only !== set) continue;
         for (const [name, { svg, w, h }] of Object.entries(svgs())) add(name, svg, w, h);
