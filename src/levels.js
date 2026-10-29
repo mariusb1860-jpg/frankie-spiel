@@ -24,6 +24,10 @@ const frog = thing('frog'); // hops up and down
 const snowman = thing('snowman');
 const snowball = thing('snowball'); // rolls towards Frankie
 const rabbit = thing('rabbit'); // hops a little way to the left and back
+const masskrug = thing('masskrug'); // beer mug
+const barrel = thing('barrel'); // rolls towards Frankie
+const dachshund = thing('dachshund'); // walks back and forth
+const marmot = thing('marmot'); // hops up and down
 // A gap in the ground with water; x is its middle. Falling in = start again.
 const stream = (x, width) => ({ kind: 'gap', x, width });
 // Floating blocks (48 px each) starting at x. tier 1 is reachable from the ground,
